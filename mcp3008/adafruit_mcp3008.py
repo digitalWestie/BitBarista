@@ -64,15 +64,16 @@ potentiometer_adc = 0;
 last_read = 0       # this keeps track of the last potentiometer value
 tolerance = 0       # to keep from being jittery we'll only change
                     # volume when the pot has moved more than 5 'counts'
+#readings = []
 
 while True:
-        # we'll assume that the pot didn't move
-        trim_pot_changed = False
-
-        # read the analog pin
-        trim_pot = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
-        # how much has it changed since the last read?
-        pot_adjust = abs(trim_pot - last_read)
+        trim_pot = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS) # read the analog pin
+        
+        pot_adjust = abs(trim_pot - last_read) # how much has it changed since the last read?
+        
+        trim_pot_changed = False # we'll assume that the pot didn't move
+        if ( pot_adjust > tolerance ):
+               trim_pot_changed = True
 
         if DEBUG:
                 print "trim_pot:", trim_pot,
@@ -84,17 +85,8 @@ while True:
                 set_volume = int(set_volume)            # cast volume as integer
 
                 print ',Percentage:{volume}%' .format(volume = set_volume),
-
-
-        if ( pot_adjust > tolerance ):
-               trim_pot_changed = True
-
-        if DEBUG:
                 print ",trim_pot_changed", trim_pot_changed
 
-        if ( trim_pot_changed ):
-                # save the potentiometer reading for the next loop
-                last_read = trim_pot
 
         # hang out and do nothing for a half second
         time.sleep(0.005)
