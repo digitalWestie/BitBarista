@@ -8,7 +8,7 @@ import os
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
-DEBUG = 1
+DEBUG = 0
 
 # read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
 def readadc(adcnum, clockpin, mosipin, misopin, cspin):
@@ -71,7 +71,10 @@ while True:
         trim_pot = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS) # read the analog pin
         
         pot_adjust = abs(trim_pot - last_read) # how much has it changed since the last read?
-        
+        set_volume = trim_pot / 10.24           # convert 10bit adc0 (0-1024) trim pot read into 0-100 volume level
+        set_volume = round(set_volume)          # round out decimal value
+        set_volume = int(set_volume)            # cast volume as integer
+       
         trim_pot_changed = False # we'll assume that the pot didn't move
         if ( pot_adjust > tolerance ):
                trim_pot_changed = True
@@ -80,19 +83,15 @@ while True:
                 print "trim_pot:", trim_pot,
                 print ",pot_adjust:", pot_adjust,
                 print ",last_read:", last_read,
-
-                set_volume = trim_pot / 10.24           # convert 10bit adc0 (0-1024) trim pot read into 0-100 volume level
-                set_volume = round(set_volume)          # round out decimal value
-                set_volume = int(set_volume)            # cast volume as integer
-
                 print ',Percentage:{volume}%' .format(volume = set_volume),
                 print ",trim_pot_changed", trim_pot_changed
         
-        readings.append(volume)
+        readings.append(set_volume)
 
-        if len(readings) >= 10:
+        if len(readings) >= 100:
                 average  = sum(readings)/len(readings)
-                print "avg: ",  average
+                print time.time(),
+                print ",", average
                 readings = []
         # hang out and do nothing for a half second
-        time.sleep(0.005)
+        time.sleep(0.0005)
