@@ -78,7 +78,7 @@ while True:
     channel_readings[channel].append(channel_value)
     channel+=1
 
-  if len(channel_readings[0]) >= 150:
+  if len(channel_readings[0]) >= 100:
     print time.time(),
     channel = 0
     while channel <= 7:
@@ -89,6 +89,6 @@ while True:
       if (channel==7):
         print ""
       channel+=1  
-
+    channel_readings   = [[],[],[],[],[],[],[],[]]
   # hang out and do nothing for a half second
   time.sleep(0.0005)
