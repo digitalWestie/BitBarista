@@ -66,29 +66,37 @@ tazza2 = 6      #pin 23
 vapore = 7      #pin 25
 
 serbatoio_readings = []
-tazza1_readings = []
+tazza1_readings    = []
+al_fondi_readings  = []
+al_fondi_average   = 0
 serbatoio_average  = 0
-tazza1_average  = 0
+tazza1_average     = 0
 
 while True:
         serbatoio_value = readadc(serbatoio, SPICLK, SPIMOSI, SPIMISO, SPICS) # read the analog pin
-        serbatoio_value = serbatoio_value / 10.24 # convert 10bit adc0 (0-1024) trim pot read into 0-100 value
+        serbatoio_value = round(serbatoio_value / 10.24, 2) # convert 10bit adc0 (0-1024) trim pot read into 0-100 value
         serbatoio_readings.append(serbatoio_value)
 
         tazza1_value = readadc(tazza1, SPICLK, SPIMOSI, SPIMISO, SPICS)
-        tazza1_value = tazza1_value / 10.24
+        tazza1_value = round(tazza1_value / 10.24, 2)
         tazza1_readings.append(tazza1_value)
+
+        al_fondi_value = readadc(al_fondi, SPICLK, SPIMOSI, SPIMISO, SPICS)
+        al_fondi_value = round(al_fondi_value / 10.24, 2)
+        al_fondi_readings.append(al_fondi_value)
         
         if len(serbatoio_readings) >= 100:
                 serbatoio_average  = sum(serbatoio_readings)/len(serbatoio_readings)
-                tazza1_average     = sum(tazza1_readings)/len(tazza1_readings)
+                #tazza1_average     = sum(tazza1_readings)/len(tazza1_readings)
+                al_fondi_average     = sum(al_fondi_readings)/len(al_fondi_readings)
                 
                 print time.time(),
                 print ", ", serbatoio_average,
-                print ", ", tazza1_average
+                print ", ", al_fondi_average
 
                 serbatoio_readings = []
-                tazza1_readings    = []
+                #tazza1_readings   = []
+                al_fondi_readings  = []
 
         # hang out and do nothing for a half second
         time.sleep(0.0005)
