@@ -70,19 +70,13 @@ tazza1_readings = []
 serbatoio_average  = 0
 tazza1_average  = 0
 
-def percentageVal(readingVal):
-  percentage = readingVal / 10.24     # convert 10bit adc0 (0-1024) trim pot read into 0-100 value
-  percentage = round(readingVal)      # round out decimal value
-  percentage = int(readingVal)        # cast volume as integer
-  return percentage
-
 while True:
         serbatoio_value = readadc(serbatoio, SPICLK, SPIMOSI, SPIMISO, SPICS) # read the analog pin
-        serbatoio_value = percentageVal(serbatoio_value)
+        serbatoio_value = serbatoio_value / 10.24 # convert 10bit adc0 (0-1024) trim pot read into 0-100 value
         serbatoio_readings.append(serbatoio_value)
 
         tazza1_value = readadc(tazza1, SPICLK, SPIMOSI, SPIMISO, SPICS)
-        tazza1_value = percentageVal(tazza1_value)
+        tazza1_value = tazza1_value / 10.24
         tazza1_readings.append(tazza1_value)
         
         if len(serbatoio_readings) >= 100:
