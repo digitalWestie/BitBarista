@@ -83,9 +83,11 @@ while True:
     channel = 0
     while channel <= 7:
       channel_average = sum(channel_readings[channel])/len(channel_readings[channel])
-      print ", ", channel_names[channel], 
-      print ": ", channel_average,
-      if channel==7
+      print ",",channel_names[channel], 
+      print ",",channel_average,
+      if (channel==7):
         print ""
+      channel+=1  
+
   # hang out and do nothing for a half second
   time.sleep(0.0005)
