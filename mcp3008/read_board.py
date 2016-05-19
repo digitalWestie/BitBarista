@@ -74,7 +74,7 @@ while True:
   channel = 0
   while channel <= 7:
     channel_value = readadc(channel, SPICLK, SPIMOSI, SPIMISO, SPICS) # read the analog pin
-    channel_value = round(channel_value / 10.24, 2) # convert 10bit adc0 (0-1024) trim pot read into 0-100 value
+    channel_value = channel_value / 10.24 # convert 10bit adc0 (0-1024) trim pot read into 0-100 value
     channel_readings[channel].append(channel_value)
     channel+=1
 
@@ -83,6 +83,7 @@ while True:
     channel = 0
     while channel <= 7:
       channel_average = sum(channel_readings[channel])/len(channel_readings[channel])
+      channel_average = round(channel_average, 2)
       print ",",channel_names[channel], 
       print ",",channel_average,
       if (channel==7):
