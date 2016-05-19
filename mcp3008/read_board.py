@@ -65,11 +65,10 @@ tazza1 = 5      #pin 21
 tazza2 = 6      #pin 23
 vapore = 7      #pin 25
 
-last_read = 0       # this keeps track of the last potentiometer value
-tolerance = 0       # to keep from being jittery we'll only change
-                    # volume when the pot has moved more than 5 'counts'
-readings = []
-average  = 0
+serbatoio_readings = []
+tazza1_readings = []
+serbatoio_average  = 0
+tazza1_average  = 0
 
 def percentageVal(readingVal):
   percentage = readingVal / 10.24     # convert 10bit adc0 (0-1024) trim pot read into 0-100 value
