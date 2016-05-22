@@ -1,0 +1,7 @@
+/*body { background: url('/assets/bc_logo.png') white no-repeat; }*/
+
+.btcColours { background-color: #f7931a; color:white; }
+.btcColoursRev { background-color: white; color:#f49542; }
+
+div.header { padding:1em; padding-left: 0em;}
+div.footer { padding:1em; margin-top:1em; }

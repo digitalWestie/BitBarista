@@ -1,10 +1,19 @@
 from flask import Flask
 from flask import render_template
+from flask import send_from_directory
+from flask import request
 from subprocess import Popen, PIPE
 
 app = Flask(__name__)
 
 @app.route("/")
+def root():
+    return render_template('root.html')
+
+@app.route('/assets/<path:path>')
+def send_asset(path):
+    return send_from_directory('assets', path)
+
 @app.route('/hello/')
 @app.route('/hello/<name>')
 def hello(name=None):
@@ -18,4 +27,4 @@ def testing():
     return output
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
