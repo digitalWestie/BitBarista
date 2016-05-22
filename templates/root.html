@@ -1,12 +1,15 @@
 {% extends "index.html" %}
 {% block content %}
-
 <div class="row">
   <div class="col-md-offset-1 col-md-10">
-  <h2>On offer today...</h2>
+    <h2>On offer today...</h2>
+    
+    <!-- <div id="led" style="height:20px; width:20px; background-color:red; border:1px solid gray; border-radius:15px;">
+    </div>-->
+
     <div class="row">
       <div class="col-md-6">
-        HALF
+        HALF {{ state["overall"] }}
       </div>
       <div class="col-md-6">
         HALF
@@ -14,5 +17,10 @@
     </div>
   </div>
 </div>
+{% endblock %}
 
+{% block javascript %}
+<script>
+  
+</script>
 {% endblock %}
