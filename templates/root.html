@@ -1,26 +1,91 @@
 {% extends "index.html" %}
 {% block content %}
-<div class="row">
+
+<div class="row" id="offers">
   <div class="col-md-offset-1 col-md-10">
     <h2>On offer today...</h2>
-    
+    <br/>
     <!-- <div id="led" style="height:20px; width:20px; background-color:red; border:1px solid gray; border-radius:15px;">
     </div>-->
 
     <div class="row">
       <div class="col-md-6">
-        HALF {{ state["overall"] }}
+        <a class="touch-button" style="">
+        <img src="/assets/espresso.jpeg" style="height:10em; width:auto%;"></img>
+        SINGLE
+        </a>
       </div>
+
       <div class="col-md-6">
-        HALF
+        <a class="touch-button" style="">
+        <img src="/assets/espresso.jpeg" style="height:10em; width:auto%;"></img>
+        DOUBLE
+        </a>
       </div>
     </div>
+
   </div>
 </div>
+
+<div class="row" id="issues">
+  <div class="col-md-offset-1 col-md-10">
+    <h2>Oh, it looks like I could do with some help!</h2>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="touch-button" style="">
+          <ul id="issues-list">
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <a class="touch-button" style="">
+          Give a hand!        
+        </a>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
 {% endblock %}
 
 {% block javascript %}
 <script>
-  
+
+$(document).ready(function(){
+  //$('#issues').hide();
+
+  var timeoot = 0;
+  function poll() { 
+    setTimeout(function() {
+      $.ajax({ url: "{{ state_url }}",
+        success: function(data) { 
+          timeoot = 8000;
+          
+          $('#issues-list').html('');
+
+          if (data.overall == 'ready'){
+            console.log("bark");
+            $('#offers').show();
+            $('#issues').hide();
+          } else {
+            $('#issues').show();
+            $('#offers').hide();
+            $.each(data, function(key, value) {
+              $('#issues-list').append('<li>'+key+ ': problem</li>');
+            });
+          }
+        }, 
+        dataType: "json",
+        complete: poll
+      });
+    }, timeoot);
+  }
+
+  poll();
+});
 </script>
 {% endblock %}

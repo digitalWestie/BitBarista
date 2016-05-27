@@ -1,17 +1,20 @@
 from flask import Flask
+from flask import jsonify
 from flask import render_template
 from flask import send_from_directory
 from flask import request
+from flask import Flask,redirect
 from subprocess import Popen, PIPE
 
 import fake_board_reader #board_reader on pi
 
 app = Flask(__name__)
 
+state_url = "http://localhost:5000/state"
+
 @app.route("/")
 def root():
-  state = fake_board_reader.read_state()
-  return render_template('root.html', state=state)
+  return render_template('root.html', state_url=state_url)
 
 @app.route('/assets/<path:path>')
 def send_asset(path):
@@ -20,7 +23,9 @@ def send_asset(path):
 @app.route('/state/')
 def get_state():
   state = fake_board_reader.read_state()
-  return 'x'
+  return jsonify(**state)
+
+#return redirect("http://www.example.com", code=302)
 
 @app.route('/hello/')
 @app.route('/hello/<name>')
