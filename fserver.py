@@ -6,7 +6,8 @@ from flask import request
 from flask import Flask,redirect
 from subprocess import Popen, PIPE
 
-import fake_board_reader #board_reader on pi
+import fake_board_reader as board_reader #board_reader on pi
+#import board_reader as board_reader 
 
 app = Flask(__name__)
 
@@ -22,11 +23,17 @@ def send_asset(path):
 
 @app.route('/state/')
 def get_state():
-  state = fake_board_reader.read_state()
+  state = board_reader.read_state()
   return jsonify(**state)
 
-#return redirect("http://www.example.com", code=302)
-
+@app.route('/sell/<offer>')
+def sell(offer="single"):
+  state = board_reader.read_state()
+  if (state['overall'] == 'ready'):
+    return 'HELLO'
+  else:
+    return redirect("/", code=302)
+  
 @app.route('/hello/')
 @app.route('/hello/<name>')
 def hello(name=None):
