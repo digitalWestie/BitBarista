@@ -99,7 +99,7 @@ def read_state():
   all_off=false
   all_off=test_hi_spread(averages)
   
-  if !all_off:
+  if not all_off:
     all_off = test_hival(results)
   
   if all_off:
