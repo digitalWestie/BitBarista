@@ -85,28 +85,39 @@ def read_state():
   results.append(collect_readings())
 
   print time.time(),
-  averages = []
+  all_channel_averages = []
   sample = 0
   while sample < len(results):
     avg = sum(results[sample])/len(results[sample])
     print avg,
-    averages.append(avg)
+    all_channel_averages.append(avg)
     sample+=1
   
   #test if machine is off
   all_off=False
-  all_off=test_hi_spread(averages)
+  is_steady=test_steady(all_channel_averages)
+  all_off=test_hi_spread(all_channel_averages)
   
   if not all_off:
     all_off = test_hival(results)
   
   if all_off:
     state["overall"] = 'off'
-
+  elif is_steady:
+    state["overall"] = 'steady'
+  else
+    state["overall"] = 'other'
+  
   print state["overall"]
 
   return state
 
+def test_steady(averages):
+  #is avg steady - ie no flashing
+  if abs(max(averages) - min(averages)) <= 1.5:
+    return True
+  else:
+    return False
 
 def test_hi_spread(averages):
   #is there a lot of fluctuation?
