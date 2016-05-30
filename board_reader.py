@@ -86,25 +86,36 @@ def read_state():
 
   averages = []
   sample = 0
+
+  print time.time(),
+
   while sample <= 7:
     avg = sum(results[sample])/len(results[sample])
+    print avg,
     averages.append(avg)
     sample+=1
 
   #test if machine is off
   all_off=false
   all_off=test_hi_spread(averages)
-  if all_off:
-    test_hival(results)
-  if all_off: 
-    state["overall"] = 'off'
-    return state
-
   
+  if !all_off:
+    all_off = test_hival(results)
+  
+  if all_off:
+    state["overall"] = 'off'
+
+  print state["overall"]
+
+  return state
+
+
 def test_hi_spread(averages):
   #is there a lot of fluctuation?
   if abs(max(averages) - min(averages)) >= 40:
     return true
+  else:
+    return false
 
 def test_hival(results):
   #do we have any super high values?
@@ -147,7 +158,7 @@ def collect_readings():
 
 
 def log_results(results):
-  channel_names      = CHANNEL_NAMES
+  channel_names = CHANNEL_NAMES
   results = collect_readings()
   while True:
     print time.time(),
@@ -158,3 +169,6 @@ def log_results(results):
       if (channel==7):
         print ""
       channel+=1
+
+while True:
+  read_state()
