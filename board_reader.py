@@ -86,13 +86,22 @@ def read_state():
   results.append(collect_readings())
 
   print time.time(),
+
   all_channel_averages = []
+  column_averages = [0,0,0,0,0,0,0,0]
+
   sample = 0
   while sample < len(results):
     avg = sum(results[sample])/len(results[sample])
     print avg,
     all_channel_averages.append(avg)
+    for col in range(8):
+      column_averages[col] += results[sample][col]
     sample+=1
+
+  for col in range(8):
+    column_averages[col] = column_averages[col]/len(results)
+  
   
   #test if machine is off
   all_off=False
@@ -100,13 +109,14 @@ def read_state():
   if not all_off:
     all_off = test_hival(results)
   
+  
   if all_off:
     state["overall"] = 'off'
-  elif test_sig(WATER_EMPTY_SIG, all_channel_averages):
+  elif test_sig(WATER_EMPTY_SIG, column_averages):
     state["overall"] = 'water missing'
   elif test_steady(all_channel_averages):
     state["overall"] = 'steady'
-  elif test_sig(READY_SIG, all_channel_averages):
+  elif test_sig(READY_SIG, column_averages):
     state["overall"] = 'ready'
   else:
     state["overall"] = 'other'
