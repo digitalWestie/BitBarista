@@ -118,7 +118,7 @@ def test_hi_spread(averages):
 def test_hival(results):
   #do we have any super high values?
   sample = 0
-  while sample <= 7:
+  while sample < len(results):
     i=0
     while i <= 7:
       if results[sample][i] > 100: 
