@@ -151,7 +151,7 @@ def collect_readings():
   while channel <= 7:
     channel_average = sum(channel_readings[channel])/len(channel_readings[channel])
     channel_average = round(channel_average, 2)
-    channel_averages[channel].append(channel_average)
+    channel_averages.append(channel_average)
     channel+=1
 
   return channel_averages
