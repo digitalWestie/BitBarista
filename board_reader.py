@@ -94,7 +94,7 @@ def read_state():
     sample+=1
   
   #test if machine is off
-  all_off=false
+  all_off=False
   all_off=test_hi_spread(averages)
   
   if not all_off:
@@ -111,9 +111,9 @@ def read_state():
 def test_hi_spread(averages):
   #is there a lot of fluctuation?
   if abs(max(averages) - min(averages)) >= 40:
-    return true
+    return True
   else:
-    return false
+    return False
 
 def test_hival(results):
   #do we have any super high values?
@@ -122,10 +122,10 @@ def test_hival(results):
     i=0
     while i <= 7:
       if results[sample][i] > 100: 
-        return true
+        return True
       i+=1
     sample+=1
-  return false
+  return False
 
 def collect_readings():
   channel_names      = CHANNEL_NAMES
