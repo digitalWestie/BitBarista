@@ -34,8 +34,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="touch-button" style="">
-          <ul id="issues-list">
-          </ul>
+          <p id="issue-message"></p>
         </div>
       </div>
 
@@ -63,20 +62,17 @@ $(document).ready(function(){
     setTimeout(function() {
       $.ajax({ url: "{{ state_url }}",
         success: function(data) { 
-          timeoot = 8000;
+          timeoot = 6000;
           
-          $('#issues-list').html('');
+          $('#issue-message').html('');
 
           if (data.overall == 'ready'){
-            console.log("bark");
             $('#offers').show();
             $('#issues').hide();
           } else {
             $('#issues').show();
             $('#offers').hide();
-            $.each(data, function(key, value) {
-              $('#issues-list').append('<li>'+key+ ': problem</li>');
-            });
+            $('#issue-message').append(data.message);            
           }
         }, 
         dataType: "json",
