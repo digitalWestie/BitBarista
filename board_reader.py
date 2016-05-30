@@ -84,17 +84,15 @@ def read_state():
   results.append(collect_readings())
   results.append(collect_readings())
 
+  print time.time(),
   averages = []
   sample = 0
-
-  print time.time(),
-
-  while sample <= 7:
+  while sample < len(results):
     avg = sum(results[sample])/len(results[sample])
     print avg,
     averages.append(avg)
     sample+=1
-
+  
   #test if machine is off
   all_off=false
   all_off=test_hi_spread(averages)
