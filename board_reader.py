@@ -105,7 +105,7 @@ def read_state():
     state["overall"] = 'off'
   elif is_steady:
     state["overall"] = 'steady'
-  else
+  else:
     state["overall"] = 'other'
   
   print state["overall"]
@@ -166,18 +166,19 @@ def collect_readings():
   return channel_averages
 
 
-def log_results(results):
+def log_results():
   channel_names = CHANNEL_NAMES
-  results = collect_readings()
-  while True:
+  while True: 
+    results = collect_readings()
     print time.time(),
     channel = 0
     while channel <= 7:
-      print ",",channel_names[channel], 
+      #print ",",channel_names[channel], 
       print ",",results[channel],
       if (channel==7):
         print ""
       channel+=1
 
-while True:
-  read_state()
+def log_state():
+  while True:
+    read_state()
