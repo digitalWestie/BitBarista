@@ -106,18 +106,22 @@ def read_state():
   if not all_off:
     all_off = test_hival(results)
   
-  
+    
   if all_off:
     state["overall"] = 'off'
+    state["message"] = "Machine is off, or warming up."
   elif test_sig(WATER_EMPTY_SIG, column_averages):
-    state["overall"] = 'water missing'
+    state["overall"] = 'water'
+    state["message"] = "Water is missing, could you replace it?"
   elif test_steady(all_channel_averages):
     state["overall"] = 'steady'
+    state["message"] = "Something's not right!"
   elif test_sig(READY_SIG, column_averages):
     state["overall"] = 'ready'
+    state["message"] = "Ready to serve!"
   else:
     state["overall"] = 'other'
-  
+    state["message"] = "Not sure what, but something's not right!"
   print state["overall"]
   return state
 
