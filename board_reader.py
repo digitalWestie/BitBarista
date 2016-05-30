@@ -85,15 +85,12 @@ def read_state():
   results.append(collect_readings())
   results.append(collect_readings())
 
-  print time.time(),
-
   all_channel_averages = []
   column_averages = [0,0,0,0,0,0,0,0]
 
   sample = 0
   while sample < len(results):
     avg = sum(results[sample])/len(results[sample])
-    print avg,
     all_channel_averages.append(avg)
     for col in range(8):
       column_averages[col] += results[sample][col]
@@ -101,8 +98,8 @@ def read_state():
 
   for col in range(8):
     column_averages[col] = column_averages[col]/len(results)
-  
-  
+    print column_averages[col],
+    
   #test if machine is off
   all_off=False
   all_off=test_hi_spread(all_channel_averages)
