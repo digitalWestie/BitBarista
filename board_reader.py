@@ -115,7 +115,7 @@ def read_state():
   return state
 
 
-def test_sig(sig, averages, margin=6.5)
+def test_sig(sig, averages, margin=6.5):
   passed = True
   for i in len(sig):
     diff = abs(averages[i] - sig[i])
