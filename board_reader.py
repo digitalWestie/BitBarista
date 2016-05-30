@@ -20,7 +20,8 @@ GPIO.setup(SPICLK, GPIO.OUT)
 GPIO.setup(SPICS, GPIO.OUT)
 
 CHANNEL_NAMES = ["serbatoio","al_fondi","al_generico","al_calcif","premacinato","tazza1","tazza2","vapore"]
-
+READY_SIG = [56.17, 57, 23.65, 22.249, 25.947, 60.995, 64.864, 28.62]
+WATER_EMPTY_SIG = [71.868, 36.713, 5.110, 0, 5.028, 70.624, 41.004, 0]
 #MCP Channel to Control Mappings
 # serbatoio   #pin 10
 # al_fondi    #pin 12
@@ -95,22 +96,31 @@ def read_state():
   
   #test if machine is off
   all_off=False
-  is_steady=test_steady(all_channel_averages)
   all_off=test_hi_spread(all_channel_averages)
-  
   if not all_off:
     all_off = test_hival(results)
   
   if all_off:
     state["overall"] = 'off'
-  elif is_steady:
+  elif test_sig(WATER_EMPTY_SIG, all_channel_averages):
+    state["overall"] = 'water missing'
+  elif test_steady(all_channel_averages):
     state["overall"] = 'steady'
+  elif test_sig(READY_SIG, all_channel_averages):
+    state["overall"] = 'ready'
   else:
     state["overall"] = 'other'
   
   print state["overall"]
-
   return state
+
+
+def test_sig(sig, averages, margin=6.5)
+  passed = True
+  for i in len(sig):
+    diff = abs(averages[i] - sig[i])
+    passed = passed & (diff<=margin)
+  return passed
 
 def test_steady(averages):
   #is avg steady - ie no flashing
