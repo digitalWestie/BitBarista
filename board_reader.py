@@ -205,4 +205,5 @@ def log_state():
     read_state()
 
 def cleanup():
+  print "Running GPIO.cleanup()"
   GPIO.cleanup()
