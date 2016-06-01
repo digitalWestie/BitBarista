@@ -33,11 +33,11 @@ def sell(offer="single"):
     return 'HELLO' #TODO: ADD SALE VIEW
   else:
     return redirect("/", code=302)
-  
-@app.route('/hello/')
-@app.route('/hello/<name>')
-def hello(name=None):
-  return render_template('hello.html', name=name)
+
+@app.route('/pressbutton/<pin>')
+def press_button(pin=None):
+  result = board_reader.press_button(pin)
+  return render_template('hello.html', result=result)
 
 @app.route("/test")
 def testing():

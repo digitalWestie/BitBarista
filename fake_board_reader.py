@@ -17,3 +17,6 @@ def read_state():
 
 def cleanup():
   print "Cleaning up GPIO"
+
+def press_button(pin=None):
+  return True

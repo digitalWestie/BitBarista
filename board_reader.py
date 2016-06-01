@@ -19,6 +19,14 @@ GPIO.setup(SPIMISO, GPIO.IN)
 GPIO.setup(SPICLK, GPIO.OUT)
 GPIO.setup(SPICS, GPIO.OUT)
 
+# set up the optopins
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
+GPIO.setup(22, GPIO.OUT)
+GPIO.setup(10, GPIO.OUT)
+GPIO.setup(9, GPIO.OUT)
+GPIO.setup(11, GPIO.OUT)
+
 CHANNEL_NAMES = ["serbatoio","al_fondi","al_generico","al_calcif","premacinato","tazza1","tazza2","vapore"]
 READY_SIG = [56.17, 57, 23.65, 22.249, 25.947, 60.995, 64.864, 28.62]
 WATER_EMPTY_SIG = [71.868, 36.713, 5.110, 0, 5.028, 70.624, 41.004, 0]
@@ -186,6 +194,16 @@ def collect_readings():
 
   return channel_averages
 
+
+def press_button(pin):
+  if (pin in [17,27,22,10,9,11]):  
+    GPIO.output(pin, 1) # set GPIOX to 1/GPIO.HIGH/True
+    sleep(0.4)
+    GPIO.output(pin, 0) # set GPIOX to 0/GPIO.LOW/False
+    return True
+  else
+    return False
+  
 
 def log_results():
   channel_names = CHANNEL_NAMES
