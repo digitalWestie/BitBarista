@@ -6,8 +6,8 @@ from flask import request
 from flask import Flask,redirect
 from subprocess import Popen, PIPE
 
-import fake_board_reader as board_reader #board_reader on pi
-#import board_reader as board_reader 
+#import fake_board_reader as board_reader #board_reader on pi
+import board_reader as board_reader 
 
 app = Flask(__name__)
 
