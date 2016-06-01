@@ -47,4 +47,11 @@ def testing():
   return output
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  try:
+    app.run(debug=True)
+  except KeyboardInterrupt:  
+    print "Shutting down server"
+  except:
+    print "Other error or exception occurred!"  
+  finally: 
+    board_reader.cleanup()

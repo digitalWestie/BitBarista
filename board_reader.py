@@ -3,7 +3,7 @@ import time
 import os
 import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM) #set up GPIO using BCM numbering
 DEBUG = 0
 
 # change these as desired - they're the pins connected from the
@@ -35,7 +35,7 @@ WATER_EMPTY_SIG = [71.868, 36.713, 5.110, 0, 5.028, 70.624, 41.004, 0]
 # read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
 def readadc(adcnum, clockpin, mosipin, misopin, cspin):
   if ((adcnum > 7) or (adcnum < 0)):
-          return -1
+    return -1
   GPIO.output(cspin, True)
 
   GPIO.output(clockpin, False)  # start clock low
@@ -203,3 +203,6 @@ def log_results():
 def log_state():
   while True:
     read_state()
+
+def cleanup():
+  GPIO.cleanup()

@@ -14,3 +14,6 @@ def read_state():
     state["message"] = "Water is missing, could you replace it?"
 
   return state
+
+def cleanup():
+  print "Cleaning up GPIO"
