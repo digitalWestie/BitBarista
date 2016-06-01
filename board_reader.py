@@ -196,12 +196,13 @@ def collect_readings():
 
 
 def press_button(pin):
+  print "pressing", pin
   if (pin in [17,27,22,10,9,11]):  
     GPIO.output(pin, 1) # set GPIOX to 1/GPIO.HIGH/True
     sleep(0.4)
     GPIO.output(pin, 0) # set GPIOX to 0/GPIO.LOW/False
     return True
-  else
+  else:
     return False
   
 
