@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row" id="offers">
+  <div class="col-sm-offset-1 col-sm-10">
+
+    <h2>Ready for sale...</h2>
+    <br/>
+    
+    <div class="row">
+      <div class="col-sm-6">
+        <a class="touch-button" style="">
+        <img src="/assets/espresso.jpeg" style="height:10em; width:auto%;"></img>
+        {{ offer }}
+        </a>
+      </div>
+      <div class="col-sm-6">
+        <div class="touch-button">
+        Sale: {{ price }}BTC
+        <br/>
+        Address: {{ address }}
+        <div id="qrcode"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+$(document).ready(function(){
+  var canvas = qr.canvas();
+  $('#qrcode').append(canvas);
+  qr.canvas({ canvas: canvas, value: '{{ address }}' });
+});
+</script>
+{% endblock %}
+</div>

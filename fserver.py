@@ -30,7 +30,7 @@ def get_state():
 def sell(offer="single"):
   state = board_reader.read_state()
   if (state['overall'] == 'ready'):
-    return 'HELLO' #TODO: ADD SALE VIEW
+    return render_template('sale.html', offer=offer, address="xyz1232323", price="0.0001")
   else:
     return redirect("/", code=302)
 

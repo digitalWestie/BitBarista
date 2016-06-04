@@ -7,7 +7,7 @@ def read_state():
     "al_generico":"", "al_calcif":"", "premacinato":"", 
     "tazza1":"","tazza2":"","vapore":""}
   
-  if randint(0,9) > 4:
+  if randint(0,9) > 1:
     state["overall"] = 'ready'
   else:
     state["overall"] = ''
