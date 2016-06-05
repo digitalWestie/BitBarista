@@ -4,7 +4,7 @@
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-10">
 
-    <h2>Ready to serve!</h2>
+    <h2>Ready to serve! <small style="margin-left:0.5em;"><a href="/">Cancel</a></small></h2>
     <br/>
     
     <div class="row">
@@ -20,7 +20,7 @@
             
             <div class="col-sm-6">
               <div id="qrcode" style="margin:0 auto;"></div>
-              <p style="font-size:3vw;">Please send to: </p><p>{{ address }}</p>
+              <p style="font-size:3vw;">Please send to: </p><p style="font-size: 1.9vw;">{{ address }}</p>
               <div style="clear:both;"></div>
             </div>
           </div>
@@ -39,7 +39,7 @@
 $(document).ready(function(){
   var canvas = qr.canvas();
   $('#qrcode').append(canvas);
-  qr.canvas({ canvas: canvas, value: '{{ address }}', size: 6 });
+  qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.5 });
 });
 </script>
 {% endblock %}

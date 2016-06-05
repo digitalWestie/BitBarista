@@ -13,7 +13,8 @@ app = Flask(__name__)
 
 state_url = "http://localhost:5000/state"
 
-offers = { "single":1200, "double":2000 } #units are in bits
+offers = { "single":1000, "double":1900 } #units are in bits
+micro = 1000000.0
 
 @app.route("/")
 def root():
@@ -30,9 +31,12 @@ def get_state():
 
 @app.route('/sale/<offer>')
 def sale(offer):
-  state = board_reader.read_state()
+  state = board_reader.read_state() 
   if (state['overall'] == 'ready'):
-    return render_template('sale.html', offer=offer, address="1AR9FJLYUb9cqojiuTwrD7awP18FfXJkoQ", price=offers[offer])
+    address = "1AR9FJLYUb9cqojiuTwrD7awP18FfXJkoQ"
+    btc_price = offers[offer] / micro
+    qrdata = 'bitcoin:'+address+'?amount='+str(btc_price)+'&label=BitBarista&message=Single%20Coffee'
+    return render_template('sale.html', offer=offer, address=address, price=offers[offer], qrdata=qrdata)
   else:
     return redirect("/", code=302)
 
