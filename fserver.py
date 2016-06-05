@@ -13,9 +13,11 @@ app = Flask(__name__)
 
 state_url = "http://localhost:5000/state"
 
+offers = { "single":1200, "double":2000 } #units are in bits
+
 @app.route("/")
 def root():
-  return render_template('root.html', state_url=state_url)
+  return render_template('root.html', state_url=state_url, offers=offers)
 
 @app.route('/assets/<path:path>')
 def send_asset(path):
@@ -26,11 +28,11 @@ def get_state():
   state = board_reader.read_state()
   return jsonify(**state)
 
-@app.route('/sell/<offer>')
-def sell(offer="single"):
+@app.route('/sale/<offer>')
+def sale(offer):
   state = board_reader.read_state()
   if (state['overall'] == 'ready'):
-    return render_template('sale.html', offer=offer, address="xyz1232323", price="0.0001")
+    return render_template('sale.html', offer=offer, address="1AR9FJLYUb9cqojiuTwrD7awP18FfXJkoQ", price=offers[offer])
   else:
     return redirect("/", code=302)
 

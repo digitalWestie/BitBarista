@@ -4,22 +4,27 @@
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-10">
 
-    <h2>Ready for sale...</h2>
+    <h2>Ready to serve!</h2>
     <br/>
     
     <div class="row">
-      <div class="col-sm-6">
-        <a class="touch-button" style="">
-        <img src="/assets/espresso.jpeg" style="height:10em; width:auto%;"></img>
-        {{ offer }}
-        </a>
-      </div>
-      <div class="col-sm-6">
-        <div class="touch-button">
-        Sale: {{ price }}BTC
-        <br/>
-        Address: {{ address }}
-        <div id="qrcode"></div>
+      <div class="col-sm-12">
+        <div class="touch-button" style="">
+
+          <div class="row">
+            <div class="col-sm-6">
+              <img src="/assets/espresso.jpeg" style="margin:0 auto; display:block; max-width:200px; min-width:80px; width:70%; height:auto;"></img>
+              <h3 style="font-size:3vw; text-align:center; margin-top:0.2em;">1 {{ offer }} is {{ price }}μBTC</h3>
+              <div style="clear:both;"></div>
+            </div>
+            
+            <div class="col-sm-6">
+              <div id="qrcode" style="margin:0 auto;"></div>
+              <p style="font-size:3vw;">Please send to: </p><p>{{ address }}</p>
+              <div style="clear:both;"></div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -34,7 +39,7 @@
 $(document).ready(function(){
   var canvas = qr.canvas();
   $('#qrcode').append(canvas);
-  qr.canvas({ canvas: canvas, value: '{{ address }}' });
+  qr.canvas({ canvas: canvas, value: '{{ address }}', size: 6 });
 });
 </script>
 {% endblock %}
