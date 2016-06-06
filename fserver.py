@@ -89,7 +89,7 @@ def payment_request(address):
 @app.route("/pay/<address>")
 def pay(address):
   result = send_payment(address, offers["single"])
-  if request:
+  if result:
     return jsonify(**result)
   else:
     return redirect("/error", code=302)
@@ -110,17 +110,24 @@ def check_request(address):
   p = Popen(['electrum', 'getrequest', address], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
   if p.returncode == 0:
-    return json.loads(output)
+    return 'Output: '+output
   else:
     return False
 
 
-def send_payment(amount, address):
+def send_payment(address, amount):
+  print "Attempting to send payment to " + address + " for " + str(amount) + "BTC"
   p = Popen(['electrum', 'pay', address, str(amount)], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
+  
+  print "Output: ", str(output)
+  print "Return code: ", p.returncode
+
   if p.returncode == 0:
+    print "Success!"
     return json.loads(output)
   else:
+    print "Failed!"
     return False
 
 
