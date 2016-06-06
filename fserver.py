@@ -1,63 +1,116 @@
-from flask import Flask
+from flask import Flask, abort, redirect
 from flask import jsonify
 from flask import render_template
 from flask import send_from_directory
 from flask import request
-from flask import Flask,redirect
 from subprocess import Popen, PIPE
+import json
 
-#import fake_board_reader as board_reader #board_reader on pi
-import board_reader as board_reader 
+import fake_board_reader as board_reader #board_reader on pi
+#import board_reader as board_reader 
 
 app = Flask(__name__)
 
 state_url = "http://localhost:5000/state"
 
-offers = { "single":1000, "double":1900 } #units are in bits
-micro = 1000000.0
+offers = { "single":0.001, "double":0.0019 } #units are in bits
 
 @app.route("/")
 def root():
   return render_template('root.html', state_url=state_url, offers=offers)
 
+
 @app.route('/assets/<path:path>')
 def send_asset(path):
   return send_from_directory('assets', path)
+
 
 @app.route('/state/')
 def get_state():
   state = board_reader.read_state()
   return jsonify(**state)
 
+
 @app.route('/sale/<offer>')
 def sale(offer):
   state = board_reader.read_state() 
   if (state['overall'] == 'ready'):
-    address = "1AR9FJLYUb9cqojiuTwrD7awP18FfXJkoQ"
-    btc_price = offers[offer] / micro
-    qrdata = 'bitcoin:'+address+'?amount='+str(btc_price)+'&label=BitBarista&message=Single%20Coffee'
-    return render_template('sale.html', offer=offer, address=address, price=offers[offer], qrdata=qrdata)
+
+    # TODO: WRITE JS TO POLL REQUEST CHECKER
+    # AFTER X RETRIES REDIRECT "/" ?
+    # TODO: WRITE PAGE FOR SERVING COFFEE
+    
+    request = generate_request(offers[offer])
+
+    if not request:
+      return redirect("/error", code=302)
+    
+    request["URI"] = request["URI"]+'&label=BitBarista&message=offer_'+offer
+    print "Making request for: "
+    print request
+
+    return render_template('sale.html', offer=offer, address=request["address"], price=offers[offer], qrdata=request["URI"])
   else:
     return redirect("/", code=302)
+
 
 @app.route('/pressbutton/<pin>')
 def press_button(pin=None):
   result = board_reader.press_button(pin)
   return render_template('hello.html', result=result)
 
-@app.route("/test")
-def testing():
-  p = Popen(['electrum', 'getaddresshistory', '1AR9FJLYUb9cqojiuTwrD7awP18FfXJkoQ'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+
+@app.route("/payment_request/<address>")
+def payment_request(address):
+  request = check_request(address)
+  if request:
+    return jsonify(**request)
+  else: 
+    abort(500)
+
+
+@app.route("/error")
+def error_page():
+  return "Oh uh, something went wrong! Please reboot."
+
+
+def check_request(address):
+  #test example address - 18GrXXPJM8eMQYMJ2GzJk39iczKzqB57Kt
+  p = Popen(['electrum', 'getrequest', address], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
-  rc = p.returncode
-  return output
+  if p.returncode == 0:
+    return json.loads(output)
+  else:
+    return False
+
+
+def generate_request(amount):
+  p = Popen(['electrum', 'addrequest', str(amount), '-m', 'Coffee Sale Test'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  output, err = p.communicate()
+  if p.returncode == 0:
+    return json.loads(output)
+  else:
+    return False
+
+
+def daemon_status():
+  p = Popen(['electrum', 'daemon', 'status'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  p.communicate()
+  if (p.returncode == 0):
+    return True
+  else:
+    return False
+
 
 if __name__ == "__main__":
   try:
+    electrumStarted = daemon_status()
+    if not electrumStarted:
+      raise ValueError('Electrum daemon not started, please run: electrum daemon start')
     app.run(debug=True)
-  except KeyboardInterrupt:  
+  except KeyboardInterrupt:
     print "Shutting down server"
-  except:
-    print "Other error or exception occurred!"  
+  except Exception as error:
+    print "Other error or exception occurred \n", str(error)
   finally: 
     board_reader.cleanup()
