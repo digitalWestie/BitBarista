@@ -50,7 +50,7 @@ def sale(offer):
     print request
 
     request_check_url = "http://localhost:5000/payment_request/"+request["address"]
-    
+
     return render_template('sale.html', offer=offer, address=request["address"], price=offers[offer], qrdata=request["URI"], request_check_url=request_check_url)
   else:
     return redirect("/", code=302)
