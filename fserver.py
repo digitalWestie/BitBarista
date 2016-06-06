@@ -60,6 +60,7 @@ def sale(offer):
 def serve(offer):
   if (offer == "single"): 
     pin = 17
+    #TAKES 45 SECONDS
   else:
     pin = 27
   result = board_reader.press_button(pin)
@@ -85,6 +86,15 @@ def payment_request(address):
     abort(500)
 
 
+@app.route("/pay/<address>")
+def pay(address):
+  result = send_payment(address, offers["single"])
+  if result:
+    return jsonify(**result)
+  else:
+    return redirect("/error", code=302)
+
+
 @app.route("/error")
 def error_page():
   return 'Oh uh, something went wrong! <a href="/">Please try again.</a>'
@@ -100,8 +110,24 @@ def check_request(address):
   p = Popen(['electrum', 'getrequest', address], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
   if p.returncode == 0:
+    return 'Output: '+output
+  else:
+    return False
+
+
+def send_payment(address, amount):
+  print "Attempting to send payment to " + address + " for " + str(amount) + "BTC"
+  p = Popen(['electrum', 'pay', address, str(amount)], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  output, err = p.communicate()
+  
+  print "Output: ", str(output)
+  print "Return code: ", p.returncode
+
+  if p.returncode == 0:
+    print "Success!"
     return json.loads(output)
   else:
+    print "Failed!"
     return False
 
 
