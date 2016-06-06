@@ -59,9 +59,9 @@ def sale(offer):
 @app.route('/serve/<offer>')
 def serve(offer):
   if (offer == "single"): 
-    pin = 21
+    pin = 17
   else:
-    pin = 23
+    pin = 27
   result = board_reader.press_button(pin)
   if result:
     #TODO CHECK IT HAS SERVED OK
