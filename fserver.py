@@ -90,6 +90,11 @@ def error_page():
   return 'Oh uh, something went wrong! <a href="/">Please try again.</a>'
 
 
+@app.route("/help")
+def help():
+  return render_template('help.html') 
+
+
 def check_request(address):
   #test example address - 18GrXXPJM8eMQYMJ2GzJk39iczKzqB57Kt
   p = Popen(['electrum', 'getrequest', address], stdin=PIPE, stdout=PIPE, stderr=PIPE)
