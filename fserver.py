@@ -106,11 +106,10 @@ def help():
 
 
 def check_request(address):
-  #test example address - 18GrXXPJM8eMQYMJ2GzJk39iczKzqB57Kt
   p = Popen(['electrum', 'getrequest', address], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
   if p.returncode == 0:
-    return 'Output: '+output
+    return json.loads(output)
   else:
     return False
 
