@@ -86,6 +86,15 @@ def payment_request(address):
     abort(500)
 
 
+@app.route("/pay/<address>")
+def pay(address):
+  result = send_payment(address, offers["single"])
+  if request:
+    return jsonify(**result)
+  else:
+    return redirect("/error", code=302)
+
+
 @app.route("/error")
 def error_page():
   return 'Oh uh, something went wrong! <a href="/">Please try again.</a>'
@@ -99,6 +108,15 @@ def help():
 def check_request(address):
   #test example address - 18GrXXPJM8eMQYMJ2GzJk39iczKzqB57Kt
   p = Popen(['electrum', 'getrequest', address], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  output, err = p.communicate()
+  if p.returncode == 0:
+    return json.loads(output)
+  else:
+    return False
+
+
+def send_payment(amount, address):
+  p = Popen(['electrum', 'pay', address, str(amount)], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
   if p.returncode == 0:
     return json.loads(output)
