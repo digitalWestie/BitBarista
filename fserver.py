@@ -6,8 +6,8 @@ from flask import request
 from subprocess import Popen, PIPE
 import json
 
-import fake_board_reader as board_reader #board_reader on pi
-#import board_reader as board_reader 
+#import fake_board_reader as board_reader #board_reader on pi
+import board_reader as board_reader 
 
 app = Flask(__name__)
 
@@ -65,7 +65,7 @@ def serve(offer):
   result = board_reader.press_button(pin)
   if result:
     return render_template('serve.html', result=result)
-  else
+  else:
     redirect("/", code=302)
 
 
