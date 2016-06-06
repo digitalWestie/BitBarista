@@ -66,7 +66,7 @@ def serve(offer):
   if result:
     return render_template('serve.html', result=result)
   else:
-    redirect("/", code=302)
+    return redirect("/", code=302)
 
 
 @app.route('/pressbutton/<pin>')
