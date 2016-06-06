@@ -64,6 +64,7 @@ def serve(offer):
     pin = 23
   result = board_reader.press_button(pin)
   if result:
+    #TODO CHECK IT HAS SERVED OK
     return render_template('serve.html', result=result)
   else:
     return redirect("/", code=302)
