@@ -60,6 +60,7 @@ def sale(offer):
 def serve(offer):
   if (offer == "single"): 
     pin = 17
+    #TAKES 45 SECONDS
   else:
     pin = 27
   result = board_reader.press_button(pin)
