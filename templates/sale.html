@@ -39,7 +39,7 @@
 $(document).ready(function(){
   var canvas = qr.canvas();
   $('#qrcode').append(canvas);
-  qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.5 });
+  qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.1 });
 
   var attempts = 0;
   function poll() { 
