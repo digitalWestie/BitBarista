@@ -63,7 +63,10 @@ def serve(offer):
   else:
     pin = 23
   result = board_reader.press_button(pin)
-  return render_template('serve.html', result=result)
+  if result:
+    return render_template('serve.html', result=result)
+  else
+    redirect("/", code=302)
 
 
 @app.route('/pressbutton/<pin>')
@@ -83,7 +86,7 @@ def payment_request(address):
 
 @app.route("/error")
 def error_page():
-  return "Oh uh, something went wrong! Please reboot."
+  return 'Oh uh, something went wrong! <a href="/">Please try again.</a>'
 
 
 def check_request(address):
