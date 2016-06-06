@@ -196,6 +196,8 @@ def collect_readings():
 
 
 def press_button(pin):
+  # tazza1 (single)     #pin 21
+  # tazza2 (double)     #pin 23
   pin = int(pin)
   if (pin in [17,27,22,10,9,11]):  
     GPIO.output(pin, 1) # set GPIOX to 1/GPIO.HIGH/True

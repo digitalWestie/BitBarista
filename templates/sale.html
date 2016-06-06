@@ -40,6 +40,29 @@ $(document).ready(function(){
   var canvas = qr.canvas();
   $('#qrcode').append(canvas);
   qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.5 });
+
+  var attempts = 0;
+  function poll() { 
+    setTimeout(function() {
+      $.ajax({ url: "{{ request_check_url }}",
+        success: function(data) { 
+          attempts++;
+          if (attempts >= 60){ //reduce this
+            window.location.replace("http://localhost:5000/");
+          }
+
+          if (data.state == 'Paid'){
+            console.log("PAYMENT MADE!");
+            window.location.replace("http://localhost:5000/serve/{{ offer }}");
+          }
+        },
+        dataType: "json",
+        complete: poll
+      });
+    }, 1000);
+  }
+
+  poll();
 });
 </script>
 {% endblock %}

@@ -49,9 +49,21 @@ def sale(offer):
     print "Making request for: "
     print request
 
-    return render_template('sale.html', offer=offer, address=request["address"], price=offers[offer], qrdata=request["URI"])
+    request_check_url = "http://localhost:5000/payment_request/"+request["address"]
+    
+    return render_template('sale.html', offer=offer, address=request["address"], price=offers[offer], qrdata=request["URI"], request_check_url=request_check_url)
   else:
     return redirect("/", code=302)
+
+
+@app.route('/serve/<offer>')
+def serve(offer):
+  if (offer == "single"): 
+    pin = 21
+  else:
+    pin = 23
+  result = board_reader.press_button(pin)
+  return render_template('serve.html', result=result)
 
 
 @app.route('/pressbutton/<pin>')
