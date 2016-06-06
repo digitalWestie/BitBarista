@@ -5,10 +5,10 @@ h2 { margin-bottom:0.7em; }
 .btcColours { background-color: #f7931a; color:white; }
 .btcColoursRev { background-color: white; color:#f49542; }
 
-div.header { padding:1em; padding-left: 0em;}
+div.header { padding:0.5em; padding-left: 0em;}
 div.footer { 
   margin-top:1em;
-  padding: 2%;
+  padding: 1.5%;
   margin-top: 1em;
   position: fixed;
   bottom: 0px;
