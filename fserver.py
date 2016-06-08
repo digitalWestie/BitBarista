@@ -5,6 +5,8 @@ from flask import send_from_directory
 from flask import request
 from subprocess import Popen, PIPE
 import json
+import urllib
+import csv
 
 import fake_board_reader as board_reader #board_reader on pi
 #import board_reader as board_reader 
@@ -150,6 +152,48 @@ def daemon_status():
     return True
   else:
     return False
+
+
+def address_transactions(address):
+  p = Popen(['electrum', 'getaddresshistory', address], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  output, err = p.communicate()
+  if (p.returncode == 0):
+    return json.loads(output)
+  else:
+    return False
+
+
+def retrieve_payouts():
+  filepath = "payouts.csv"
+  try:
+    targetfile = urllib.URLopener()
+    targetfile.retrieve(config["payouts_url"], filepath)
+  except Exception as error:
+    print "Failed to get payout csv \n", str(error)
+  entries = read_csv(filepath)
+
+  payouts = []
+  for entry in entries:
+    split = entry['body'].split()
+    if len(split) == 2:
+      entry['address'] = split[0]
+      entry['reference'] = split[1]
+      payouts.append(entry)
+  return payouts
+
+
+def read_csv(filepath):
+  arr = []
+  try:
+    with open(filepath, 'r') as csvfile:
+      fileDialect = csv.Sniffer().sniff(csvfile.read(1024))
+      csvfile.seek(0)
+      dictReader = csv.DictReader(csvfile, dialect=fileDialect)
+      for row in dictReader:
+        arr.append(row)
+  except Exception as error:
+    print "Failed to read csv file \n", str(error)
+  return arr
 
 
 if __name__ == "__main__":
