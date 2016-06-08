@@ -7,7 +7,7 @@ from subprocess import Popen, PIPE
 import json
 import urllib
 import csv
-
+import random
 import fake_board_reader as board_reader #board_reader on pi
 #import board_reader as board_reader 
 
@@ -154,13 +154,31 @@ def daemon_status():
     return False
 
 
-def address_transactions(address):
-  p = Popen(['electrum', 'getaddresshistory', address], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+def bitbarista_history():
+  p = Popen(['electrum', 'history'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
   if (p.returncode == 0):
     return json.loads(output)
   else:
     return False
+
+
+def generate_reference():
+  existing = used_references()
+  generating = True
+  ref = ''
+  while generating:
+    ref = ''.join(random.choice('0123456789abcdefghijklmnopqrstuvwxyz') for i in range(4))
+    generating = (ref in existing)
+  return ref
+
+
+def used_references():
+  references = []
+  for tx in bitbarista_history():
+    if tx["label"][0:4] == "ref:":
+      references.append(tx["label"].split("ref:")[1])
+  return references
 
 
 def retrieve_payouts():
