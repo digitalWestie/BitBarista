@@ -6,8 +6,8 @@ from flask import request
 from subprocess import Popen, PIPE
 import json
 
-#import fake_board_reader as board_reader #board_reader on pi
-import board_reader as board_reader 
+import fake_board_reader as board_reader #board_reader on pi
+#import board_reader as board_reader 
 
 app = Flask(__name__)
 
@@ -92,7 +92,7 @@ def payment_request(address):
 def pay(address):
   result = send_payment(address, offers["single"])
   if result:
-    return jsonify(**result)
+    return "Paid!"
   else:
     return redirect("/error", code=302)
 
@@ -118,19 +118,19 @@ def check_request(address):
 
 def send_payment(address, amount):
   print "Attempting to send payment to " + address + " for " + str(amount) + "BTC"
-  p = Popen(['electrum', 'payto', address, str(amount), '-W', config["walletpass"], '>', 'newtxn'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-  output, err = p.communicate()
+  p = Popen(['electrum', 'payto', address, str(amount), '-W', config["walletpass"]], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  tx, err = p.communicate()
   
   if p.returncode == 0:
-    print "Broadcasting txn\n", output
-    p = Popen(['cat', 'newtxn', '|', 'electrum', 'broadcast', '-'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    print "Broadcasting txn\n", tx
+    p = Popen(['electrum', 'broadcast', tx], stdin=PIPE, stdout=PIPE, stderr=PIPE)
     output, err = p.communicate()
     if p.returncode == 0:
       return True
     else:
       return False
   else:
-    print "Couldnt generate txn\n", output
+    print "Couldn't generate txn\n", err
     return False
 
 
