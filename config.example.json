@@ -1,0 +1,6 @@
+//An example configuration file
+//To use make a copy of this and rename it to config.json
+{
+    "offers":{ "single":0.001, "double":0.0019 },
+    "walletpass":"<electrum wallet password>"
+}

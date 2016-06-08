@@ -11,12 +11,14 @@ import board_reader as board_reader
 
 app = Flask(__name__)
 
-state_url = "http://localhost:5000/state"
+with open('config.json') as json_config:
+  config = json.load(json_config)
 
-offers = { "single":0.001, "double":0.0019 } #units are in bits
+offers = config["offers"]
 
 @app.route("/")
 def root():
+  state_url = "http://localhost:5000/state"
   return render_template('root.html', state_url=state_url, offers=offers)
 
 
@@ -116,7 +118,7 @@ def check_request(address):
 
 def send_payment(address, amount):
   print "Attempting to send payment to " + address + " for " + str(amount) + "BTC"
-  p = Popen(['electrum', 'pay', address, str(amount)], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  p = Popen(['electrum', 'payto', address, str(amount), '-W', config["walletpass"]], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
   
   print "Output: ", str(output)
