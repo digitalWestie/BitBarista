@@ -118,17 +118,19 @@ def check_request(address):
 
 def send_payment(address, amount):
   print "Attempting to send payment to " + address + " for " + str(amount) + "BTC"
-  p = Popen(['electrum', 'payto', address, str(amount), '-W', config["walletpass"]], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  p = Popen(['electrum', 'payto', address, str(amount), '-W', config["walletpass"], '>', 'newtxn'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
   
-  print "Output: ", str(output)
-  print "Return code: ", p.returncode
-
   if p.returncode == 0:
-    print "Success!"
-    return json.loads(output)
+    print "Broadcasting txn\n", output
+    p = Popen(['cat', 'newtxn', '|', 'electrum', 'broadcast', '-'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    output, err = p.communicate()
+    if p.returncode == 0:
+      return True
+    else:
+      return False
   else:
-    print "Failed!"
+    print "Couldnt generate txn\n", output
     return False
 
 
