@@ -18,6 +18,8 @@ with open('config.json') as json_config:
 
 offers = config["offers"]
 
+state_url = "http://localhost:5000/state"
+
 @app.route("/")
 def home():
   return render_template('home.html', hello="STARTED")
@@ -25,7 +27,6 @@ def home():
 
 @app.route("/start")
 def start():
-  state_url = "http://localhost:5000/state"
   return render_template('root.html', state_url=state_url, offers=offers)
 
 
@@ -37,7 +38,7 @@ def send_asset(path):
 @app.route('/water_request/')
 def water_request():
   reward = "0.0006"
-  return render_template('water_request.html', reward=reward)
+  return render_template('water_request.html', reward=reward, state_url=state_url)
 
 
 @app.route('/state/')
