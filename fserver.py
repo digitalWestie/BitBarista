@@ -76,7 +76,7 @@ def serve(offer):
     return redirect("/", code=302)
 
 
-@app.route('/pressbutton/button')
+@app.route('/pressbutton/<button>')
 def press_button(button=None):
   result = board_reader.press_button(button)
   return render_template('hello.html', result=result)
