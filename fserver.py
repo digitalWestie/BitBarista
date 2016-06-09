@@ -182,6 +182,7 @@ def ref_last_transaction(ref):
     else:
       return False
 
+
 #Pay everyone in the request list
 def settle_payouts():
   payouts = retrieve_payouts()
@@ -234,7 +235,7 @@ def save_reference(ref,amount):
       nextline = ""
       if len(payout_references()) >= 1:
         nextline = "\n"
-      references.write(nextline+ref+","+amount)
+      references.write(nextline+ref+","+str(amount))
     return True
   except:
     return False
