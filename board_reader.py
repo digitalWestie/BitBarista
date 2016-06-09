@@ -205,7 +205,7 @@ def collect_readings():
 
 
 def press_button(btn):
-  #pi gpio pin numbering
+  #pi gpio pin numbering - refer to rpi3 pin mappings for help
   buttons = { 
     "tazza1": 27,
     "single": 27,
@@ -220,6 +220,7 @@ def press_button(btn):
   }
 
   pin = buttons[btn]
+  print btn+" ", str(pin) 
   if (pin in [17,27,22,10,9,11]):  
     GPIO.output(pin, 1) # set GPIOX to 1/GPIO.HIGH/True
     time.sleep(0.4)
