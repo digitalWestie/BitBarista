@@ -14,15 +14,16 @@
           <div class="row">
             <div class="col-sm-6">
               <div id="qrcode" style="float:left; margin-right:3%;"></div>
-              <p style="font-size:2.4vw;">
-                Send an email with your BTC address followed by the reference, {{ reference }}.
-              </p>
+              <p style="font-size:2vw;">Step 1: Scan the email QR code</p>
+              <p style="font-size:2vw;">Step 2: Paste your BTC address into the body</p>
+              <p style="font-size:2vw;">Step 3: Follow your address with reference code, <code>{{ reference }}</code></p>
             </div>
             <div class="col-sm-6">
-              <code style="font-size:2.2vw;">
-                to: trigger@recipe.ifttt.com<br/>
-                subject: #bitbarista <br/>
-                body: < my-btc-address > {{ reference }}
+              <p style="font-size:1.8vw;">The result should look like this:</p><br/>
+              <code style="font-size:1.8vw;">
+                to: giannichan+bitbarista@gmail.com<br/>
+                subject: #bitbarista<br/>
+                body: &lt;my-btc-address&gt; {{ reference }}
               </code>
               <div style="clear:both;"></div>
             </div>
@@ -47,7 +48,7 @@
 $(document).ready(function(){
   var canvas = qr.canvas();
   $('#qrcode').append(canvas);
-  qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.1 });
+  qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.2 });
 });
 </script>
 {% endblock %}

@@ -3,5 +3,6 @@
 {
   "offers":{ "single":0.001, "double":0.0019 },
   "walletpass":"<electrum wallet password>",
+  "payout_claim_email":"myaddress+bitbarista@gmail.com",
   "payouts_url": "https://docs.google.com/spreadsheets/d/sheet&single=true&output=csv" //a gdrive sheet storing addresses we need to refund
 }

@@ -113,7 +113,7 @@ def help():
 def claim(amount):
   ref = generate_reference()
   save_reference(ref, amount)
-  qrdata = "mailto:trigger@recipe.ifttt.com?subject=#bitbarista&body=mybtcaddress%20"+ref
+  qrdata = "mailto:"+config["payout_claim_email"]+"?subject=#bitbarista&body=mybtcaddress%20"+ref
   return render_template('claim.html', reference=ref, amount=amount, qrdata=qrdata)
 
 
