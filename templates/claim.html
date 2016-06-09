@@ -1,0 +1,54 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row" id="offers">
+  <div class="col-sm-offset-1 col-sm-10">
+
+    <h2>Claim your payment! <small style="margin-left:0.5em;"><a href="/">Cancel</a></small></h2>
+    <br/>
+    
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="touch-button" style="">
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div id="qrcode" style="float:left; margin-right:3%;"></div>
+              <p style="font-size:2.4vw;">
+                Send an email with your BTC address followed by the reference, {{ reference }}.
+              </p>
+            </div>
+            <div class="col-sm-6">
+              <code style="font-size:2.2vw;">
+                to: trigger@recipe.ifttt.com<br/>
+                subject: #bitbarista <br/>
+                body: < my-btc-address > {{ reference }}
+              </code>
+              <div style="clear:both;"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--
+<img src="/assets/btc.jpeg" style="margin:0 auto; display:block; max-width:200px; min-width:80px; width:70%; height:auto;"></img>
+              <h3 style="font-size:3vw; text-align:center; margin-top:0.2em;">Payout of {{ amount }}BTC</h3>
+              <div style="clear:both;"></div>
+-->
+{% endblock %}
+
+{% block javascript %}
+<script>
+$(document).ready(function(){
+  var canvas = qr.canvas();
+  $('#qrcode').append(canvas);
+  qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.1 });
+});
+</script>
+{% endblock %}
+</div>

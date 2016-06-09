@@ -106,7 +106,15 @@ def error_page():
 
 @app.route("/help")
 def help():
-  return render_template('help.html') 
+  return render_template('help.html')
+
+
+@app.route("/payout_claim/<amount>")
+def claim(amount):
+  ref = generate_reference()
+  save_reference(ref, amount)
+  qrdata = "mailto:trigger@recipe.ifttt.com?subject=#bitbarista&body=mybtcaddress%20"+ref
+  return render_template('claim.html', reference=ref, amount=amount, qrdata=qrdata)
 
 
 @app.route("/settle_payouts")
