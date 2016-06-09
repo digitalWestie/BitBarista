@@ -31,7 +31,7 @@ CHANNEL_NAMES = ["serbatoio","al_fondi","al_generico","al_calcif","premacinato",
 READY_SIG = [56.17, 57, 23.65, 22.249, 25.947, 60.995, 64.864, 28.62]
 WATER_EMPTY_SIG = [71.868, 36.713, 5.110, 0, 5.028, 70.624, 41.004, 0]
 
-# LED pin numbering from control board ribbon
+# LED pin numbering from control board ribbon (NOT GPIO!)
 # serbatoio   #pin 10
 # al_fondi    #pin 12
 # al_generico #pin 14
@@ -40,6 +40,14 @@ WATER_EMPTY_SIG = [71.868, 36.713, 5.110, 0, 5.028, 70.624, 41.004, 0]
 # tazza1      #pin 21
 # tazza2      #pin 23
 # vapore      #pin 25
+
+# Button pin numbering from control board ribbon (NOT GPIO!)
+# on/off: 3 & 5
+# tazza1: 7 & 9
+# tazza2: 11 & 13
+# vapore: 15 & 17
+# decalcif: 20 & 22
+# premacinato: 24 & 26
 
 # read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
 def readadc(adcnum, clockpin, mosipin, misopin, cspin):
@@ -196,10 +204,22 @@ def collect_readings():
   return channel_averages
 
 
-def press_button(pin):
-  # tazza1 (single)     #pin 21
-  # tazza2 (double)     #pin 23
-  pin = int(pin)
+def press_button(btn):
+  #pi gpio pin numbering
+  buttons = { 
+    "tazza1": 27,
+    "single": 27,
+    "tazza2": 17,
+    "double": 17,
+    "on": 22,
+    "onoff": 22,
+    "off": 22,
+    "vapore": 10,
+    "decalcif": 9,
+    "premacinato": 11
+  }
+
+  pin = buttons[btn]
   if (pin in [17,27,22,10,9,11]):  
     GPIO.output(pin, 1) # set GPIOX to 1/GPIO.HIGH/True
     time.sleep(0.4)
