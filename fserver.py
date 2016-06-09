@@ -34,6 +34,12 @@ def send_asset(path):
   return send_from_directory('assets', path)
 
 
+@app.route('/water_request/')
+def water_request():
+  reward = "0.0006"
+  return render_template('water_request.html', reward=reward)
+
+
 @app.route('/state/')
 def get_state():
   state = board_reader.read_state()
@@ -121,6 +127,8 @@ def claim(amount):
   reason = request.args.get('reason')
   if (reason == "refund"):
     message = "Oops, something went wrong! Follow the steps to claim a refund..."
+  elif (reason == "refill"):
+    message = "Thanks for the refill! Follow the steps to claim your payment."
   else:
     message = "Thanks for that! Follow the steps to claim your payment."
 

@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row" id="offers">
+  <div class="col-sm-offset-1 col-sm-10">
+    <h2>The water tank is empty</h2>
+    <br/>
+    <!-- <div id="led" style="height:20px; width:20px; background-color:red; border:1px solid gray; border-radius:15px;">
+    </div>-->
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="touch-button" href="/start" style="">
+        <img src="/assets/watertank.png" style="width:29%; height:auto; float:left;"></img>
+        <p style="width: 70%; padding-top:3%;font-size:3.2vw;display:inline-block;">Could you refill the water tank? There's some bitcoin in it for you!</p>
+        <div style="clear:both;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+$(document).ready(function(){
+  
+  var timeoot = 8000;
+  function poll() { 
+    setTimeout(function() {
+      $.ajax({ url: "{{ state_url }}",
+        success: function(data) { 
+          timeoot = 6000;
+          if (data.overall == 'ready'){
+            window.location.replace("http://localhost:5000/payout_claim/{{ reward }}?reason=refill");
+          }
+        },
+        dataType: "json",
+        complete: poll
+      });
+    }, timeoot);
+  }
+
+  poll();
+});
+</script>
+{% endblock %}
