@@ -30,13 +30,15 @@ a.touch-button:hover {
 }
 
 #message {
-
   position: fixed;
-  width:80%;
-  text-align:center;
-  margin:0 auto;
-  padding:1em;
-  top:4%;
-  left:10%;
-
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 1em;
+  top: 4%;
+  left: 10%;
+  background-color: wheat;
+  border-radius: 0.5em;
+  box-shadow: 1px 1px 2px 1px #666;
+  font-size: 2vw;
 } 
