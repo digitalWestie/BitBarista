@@ -47,13 +47,15 @@
 {% block javascript %}
 <script>
 $(document).ready(function(){
+
   var canvas = qr.canvas();
   $('#qrcode').append(canvas);
   qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.2 });
 
   setTimeout(function(){
-    $('message').fadeOut();
-  },3000);
+    $('#message').fadeOut();
+  },2599);
+
 });
 </script>
 {% endblock %}
