@@ -8,8 +8,8 @@ import json
 import urllib
 import csv
 import random
-import fake_board_reader as board_reader #board_reader on pi
-#import board_reader as board_reader 
+#import fake_board_reader as board_reader #board_reader on pi
+import board_reader as board_reader 
 
 app = Flask(__name__)
 
