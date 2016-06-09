@@ -19,7 +19,12 @@ with open('config.json') as json_config:
 offers = config["offers"]
 
 @app.route("/")
-def root():
+def home():
+  return render_template('home.html', hello="STARTED")
+
+
+@app.route("/start")
+def start():
   state_url = "http://localhost:5000/state"
   return render_template('root.html', state_url=state_url, offers=offers)
 
