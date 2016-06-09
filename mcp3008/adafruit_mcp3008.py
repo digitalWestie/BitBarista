@@ -67,7 +67,8 @@ tolerance = 0       # to keep from being jittery we'll only change
 readings = []
 average  = 0
 
-while True:
+try:
+    while True:
         trim_pot = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS) # read the analog pin
         
         pot_adjust = abs(trim_pot - last_read) # how much has it changed since the last read?
@@ -95,3 +96,10 @@ while True:
                 readings = []
         # hang out and do nothing for a half second
         time.sleep(0.0005)
+except KeyboardInterrupt:
+    print "Interrupted"
+except Exception as error:
+    print "Other error or exception occurred \n", str(error)
+finally: 
+    print "Running GPIO.cleanup()"
+    GPIO.cleanup()
