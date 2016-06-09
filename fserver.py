@@ -63,12 +63,12 @@ def sale(offer):
 @app.route('/serve/<offer>')
 def serve(offer):
   if (offer == "single"): 
-    pin = 17
+    button = "tazza1"
     servetime = 45
   else:
-    pin = 27
+    button = "tazza2"
     servetime = 60
-  result = board_reader.press_button(pin)
+  result = board_reader.press_button(button)
   if result:
     #TODO CHECK IT HAS SERVED OK
     return render_template('serve.html', result=result, servetime=servetime, amount=offers[offer])
@@ -76,9 +76,9 @@ def serve(offer):
     return redirect("/", code=302)
 
 
-@app.route('/pressbutton/<pin>')
-def press_button(pin=None):
-  result = board_reader.press_button(pin)
+@app.route('/pressbutton/button')
+def press_button(button=None):
+  result = board_reader.press_button(button)
   return render_template('hello.html', result=result)
 
 
