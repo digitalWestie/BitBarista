@@ -64,13 +64,14 @@ def sale(offer):
 def serve(offer):
   if (offer == "single"): 
     pin = 17
-    #TAKES 45 SECONDS
+    servetime = 45
   else:
     pin = 27
+    servetime = 60
   result = board_reader.press_button(pin)
   if result:
     #TODO CHECK IT HAS SERVED OK
-    return render_template('serve.html', result=result)
+    return render_template('serve.html', result=result, servetime=servetime, amount=offers[offer])
   else:
     return redirect("/", code=302)
 
@@ -84,6 +85,7 @@ def press_button(pin=None):
 @app.route("/payment_request/<address>")
 def payment_request(address):
   request = check_request(address)
+  print request
   if request:
     return jsonify(**request)
   else: 
@@ -111,10 +113,16 @@ def help():
 
 @app.route("/payout_claim/<amount>")
 def claim(amount):
+  reason = request.args['reason']
+  if (reason == "refund"):
+    message = "Oops, something went wrong! Follow the steps to claim a refund..."
+  else:
+    message = "Thanks for that! Follow the steps to claim your payment."
+
   ref = generate_reference()
   save_reference(ref, amount)
   qrdata = "mailto:"+config["payout_claim_email"]+"?subject=#bitbarista&body=mybtcaddress%20"+ref
-  return render_template('claim.html', reference=ref, amount=amount, qrdata=qrdata)
+  return render_template('claim.html', reference=ref, amount=amount, qrdata=qrdata, message=message)
 
 
 @app.route("/settle_payouts")

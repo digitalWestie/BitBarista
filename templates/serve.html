@@ -1,15 +1,51 @@
 {% extends "index.html" %}
 {% block content %}
 
-<img style="margin:0 auto; display:block; width:50%;" src="/assets/double.gif"></img>
-
+<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/1.gif"></img>
+<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/2.gif"></img>
+<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/3.gif"></img>
+<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/4.gif"></img>
+<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/5.gif"></img>
 
 {% endblock %}
 
 {% block javascript %}
 <script>
-
 //timeout and show gif
+$(document).ready(function(){
+  var servetime = {{ servetime }};
+  var serve_countdown = servetime / 5;
+  var successful = true;
 
+  var gifs = $('img.gif');
+  var imgIdx = 0;
+  function updateImg(){  
+    //update image
+    gifs.hide();
+    $(gifs[imgIdx]).show();
+    imgIdx++;
+    if (imgIdx == gifs.size()){ imgIdx = 0; }
+  }
+
+  function endServe(){
+    if (successful){
+      window.location.replace("http://localhost:5000/");
+    } else {
+      window.location.replace("http://localhost:5000/payout_claim/{{amount}}?reason=refund");
+    }
+  }
+
+  updateImg();
+
+  for(count = 8; count <= servetime; count+=8){
+    console.log("count " + count);
+    setTimeout(updateImg, count*1000);
+  };
+
+  setTimeout(endServe, servetime * 1000);
+
+  //After x time check state, error: show refund or success: redirect!
+
+});
 </script>
 {% endblock %}

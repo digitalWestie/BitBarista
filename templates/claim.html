@@ -1,5 +1,6 @@
 {% extends "index.html" %}
 {% block content %}
+<div id="message">{{ message }}</div>
 
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-10">
@@ -49,6 +50,10 @@ $(document).ready(function(){
   var canvas = qr.canvas();
   $('#qrcode').append(canvas);
   qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.2 });
+
+  setTimeout(function(){
+    $('message').fadeOut();
+  },3000);
 });
 </script>
 {% endblock %}
