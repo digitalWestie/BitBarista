@@ -228,6 +228,18 @@ def generate_reference():
   return ref
 
 
+def save_reference(ref,amount):
+  try:
+    with open("references.csv", "a") as references:
+      nextline = ""
+      if len(payout_references()) >= 1:
+        nextline = "\n"
+      references.write(nextline+ref+","+amount)
+    return True
+  except:
+    return False
+
+
 #Collects payout references that have been labelled against historical transactions
 def used_references():
   references = []
