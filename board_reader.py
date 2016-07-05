@@ -135,12 +135,12 @@ def read_state():
   elif test_sig(WATER_EMPTY_SIG, column_averages):
     state["overall"] = 'water'
     state["message"] = "Water is missing, could you replace it?"
-  elif test_steady(all_channel_averages):
-    state["overall"] = 'steady'
-    state["message"] = "Something's not right!"
   elif test_sig(READY_SIG, column_averages):
     state["overall"] = 'ready'
     state["message"] = "Ready to serve!"
+  elif test_steady(all_channel_averages):
+    state["overall"] = 'steady'
+    state["message"] = "Something's not right!"
   else:
     state["overall"] = 'other'
     state["message"] = "Not sure what, but something's not right!"
