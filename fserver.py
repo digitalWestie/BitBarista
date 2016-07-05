@@ -27,6 +27,7 @@ def home():
 
 @app.route("/start")
 def start():
+  settle_payouts()
   return render_template('root.html', state_url=state_url, offers=offers)
 
 
