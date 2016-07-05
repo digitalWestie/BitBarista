@@ -34,6 +34,8 @@ CHANNEL_NAMES = ["serbatoio","al_fondi","al_generico","al_calcif","premacinato",
 #NEW BOARD:
 READY_SIG = [31.0, 31.0, 2.1, 0.0, 0.0, 31.0, 31.0, 2.0]
 WATER_EMPTY_SIG = [56.2, 29.0, 0.0, 0.0, 0.0, 56.2, 29.5, 0.0]
+OFF_SIG = [2.0, 2.0, 2.0, 0.0, 0.10, 2.0, 2.0, 2.0]
+OFF_AT_WALL_SIG = [11.0, 11.0, 11.0, 5.0, 2.10, 11.0, 10.5, 11.0]
 
 # LED pin numbering from control board ribbon (NOT GPIO!)
 # serbatoio   #pin 10
@@ -123,11 +125,10 @@ def read_state():
     
   #test if machine is off
   all_off=False
-  all_off=test_hi_spread(all_channel_averages)
+  all_off=test_sig(OFF_AT_WALL_SIG, column_averages)
   if not all_off:
-    all_off = test_hival(results)
-  
-    
+    all_off = test_sig(OFF_SIG, column_averages)
+        
   if all_off:
     state["overall"] = 'off'
     state["message"] = "Machine is off, or warming up."
