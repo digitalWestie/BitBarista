@@ -228,7 +228,7 @@ def press_button(btn):
   print btn+" ", str(pin) 
   if (pin in [17,27,22,10,9,11]):  
     GPIO.output(pin, 1) # set GPIOX to 1/GPIO.HIGH/True
-    time.sleep(0.8)
+    time.sleep(0.5)
     GPIO.output(pin, 0) # set GPIOX to 0/GPIO.LOW/False
     return True
   else:
