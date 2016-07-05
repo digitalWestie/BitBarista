@@ -28,8 +28,12 @@ GPIO.setup(9, GPIO.OUT)
 GPIO.setup(11, GPIO.OUT)
 
 CHANNEL_NAMES = ["serbatoio","al_fondi","al_generico","al_calcif","premacinato","tazza1","tazza2","vapore"]
-READY_SIG = [56.17, 57, 23.65, 22.249, 25.947, 60.995, 64.864, 28.62]
-WATER_EMPTY_SIG = [71.868, 36.713, 5.110, 0, 5.028, 70.624, 41.004, 0]
+#BREAD BOARD VERS:
+#READY_SIG = [56.17, 57, 23.65, 22.249, 25.947, 60.995, 64.864, 28.62]
+#WATER_EMPTY_SIG = [71.868, 36.713, 5.110, 0, 5.028, 70.624, 41.004, 0]
+#NEW BOARD:
+READY_SIG = [31.0, 31.0, 2.1, 0.0, 0.0, 31.0, 31.0, 2.0]
+WATER_EMPTY_SIG = [56.2, 29.0, 0.0, 0.0, 0.0, 56.2, 29.5, 0.0]
 
 # LED pin numbering from control board ribbon (NOT GPIO!)
 # serbatoio   #pin 10
