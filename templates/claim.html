@@ -41,6 +41,10 @@
 <img src="/assets/btc.jpeg" style="margin:0 auto; display:block; max-width:200px; min-width:80px; width:70%; height:auto;"></img>
               <h3 style="font-size:3vw; text-align:center; margin-top:0.2em;">Payout of {{ amount }}BTC</h3>
               <div style="clear:both;"></div>
+
+              {{ qrdata }}
+
+
 -->
 {% endblock %}
 
@@ -50,6 +54,9 @@ $(document).ready(function(){
 
   var canvas = qr.canvas();
   $('#qrcode').append(canvas);
+
+  console.log(encodeURI('{{ qrdata }}'));
+
   qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.2 });
 
   setTimeout(function(){

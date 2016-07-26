@@ -78,6 +78,9 @@ def serve(offer):
   if (offer == "single"): 
     button = "tazza1"
     servetime = 45
+  elif (offer == "kenyan"):
+    button = "tazza1"
+    servetime = 45
   else:
     button = "tazza2"
     servetime = 60
@@ -136,7 +139,7 @@ def claim(amount):
 
   ref = generate_reference()
   save_reference(ref, amount)
-  qrdata = "mailto:"+config["payout_claim_email"]+"?subject=#bitbarista&body=mybtcaddress%20"+ref
+  qrdata = "mailto:"+config["payout_claim_email"]+"?subject=#bitbarista&body=mybtcaddress "+ref
   return render_template('claim.html', reference=ref, amount=amount, qrdata=qrdata, message=message)
 
 
