@@ -28,6 +28,8 @@ GET "/refund?txdetails=<txdetails>" - Checks refund hasn't been carried out alre
 
 =====
 
+#hi there
+
 Optocouple the buttons, making sure that current isn't too high for it to control (~40mA).
 
 Use MCP3008 to measure the 2ksps (0.0005 seconds) averaged over 100 readings.
