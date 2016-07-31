@@ -25,10 +25,10 @@ var company = new Array();
 	company[4] = "Kraft";
 
 var stat = new Array();
-    stat[0] = "<span style='color:rgb(0,255,0)'>Saturated</span>";
-    stat[1] = "<span style='background-color:rgb(0,255,0);color:rgb(0,0,0)'>Available</span>";
-    stat[2] = "<span style='color:rgb(0,255,0)'>HighDemand</span>";
-    stat[3] = "<span style='text-decoration:underline;color:rgb(70,70,70)'>Unavailable</span>";
+    stat[0] = "<span style='color:rgb(0,255,0)'>Sat</span>";
+    stat[1] = "<span style='background-color:rgb(0,255,0);color:rgb(0,0,0)'>Avail</span>";
+    stat[2] = "<span style='color:rgb(0,255,0)'>HiDem</span>";
+    stat[3] = "<span style='text-decoration:underline;color:rgb(70,70,70)'>Unavail</span>";
 
 
 function showDiv() {
