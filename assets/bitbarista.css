@@ -47,12 +47,7 @@ h2 {
 div.header { padding:0.5em; padding-left: 0em;}
 
 div.footer { 
-  margin-top:1em;
-  padding: 1.5%;
-  margin-top: 1em;
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
+
 }
 
 .touch-button {
