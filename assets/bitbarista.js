@@ -16,12 +16,12 @@ var countries = new Array();
     countries[13] = "Nicarag";
     countries[14] = "PNGuine";
     countries[15] = "Ecuador";
-    countries[16] = "Thailand";
-    /*countries[17] = "Tanzania";
-    countries[18] = "DominicRep";
+    countries[16] = "Thailan";
+    countries[17] = "Tanzani";
+    countries[18] = "DominRe";
     countries[19] = "Kenya";
     countries[20] = "Venezuela";
-    countries[21] = "Cameroon";
+    /*countries[21] = "Cameroon";
     countries[22] = "Philippin";
     countries[23] = "DRepCongo";
     countries[24] = "Burundi";
@@ -45,17 +45,6 @@ var stat = new Array();
     stat[3] = "<span style='text-decoration:underline;color:rgb(70,70,70)'>Unavail</span>";
 
 
-function showDiv() {
-   // If there are hidden divs left
-    if($('div:hidden').length) {
-        // Fade the first of them in
-        $('div:hidden:first').fadeIn();
-        // And wait one second before fading in the next one
-        setTimeout(showDiv, 1000);
-    }
-}
-
-
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -63,13 +52,6 @@ function getRandomInt(min, max) {
 
 $( document ).ready(function() {
 
-	/*$("#show").each(function() {
-		var elem = $(this);
-		if (elem.css('visibility') == 'hidden') {
-            	//elem.css('visibility', 'visible');
-        	} 
-	});*/   
-    
 
 	$("#show_1").css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0},100);
 
@@ -98,24 +80,6 @@ $( document ).ready(function() {
        }
 
 
-     setInterval(function() {
-     	console.log("callPage");
-     	//$("#goToStart").click();
-     	window.location.href = "/start";
-     },10000);
-
-   	function fadeSwitchElements(id1, id2)
-	{
-    	var element1 = $('#' + id1);
- 	    var element2 = $('#' + id2);
-
-    	if(element1.is(':visible'))
-    	{
-        	element1.fadeToggle(500);
-        	element2.fadeToggle(500);
-    	}    
-	}
-
 	$('.blink').each(function() {
   	  var elem = $(this);
     	setInterval(function() {
@@ -126,8 +90,16 @@ $( document ).ready(function() {
         	}    
 
     	}, 100);
+
+
+    setInterval(function() {
+      console.log("callPage");
+      //$("#goToStart").click();
+      window.location.href = "/start";
+     },13000);
+    
 	});
 
-
+	
 });
 
