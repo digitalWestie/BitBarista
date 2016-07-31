@@ -21,6 +21,7 @@ h2 {
   margin-bottom:0.7em; 
 }
 
+
 .btcColours { background-color: #f7931a; color:white; }
 .btcColoursRev { background-color: white; color:#f49542; }
 
@@ -65,7 +66,9 @@ div.footer {
 a.touch-button:hover {
   cursor: pointer;
 }
-
+#status{
+  background-color:rgb(0, 255, 0);
+}
 #message {
   position: fixed;
   width: 80%;
@@ -78,3 +81,4 @@ a.touch-button:hover {
   box-shadow: 1px 1px 2px 1px #666;
   font-size: 2vw;
 } 
+
