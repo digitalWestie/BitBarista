@@ -78,10 +78,19 @@ def sale(offer):
 
 @app.route('/serve/<offer>')
 def serve(offer):
-  if (offer == "single"): 
+   if (offer == "single"): 
     button = "tazza1"
     servetime = 45
-  elif (offer == "kenyan"):
+  elif (offer == "Vietnamese"):
+    button = "tazza1"
+    servetime = 45
+  elif (offer == "Ethiopian"):
+    button = "tazza1"
+    servetime = 45
+  elif (offer == "Brazilian"):
+    button = "tazza1"
+    servetime = 45
+  elif (offer == "Colombian"):
     button = "tazza1"
     servetime = 45
   else:
