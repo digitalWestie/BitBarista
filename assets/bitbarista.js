@@ -16,8 +16,8 @@ var countries = new Array();
     countries[13] = "Nicarag";
     countries[14] = "PNGuine";
     countries[15] = "Ecuador";
-    /*countries[16] = "Thailand";
-    countries[17] = "Tanzania";
+    countries[16] = "Thailand";
+    /*countries[17] = "Tanzania";
     countries[18] = "DominicRep";
     countries[19] = "Kenya";
     countries[20] = "Venezuela";
@@ -101,7 +101,7 @@ $( document ).ready(function() {
      setInterval(function() {
      	console.log("callPage");
      	//$("#goToStart").click();
-     //	window.location.href = "/start";
+     	window.location.href = "/start";
      },10000);
 
    	function fadeSwitchElements(id1, id2)
@@ -128,21 +128,6 @@ $( document ).ready(function() {
     	}, 100);
 	});
 
-	//console.log ($('#status').css('background-color'));
 
-	/*$('#status').each(function() {
-  	  var elem = $(this);
-    	setInterval(function() {
-        	if (elem.css('background-color') == 'rgb(0, 255, 0)') {
-            	elem.css('background-color', 'rgb(255, 0, 0)');
-        	} else if (elem.css('background-color') == 'rgb(255, 0, 0)') {
-            		elem.css('background-color', 'rgb(255, 255, 0)');
-        	} else {
-            		elem.css('background-color', 'rgb(0, 255, 0)');
-        	}
-        	    
-    	}, 200);
-	});*/
-	
 });
 
