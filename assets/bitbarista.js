@@ -16,20 +16,6 @@ var countries = new Array();
     countries[13] = "Nicaragua";
     countries[14] = "PNGuinea";
     countries[15] = "Ecuador";
-    countries[16] = "Thailand";
-    countries[17] = "Tanzania";
-    countries[18] = "DominicRep";
-    countries[19] = "Kenya";
-    countries[20] = "Venezuela";
-    countries[21] = "Cameroon";
-    countries[22] = "Philippin";
-    countries[23] = "DRepCongo";
-    countries[24] = "Burundi";
-    countries[25] = "Madagascar";
-    countries[26] = "Haiti";
-    countries[27] = "Rwanda";
-    countries[28] = "Guinea";
-    countries[29] = "Cuba";
 
 var company = new Array();
 	company[0] = "";
@@ -86,7 +72,7 @@ $( document ).ready(function() {
 
     for(i=0; i<countries.length-1; i++){  
     		comp_num=getRandomInt(0, 4)			
-  			list ="<div class='col-sm-12 row' style='visibility:hidden' id='"+countries[i]+"'><div class='col-sm-1'>"+countries[i]+"</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-2'>"+company[comp_num]+" "+Math.round(Math.random() * 100)+"%</div><div class='col-sm-2'>"+stat[getRandomInt(0, 3)]+"</div><div class='col-sm-1'>"+stat[getRandomInt(0, 3)]+"</div></div>";
+  			list ="<div class='col-sm-12 row' style='visibility:hidden' id='"+countries[i]+"'><div class='col-sm-1'>"+countries[i]+"</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-2'>"+company[comp_num]+" "+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+stat[getRandomInt(0, 3)]+"</div><div class='col-sm-1'>"+stat[getRandomInt(0, 3)]+"</div></div>";
         	$("#countries_list").append(list);
         	list = "";
 
@@ -102,8 +88,7 @@ $( document ).ready(function() {
 
 
      setInterval(function() {
-     	$("#goToStart").trigger("click");
-     	console.log("ho");
+     	$("#goToStart").click();
      },10000);
 
    	function fadeSwitchElements(id1, id2)
