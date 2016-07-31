@@ -16,7 +16,7 @@ var countries = new Array();
     countries[13] = "Nicarag";
     countries[14] = "PNGuine";
     countries[15] = "Ecuador";
-    countries[16] = "Thailand";
+    /*countries[16] = "Thailand";
     countries[17] = "Tanzania";
     countries[18] = "DominicRep";
     countries[19] = "Kenya";
@@ -29,7 +29,7 @@ var countries = new Array();
     countries[26] = "Haiti";
     countries[27] = "Rwanda";
     countries[28] = "Guinea";
-    countries[29] = "Cuba";
+    countries[29] = "Cuba";*/
 
 var company = new Array();
 	company[0] = "";
@@ -39,9 +39,9 @@ var company = new Array();
 	company[4] = "Kraft";
 
 var stat = new Array();
-    stat[0] = "<span style='color:rgb(0,255,0)'>Sat</span>";
-    stat[1] = "<span style='background-color:rgb(0,255,0);color:rgb(0,0,0)'>Avail</span>";
-    stat[2] = "<span style='color:rgb(0,255,0)'>HiDem</span>";
+    stat[0] = "<span style='color:rgb(0,255,0)'>Saturat</span>";
+    stat[1] = "<span style='background-color:rgb(0,255,0);color:rgb(0,0,0)'>Availab</span>";
+    stat[2] = "<span style='color:rgb(0,255,0)'>HighDem</span>";
     stat[3] = "<span style='text-decoration:underline;color:rgb(70,70,70)'>Unavail</span>";
 
 
@@ -81,9 +81,6 @@ $( document ).ready(function() {
         $("#show_3").delay( 600 ).css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0},100);
     } 
 
-	
-    //console.log( $("#country").html() );
-
     for(i=0; i<countries.length-1; i++){  
     		comp_num=getRandomInt(0, 4)			
   			list ="<div class='col-sm-12 row' style='visibility:hidden' id='"+countries[i]+"'><div class='col-sm-1'>"+countries[i]+"</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-2'>"+company[comp_num]+" "+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+stat[getRandomInt(0, 3)]+"</div><div class='col-sm-1'>"+stat[getRandomInt(0, 3)]+"</div></div>";
@@ -102,7 +99,9 @@ $( document ).ready(function() {
 
 
      setInterval(function() {
-     	$("#goToStart").click();
+     	console.log("callPage");
+     	//$("#goToStart").click();
+     	window.location.href = "/start";
      },10000);
 
    	function fadeSwitchElements(id1, id2)
