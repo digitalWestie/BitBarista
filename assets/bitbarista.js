@@ -101,7 +101,7 @@ $( document ).ready(function() {
      setInterval(function() {
      	console.log("callPage");
      	//$("#goToStart").click();
-     	window.location.href = "/start";
+     //	window.location.href = "/start";
      },10000);
 
    	function fadeSwitchElements(id1, id2)
