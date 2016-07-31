@@ -24,7 +24,10 @@ state_url = "http://localhost:5000/state"
 def home():
   return render_template('home.html', hello="STARTED")
 
-
+@app.route("/table")
+def table():
+  return render_template('table.html')
+  
 @app.route("/start")
 def start():
   settle_payouts()
