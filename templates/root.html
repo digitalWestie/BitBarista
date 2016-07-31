@@ -1,32 +1,46 @@
+
 {% extends "index.html" %}
 {% block content %}
 
 <div class="row" id="offers">
-  <div class="col-sm-offset-1 col-sm-10">
-    <h2>On offer today...</h2>
-    <br/>
-    <!-- <div id="led" style="height:20px; width:20px; background-color:red; border:1px solid gray; border-radius:15px;">
-    </div>-->
+  <div class="col-sm-12">
+    <p>The price you pay for your coffee will influence the next supply</p>
+    <!-- <div id="led" style="height:20px; width:20px; background-color:red; border:1px solid gray; border-radius:15px;"></div>-->
 
     <div class="row">
       <div class="col-sm-6">
         <a class="touch-button" href="/sale/single" style="">
-        <img src="/assets/espresso.jpeg" style="height:8.9em; width:auto;"></img>
-        Single ({{ offers["single"] }} BTC)
+          <p>Price</p>
+          <span class="input">South Asian Blend Medium Roast Coffee Blend</span>
+          <!-- <img src="../assets/espresso.jpeg" style="height:8.9em; width:auto;"></img>-->
+          Sign up to this future supply, pay ({{ offers["single"] }} BTC)
         </a>
       </div>
 
       <div class="col-sm-6">
         <a class="touch-button" href="/sale/double" style="">
-        <img src="/assets/espresso.jpeg" style="height:8.9em; width:auto;"></img>
-        Double ({{ offers["double"] }} BTC)
+          <p>Quality</p>
+          <span class="input">Brazil Santos Medium-Dark Roast</span>
+          <!-- <img src="../assets/espresso.jpeg" style="height:8.9em; width:auto;"></img>-->
+          Sign up to this future supply, pay ({{ offers["double"] }} BTC)
         </a>
       </div>
 
       <div class="col-sm-6">
         <a class="touch-button" href="/sale/kenyan" style="">
-        <img src="/assets/espresso.jpeg" style="height:8.9em; width:auto;"></img>
-        Kenyan ({{ offers["kenyan"] }} BTC)
+          <p>Social responsibility</p>
+          <span class="input">Ethiopia Sidamo Medium Freshly Roasted</span>
+          <!-- <img src="../assets/espresso.jpeg" style="height:8.9em; width:auto;"></img>-->
+          Sign up to this future supply, pay ({{ offers["kenyan"] }} BTC)
+        </a>
+      </div>
+
+      <div class="col-sm-6">
+        <a class="touch-button" href="/sale/kenyan" style="">
+          <p>Environmental impact</p>
+          <span class="input">Colombia Huila Medium Fresh Roast</span>
+          <!-- <img src="../assets/espresso.jpeg" style="height:8.9em; width:auto;"></img>-->
+          Sign up to this future supply, pay ({{ offers["kenyan"] }} BTC)
         </a>
       </div>
 
@@ -36,8 +50,8 @@
 </div>
 
 <div class="row" id="issues">
-  <div class="col-sm-offset-1 col-sm-10">
-    <h2>Oh, it looks like I could do with some help!</h2>
+  <div class="col-sm-10">
+    <p>Oh, it looks like I could do with some help!</p>
 
     <div class="row">
       <div class="col-sm-6">
@@ -47,7 +61,7 @@
       </div>
 
       <div class="col-sm-6">
-        <a href="/help" class="touch-button" style="">
+        <a href="../help" class="touch-button" style="">
           Check troubleshooting manual
         </a>
       </div>
