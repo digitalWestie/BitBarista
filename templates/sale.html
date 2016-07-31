@@ -1,31 +1,40 @@
 {% extends "index.html" %}
 {% block content %}
 
+
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-10">
 
-    <h2>Ready to serve! <small style="margin-left:0.5em;"><a href="/">Cancel</a></small></h2>
-    <br/>
+    <p>Ready to serve!</p>
     
     <div class="row">
-      <div class="col-sm-12">
-        <div class="touch-button" style="">
+      <div class="col-sm-10">
+
+        <div class="touch-button">
 
           <div class="row">
             <div class="col-sm-6">
-              <img src="/assets/espresso.jpeg" style="margin:0 auto; display:block; max-width:200px; min-width:80px; width:70%; height:auto;"></img>
-              <h3 style="font-size:3vw; text-align:center; margin-top:0.2em;">1 {{ offer }} is {{ price }}BTC</h3>
+              <!--<img src="/assets/espresso.jpeg" style="margin:0 auto; display:block; max-width:200px; min-width:80px; width:70%; height:auto;"></img>-->
+              <p><span class="input">1 Vietnam Blend Robusta Medium Roast</span></p>
+              <p> Signing up to future supply of {{ offer }} coffee </p>
+              <p> Total to pay <span class="input">{{ price }} BTC</span></p>
               <div style="clear:both;"></div>
             </div>
             
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <div id="qrcode" style="margin:0 auto;"></div>
-              <p style="font-size:3vw;">Please send to: </p><p style="font-size: 1.9vw;">{{ address }}</p>
+              <p>Please send to: </p><p style="font-size: 1.9vw;">{{ address }}</p>
               <div style="clear:both;"></div>
             </div>
           </div>
-
         </div>
+        <div class="touch-button">
+            
+              <a href="/" style="">
+                <span>[[ CANCEL ]]</span>
+              </a>
+            </div>  
+
       </div>
     </div>
 
