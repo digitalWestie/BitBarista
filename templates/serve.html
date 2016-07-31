@@ -1,11 +1,20 @@
 {% extends "index.html" %}
 {% block content %}
 
-<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/1.gif"></img>
+  <div class="row">
+      <div class="col-sm-offset-1 col-sm-10">
+        <p>Thank you.</p>
+
+        <p>I have now sold <span class="input cups">204</span> cups of coffee at an average price of <span class="input">0.206785</span>BTC</p>  
+        <p>The next supply is tending towards <span class="input">Ethiopia Sidamo Medium</span>, highest rated in terms of <span class="input">Social Responsibility</span> </p>
+        <p>The next supply will be ordered on <span class="input"> 16 Sep 2016</span> </p>
+      </div>
+  </div>
+<!--<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/1.gif"></img>
 <img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/2.gif"></img>
 <img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/3.gif"></img>
 <img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/4.gif"></img>
-<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/5.gif"></img>
+<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/5.gif"></img>-->
 
 {% endblock %}
 
@@ -13,6 +22,13 @@
 <script>
 //timeout and show gif
 $(document).ready(function(){
+  
+  var totalSec = new Date().getTime();
+  totalSec=(Math.round((totalSec-1470006200000)/60000));
+
+  console.log(totalSec);
+  $(".cups").html(totalSec);
+  
   var servetime = {{ servetime }};
   var serve_countdown = servetime / 5;
   var successful = true;
