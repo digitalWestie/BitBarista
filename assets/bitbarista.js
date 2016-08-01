@@ -34,14 +34,14 @@ var countries = new Array();
 var company = new Array();
 	company[0] = "";
 	company[1] = "P&G";
-	company[2] = "SaraLee";
+	company[2] = "SaraLe";
 	company[3] = "Nestle";
 	company[4] = "Kraft";
 
 var stat = new Array();
-    stat[0] = "<span style='color:rgb(0,255,0)'>Saturat</span>";
-    stat[1] = "<span style='background-color:rgb(0,255,0);color:rgb(0,0,0)'>Availab</span>";
-    stat[2] = "<span style='color:rgb(0,255,0)'>HighDem</span>";
+    stat[0] = "<span style='color:rgb(155,155,155)'>Saturat</span>";
+    stat[1] = "<span style='background-color:rgb(255,255,255);color:rgb(0,0,0)'>Availab</span>";
+    stat[2] = "<span style='color:rgb(255,255,255)'>HighDem</span>";
     stat[3] = "<span style='text-decoration:underline;color:rgb(70,70,70)'>Unavail</span>";
 
 
