@@ -61,12 +61,11 @@ h2 {
 
 div.header { padding:0.5em; padding-left: 0em;}
 
-div.footer { 
-
-}
+div.footer { }
 
 .touch-button {
   padding: 3%;
+  margin-top:1em;
   /*box-shadow: 0px 0px 3px 1px #00ff00;*/
   box-shadow: 0px 0px 3px 1px #ffffff;
   border-radius: 2%;
