@@ -78,24 +78,12 @@ def sale(offer):
 
 @app.route('/serve/<offer>')
 def serve(offer):
-   if (offer == "single"): 
-    button = "tazza1"
-    servetime = 45
-  elif (offer == "Vietnamese"):
-    button = "tazza1"
-    servetime = 45
-  elif (offer == "Ethiopian"):
-    button = "tazza1"
-    servetime = 45
-  elif (offer == "Brazilian"):
-    button = "tazza1"
-    servetime = 45
-  elif (offer == "Colombian"):
-    button = "tazza1"
-    servetime = 45
-  else:
+  if (offer == "double"): 
     button = "tazza2"
     servetime = 60
+  else:
+    button = "tazza1"
+    servetime = 45
   result = board_reader.press_button(button)
   if result:
     #TODO CHECK IT HAS SERVED OK
