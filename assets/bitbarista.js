@@ -65,7 +65,7 @@ $( document ).ready(function() {
 
     for(i=0; i<countries.length-1; i++){  
     		comp_num=getRandomInt(0, 4)			
-  			list ="<div class='col-sm-12 row' style='visibility:hidden' id='"+countries[i]+"'><div class='col-sm-1'>"+countries[i]+"</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-2'>"+company[comp_num]+" "+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+stat[getRandomInt(0, 3)]+"</div><div class='col-sm-1'>"+stat[getRandomInt(0, 3)]+"</div></div>";
+  			list ="<div class='col-sm-12 row' style='visibility:hidden' id='"+countries[i]+"'><div class='col-sm-1'>"+countries[i]+"</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-1'>"+Math.round(Math.random() * 100)+"%</div><div class='col-sm-2'>"+company[comp_num]+" "+Math.round(Math.random() * 100)+"%</div><div class='col-sm-2'>"+stat[getRandomInt(0, 3)]+"</div><div class='col-sm-1'>"+stat[getRandomInt(0, 3)]+"</div></div>";
         	$("#countries_list").append(list);
         	list = "";
 
