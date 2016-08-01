@@ -96,7 +96,7 @@ $( document ).ready(function() {
       console.log("callPage");
       //$("#goToStart").click();
       window.location.href = "/start";
-     },13000);
+     },10000);
     
 	});
 
