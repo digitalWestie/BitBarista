@@ -32,10 +32,10 @@ CHANNEL_NAMES = ["serbatoio","al_fondi","al_generico","al_calcif","premacinato",
 #READY_SIG = [56.17, 57, 23.65, 22.249, 25.947, 60.995, 64.864, 28.62]
 #WATER_EMPTY_SIG = [71.868, 36.713, 5.110, 0, 5.028, 70.624, 41.004, 0]
 #NEW BOARD:
-READY_SIG = [31.0, 31.0, 2.1, 0.0, 0.0, 31.0, 31.0, 2.0]
-WATER_EMPTY_SIG = [56.2, 29.0, 0.0, 0.0, 0.0, 56.2, 29.5, 0.0]
-OFF_SIG = [2.0, 2.0, 2.0, 0.0, 0.10, 2.0, 2.0, 2.0]
-OFF_AT_WALL_SIG = [11.0, 11.0, 11.0, 5.0, 2.10, 11.0, 10.5, 11.0]
+READY_SIG = [0.0, 31.0, 2.1, 0.0, 0.0, 31.0, 31.0, 2.0]
+WATER_EMPTY_SIG = [0.0, 29.0, 0.0, 0.0, 0.0, 56.2, 29.5, 0.0]
+OFF_SIG = [0.0, 2.0, 2.0, 0.0, 0.10, 2.0, 2.0, 2.0]
+OFF_AT_WALL_SIG = [0.0, 11.0, 11.0, 5.0, 2.10, 11.0, 10.5, 11.0]
 
 # LED pin numbering from control board ribbon (NOT GPIO!)
 # serbatoio   #pin 10
