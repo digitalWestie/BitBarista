@@ -25,6 +25,7 @@
 
             <div class="col-sm-6">
               <p style="font-size:1.8vw;">PICTURE</p><br/><br/>
+              <p id="result"></p>
               <div style="clear:both;"></div>
             </div>
           </div>
@@ -55,6 +56,7 @@ $(document).ready(function(){
             window.location.replace("http://localhost:5000/");
           } else if (data.success) {
             //window.location.replace("http://localhost:5000/serve/{{ offer }}");
+            $('#result').text(data);
             console.log(data);
           }
         },
