@@ -10,6 +10,7 @@ import csv
 import random
 #import fake_board_reader as board_reader #board_reader on pi
 import board_reader as board_reader 
+import qr_reader as qr_reader
 
 app = Flask(__name__)
 
@@ -24,13 +25,14 @@ state_url = "http://localhost:5000/state"
 def home():
   return render_template('home.html', hello="STARTED")
 
+
 @app.route("/table")
 def table():
   return render_template('table.html')
-  
+
+
 @app.route("/start")
 def start():
-  settle_payouts()
   return render_template('root.html', state_url=state_url, offers=offers)
 
 
@@ -49,6 +51,12 @@ def water_request():
 def get_state():
   state = board_reader.read_state()
   return jsonify(**state)
+
+
+@app.route('/qr/')
+def get_qr():
+  result = qr_reader.read_qr()
+  return jsonify(**result)
 
 
 @app.route('/sale/<offer>')

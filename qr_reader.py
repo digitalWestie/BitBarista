@@ -9,6 +9,7 @@ def take_image():
   else:
     return False
 
+
 def read_image():
   p = Popen(['zbarimg', '-q', '--xml', 'image.jpg'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
@@ -21,9 +22,10 @@ def read_image():
   else:
     return False
 
+
 def parse_url(url): 
   #separate address & params
-  result = { 'params': {} }
+  result = { 'success': True, 'params': {} }
   split = url.split('?')
   #extract address
   address_half = split[0]
@@ -43,12 +45,13 @@ def parse_url(url):
   return result
 
 
-pic = take_image()
-if pic:
-  result = read_image()
-  if (result):
-    print parse_url(result)
+def read_qr():
+  pic = take_image()
+  if pic:
+    result = read_image()
+    if (result):
+      return parse_url(result)
+    else:
+      return { 'success': False, 'message': "Failed to find QR code" }
   else:
-    print "Failed to parse QR code"
-else:
-  print "Failed to take image"
+    return { 'success': False, 'message': "Failed to take image" }
