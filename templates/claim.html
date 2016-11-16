@@ -17,7 +17,7 @@
             </div>
 
             <div class="col-sm-6">
-              <p style="font-size:1.8vw;">PICTURE</p><br/><br/>
+              <img id="qrout" src="" style="width:80%; display:block;" />
               <p id="result"></p><p id="attempt"></p>
               <div style="clear:both;"></div>
             </div>
@@ -48,6 +48,7 @@ $(document).ready(function(){
           
           $('#result').text(JSON.stringify(data));
           $('#attempt').text(attempts);
+          $('#qrout').attr('src', '../image.jpg');
 
           if (attempts >= 50){ //give up!
             window.location.replace("http://localhost:5000/");
