@@ -42,10 +42,13 @@ def parse_url(url):
       result['params'][pair[0]] = pair[1] 
   return result
 
-result = read_image()
-if (result):
-  print parse_url(result)
+
+pic = take_image()
+if pic:
+  result = read_image()
+  if (result):
+    print parse_url(result)
+  else:
+    print "Failed to parse QR code"
 else:
-  print "Failed"
-
-
+  print "Failed to take image"
