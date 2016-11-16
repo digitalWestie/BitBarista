@@ -2,7 +2,7 @@ from xml.dom.minidom import parse, parseString
 from subprocess import Popen, PIPE
 
 def take_image():
-   p = Popen(['fswebcam', '--no-banner', '--greyscale', '-r', '640x480', 'image.jpg', '-S', '1'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  p = Popen(['fswebcam', '--no-banner', '--greyscale', '-r', '640x480', 'image.jpg', '-S', '1'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
   if p.returncode == 0:
     return True
