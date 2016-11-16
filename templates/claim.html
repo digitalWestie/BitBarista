@@ -5,7 +5,11 @@
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-10">
 
-    <p><span class="input">Claim your payment!</span><small style="margin-left:0.5em;"><a class="btn btn-success" href="/">Done</a></small></p>
+    <p>
+      <span class="input">Claim your payment!</span>
+      <small style="margin-left:0.5em;"><a class="btn btn-success" href="/">Done</a></small>
+    </p>
+    
     <br/>
     
     <div class="row">
@@ -15,17 +19,12 @@
           <div class="row">
             <div class="col-sm-6">
               <div id="qrcode" style="float:left; margin-right:3%;"></div>
-              <p style="font-size:2vw;">Step 1: Scan the email QR code</p>
-              <p style="font-size:2vw;">Step 2: Paste your BTC address into the body</p>
-              <p style="font-size:2vw;">Step 3: Follow your address with reference code, <code>{{ reference }}</code></p>
+              <p style="font-size:2vw;">Step 1: Get your smartphone to display a QR code with <i>your</i> bitcoin address!</p>
+              <p style="font-size:2vw;">Step 2: Hold it under the camera on the right.</p>
             </div>
+
             <div class="col-sm-6">
-              <p style="font-size:1.8vw;">The result should look like this:</p><br/>
-              <code style="font-size:1.8vw;">
-                to: giannichan+bitbarista@gmail.com<br/>
-                subject: #bitbarista<br/>
-                body: &lt;my-btc-address&gt; {{ reference }}
-              </code>
+              <p style="font-size:1.8vw;">PICTURE</p><br/><br/>
               <div style="clear:both;"></div>
             </div>
           </div>
@@ -43,8 +42,6 @@
               <div style="clear:both;"></div>
 
               {{ qrdata }}
-
-
 -->
 {% endblock %}
 
@@ -52,17 +49,29 @@
 <script>
 $(document).ready(function(){
 
-  var canvas = qr.canvas();
-  $('#qrcode').append(canvas);
+  setTimeout(function(){ $('#message').fadeOut(); },2599);
 
-  console.log(encodeURI('{{ qrdata }}'));
+  var attempts = 0;
 
-  qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.2 });
+  function poll() {
+    setTimeout(function() {
+      $.ajax({ url: "http://localhost:5000/qr/",
+        success: function(data) { 
+          attempts++;
+          if (attempts >= 50){ //give up!
+            window.location.replace("http://localhost:5000/");
+          } else if (data.success) {
+            //window.location.replace("http://localhost:5000/serve/{{ offer }}");
+            console.log(data);
+          }
+        },
+        dataType: "json",
+        complete: poll
+      });
+    }, 1500);
+  }
 
-  setTimeout(function(){
-    $('#message').fadeOut();
-  },2599);
-
+  poll();
 });
 </script>
 {% endblock %}
