@@ -46,8 +46,8 @@ $(document).ready(function(){
         success: function(data) { 
           attempts++;
           
-          $('#result').text(data);
-          
+          $('#result').text(JSON.stringify(data));
+
           if (attempts >= 50){ //give up!
             window.location.replace("http://localhost:5000/");
           } else if (data.success) {
