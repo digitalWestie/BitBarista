@@ -145,10 +145,7 @@ def claim(amount):
   else:
     message = "Thanks for that! Follow the steps to claim your payment."
 
-  ref = generate_reference()
-  save_reference(ref, amount)
-  qrdata = "mailto:"+config["payout_claim_email"]+"?subject=#bitbarista&body=mybtcaddress "+ref
-  return render_template('claim.html', reference=ref, amount=amount, qrdata=qrdata, message=message)
+  return render_template('claim.html', amount=amount, message=message)
 
 
 @app.route("/settle_payouts")
