@@ -11,7 +11,7 @@ def take_image():
 
 
 def read_image():
-  p = Popen(['zbarimg', '-q', '--xml', 'image.jpg'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  p = Popen(['zbarimg', '-q', '--xml', 'assets/image.jpg'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
   if p.returncode == 0:
     dom = parseString(output)
