@@ -17,6 +17,7 @@
             </div>
 
             <div class="col-sm-6">
+              <div id="qrloading" class="loader">Loading...</div>
               <img id="qrout" src="" style="width:80%; display:block;" />
               <p id="result"></p><p id="attempt"></p>
               <div style="clear:both;"></div>
@@ -41,6 +42,9 @@ $(document).ready(function(){
   var attempts = 0;
 
   function poll() {
+    $('#qrout').attr('src', '');
+    $('#qrloading').show();
+
     setTimeout(function() {
       $.ajax({ url: "http://localhost:5000/qr/",
         success: function(data) { 
@@ -48,14 +52,15 @@ $(document).ready(function(){
           
           $('#result').text(JSON.stringify(data));
           $('#attempt').text(attempts);
+          
+          $('#qrloading').hide();
           $('#qrout').attr('src', '/assets/scan.jpg');
-
+          
           if (attempts >= 50){ //give up!
             window.location.replace("http://localhost:5000/");
           } else if (data.success) {
             //window.location.replace("http://localhost:5000/serve/{{ offer }}");
           }
-
         },
         dataType: "json",
         complete: poll
