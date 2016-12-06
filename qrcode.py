@@ -296,6 +296,7 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       #warped = four_point_transform(img,src)
       #cv2.imshow("warped",warped)
 
+      img = cv2.flip(img,1)
       scanner = zbar.ImageScanner()
       scanner.parse_config('enable')
       imagez = zbar.Image(img.shape[0],img.shape[1],'Y800',img.tostring())
@@ -303,6 +304,7 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
 
       print "Outputting to file"
       wimg = Image.fromarray(img)
+      #wimg.transpose(Image.FLIP_LEFT_RIGHT)
       wimg.save("your_file.jpeg")
       
       for symbol in imagez:
