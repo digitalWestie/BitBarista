@@ -185,7 +185,7 @@ print "Starting capture..."
 camera = PiCamera()
 camera.resolution = (640,480)
 camera.framerate = 20
-camera.hlip = True
+#camera.hlip = False
 
 rawCapture = PiRGBArray(camera,size=(640,480))
 time.sleep(0.1)
@@ -303,6 +303,10 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       scanner.parse_config('enable')
       imagez = zbar.Image(warped.shape[0],warped.shape[1],'Y800',warped.tostring())
       scanner.scan(imagez)
+
+      print "Outputting to file"
+      wimg = Image.fromarray(warped)
+      wimg.save("your_file.jpeg")
       
       for symbol in imagez:
         print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
