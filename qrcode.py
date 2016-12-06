@@ -307,7 +307,7 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
   img = cv2.flip(img,1)
   
   cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
-  cv2.setWindowProperty("window", cv2.WND_PROP_FULLSCREEN, cv2.cv.WINDOW_FULLSCREEN)
+  cv2.setWindowProperty("window", cv2.WND_PROP_FULLSCREEN, 1)
   cv2.imshow("window", img)
 
   key = cv2.waitKey(1) & 0xFF
