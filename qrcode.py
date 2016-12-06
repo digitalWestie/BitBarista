@@ -187,7 +187,7 @@ print "Starting capture..."
 camera = PiCamera()
 camera.resolution = (640,480)
 camera.framerate = 20
-camera.hlip = True
+camera.hlip = False
 
 rawCapture = PiRGBArray(camera,size=(640,480))
 time.sleep(0.1)
@@ -296,7 +296,7 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       #warped = four_point_transform(img,src)
       #cv2.imshow("warped",warped)
 
-      img = cv2.flip(img,1)
+      #img = cv2.flip(img,1)
       scanner = zbar.ImageScanner()
       scanner.parse_config('enable')
       imagez = zbar.Image(img.shape[0],img.shape[1],'Y800',img.tostring())
