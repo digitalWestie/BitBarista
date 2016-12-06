@@ -183,10 +183,12 @@ def getIntersection(a1,a2,b1,b2,intersection):
   intersection = (int(p[0]+(t*r[0])),int(p[1]+(t*r[1])))
   return True,intersection
 
+#############################
+
 print "Starting capture..."
 camera = PiCamera()
 camera.resolution = (640,480)
-camera.framerate = 20
+camera.framerate = 24
 camera.hlip = False
 
 rawCapture = PiRGBArray(camera,size=(640,480))
