@@ -9,6 +9,8 @@ import math
 import numpy as np
 import zbar
 import imutils
+from PIL import Image
+
 
 def distance(p,q):
   return math.sqrt(math.pow(math.fabs(p[0]-q[0]),2)+math.pow(math.fabs(p[1]-q[1]),2))
