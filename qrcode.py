@@ -301,7 +301,7 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       warped = cv2.cvtColor(warped,cv2.COLOR_BGR2GRAY)
       
       codes = zbarlight.scan_codes('qrcode', warped)
-			print('QR codes: %s' % codes)
+      print('QR codes: %s' % codes)
 
       #scanner = zbar.ImageScanner()
       #scanner.parse_config('enable')
