@@ -194,8 +194,7 @@ time.sleep(0.1)
 for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=True):
   image = frame.array
   img = image
-  img = cv2.flip(img,1)
-
+  
   edges = cv2.Canny(image,100,200)
   contours,hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
   mu = []
@@ -273,11 +272,28 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
     areatop = 0.0
     arearight = 0.0
     areabottom = 0.0
+    
     if(top < len(contours) and right < len(contours) and bottom < len(contours) and cv2.contourArea(contours[top]) > 10 and cv2.contourArea(contours[right]) > 10 and cv2.contourArea(contours[bottom]) > 10):
+      #FLIP, SCAN, AND SAVE BEFORE ADDING COLOURS 
+      scanner = zbar.ImageScanner()
+      scanner.parse_config('enable')
+      scanimg = cv2.flip(img,1)
+      imagez = zbar.Image(scanimg.shape[0],scanimg.shape[1],'Y800',scanimg.tostring())
+      scanner.scan(imagez)
+
+      print "Outputting to file"
+      wimg = Image.fromarray(scanimg)
+      #warped = cv2.cvtColor(warped,cv2.COLOR_BGR2GRAY)
+      #wimg.transpose(Image.FLIP_LEFT_RIGHT)
+      wimg.save("your_file.jpeg")
+      
+      for symbol in imagez:
+        print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
+
+      #DRAW DETECTED LINES
       tempL = []
       tempM = []
       tempO = []
-      src = []
       N = (0,0)
       tempL = getVertices(contours,top,slope,tempL)
       tempM = getVertices(contours,right,slope,tempM)
@@ -287,35 +303,13 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       O = updateCornerOr(orientation,tempO)
       
       iflag,N = getIntersection(M[1],M[2],O[3],O[2],N)
-      src.append(L[0])
-      src.append(M[1])
-      src.append(N)
-      src.append(O[3])
-      src = np.asarray(src,np.float32)
-      
-      #warped = four_point_transform(img,src)
-      #cv2.imshow("warped",warped)
-
-      scanner = zbar.ImageScanner()
-      scanner.parse_config('enable')
-      imagez = zbar.Image(img.shape[0],img.shape[1],'Y800',img.tostring())
-      scanner.scan(imagez)
-
-      print "Outputting to file"
-      wimg = Image.fromarray(img)
-      #wimg.transpose(Image.FLIP_LEFT_RIGHT)
-      wimg.save("your_file.jpeg")
-      
-      for symbol in imagez:
-        print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
-
       cv2.circle(img,N,1,(0,0,255),2)
       cv2.drawContours(img,contours,top,(255,0,0),2)
       cv2.drawContours(img,contours,right,(0,255,0),2)
       cv2.drawContours(img,contours,bottom,(0,0,255),2)
-      
-      #warped = cv2.cvtColor(warped,cv2.COLOR_BGR2GRAY)
-      
+  
+  #DISPLAY      
+  img = cv2.flip(img,1)
   cv2.imshow("rect",img)
   key = cv2.waitKey(1) & 0xFF
   rawCapture.truncate(0)
