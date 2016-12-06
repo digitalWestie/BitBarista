@@ -301,10 +301,11 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       scanner.parse_config('enable')
       imagez = zbar.Image(warped.shape[0],warped.shape[1],'Y800',warped.tostring())
       
-      print "scanning..."
-      scanner.scan(imagez)
-      
-      for symbol in imagez:
+      print "scanning result "
+      rezult = scanner.scan(imagez)
+      print rezult
+
+      for symbol in scanner.get_results():
         print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
 
   cv2.imshow("rect",img)
