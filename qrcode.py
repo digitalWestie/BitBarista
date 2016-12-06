@@ -194,8 +194,8 @@ time.sleep(0.1)
 for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=True):
   image = frame.array
   img = image
-#show the image
-#wait until some key is pressed to procced
+  img = cv2.flip(img,1)
+
   edges = cv2.Canny(image,100,200)
   contours,hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
   mu = []
@@ -296,7 +296,6 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       #warped = four_point_transform(img,src)
       #cv2.imshow("warped",warped)
 
-      #img = cv2.flip(img,1)
       scanner = zbar.ImageScanner()
       scanner.parse_config('enable')
       imagez = zbar.Image(img.shape[0],img.shape[1],'Y800',img.tostring())
