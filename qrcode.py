@@ -305,4 +305,4 @@ def four_point_transform(image, pts):
   warped = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
 
   # return the warped image
-  return warped﻿
+  return warped
