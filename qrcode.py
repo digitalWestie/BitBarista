@@ -277,7 +277,7 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       #FLIP, SCAN, AND SAVE BEFORE ADDING COLOURS 
       scanimg = cv2.flip(img,1)
       #scanimg = cv2.cvtColor(scanimg,cv2.COLOR_BGR2GRAY)
-      codes = zbarlight.scan_codes('qrcode', scanimg)
+      codes = zbarlight.scan_codes('qrcode', Image.fromarray(scanimg))
       print('QR codes: %s' % codes)
 
       print "Outputting to file"
