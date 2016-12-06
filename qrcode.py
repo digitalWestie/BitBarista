@@ -181,6 +181,7 @@ def getIntersection(a1,a2,b1,b2,intersection):
   intersection = (int(p[0]+(t*r[0])),int(p[1]+(t*r[1])))
   return True,intersection
 
+print "Starting capture..."
 camera = PiCamera()
 camera.resolution = (640,480)
 camera.framerate = 32
@@ -287,20 +288,22 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       src.append(N)
       src.append(O[3])
       src = np.asarray(src,np.float32)
+      
       warped = four_point_transform(img,src)
-      cv2.imshow("warped",warped)
+      #cv2.imshow("warped",warped)
       cv2.circle(img,N,1,(0,0,255),2)
       cv2.drawContours(img,contours,top,(255,0,0),2)
       cv2.drawContours(img,contours,right,(0,255,0),2)
       cv2.drawContours(img,contours,bottom,(0,0,255),2)
       warped = cv2.cvtColor(warped,cv2.COLOR_BGR2GRAY)
+      
       scanner = zbar.ImageScanner()
       scanner.parse_config('enable')
       imagez = zbar.Image(warped.shape[0],warped.shape[1],'Y800',warped.tostring())
       scanner.scan(imagez)
+      
       for symbol in imagez:
-        x = symbol.data
-        print x
+        print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
 
   cv2.imshow("rect",img)
   key = cv2.waitKey(1) & 0xFF
