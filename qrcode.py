@@ -7,8 +7,11 @@ import time
 import cv2
 import math
 import numpy as np
-import zbar
+#import zbar
 import imutils
+from PIL import Image
+import zbarlight
+
 
 def distance(p,q):
   return math.sqrt(math.pow(math.fabs(p[0]-q[0]),2)+math.pow(math.fabs(p[1]-q[1]),2))
@@ -297,16 +300,19 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       cv2.drawContours(img,contours,bottom,(0,0,255),2)
       warped = cv2.cvtColor(warped,cv2.COLOR_BGR2GRAY)
       
-      scanner = zbar.ImageScanner()
-      scanner.parse_config('enable')
-      imagez = zbar.Image(warped.shape[0],warped.shape[1],'Y800',warped.tostring())
-      
-      print "scanning result "
-      rezult = scanner.scan(imagez)
-      print rezult
+      codes = zbarlight.scan_codes('qrcode', warped)
+			print('QR codes: %s' % codes)
 
-      for symbol in imagez:
-        print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
+      #scanner = zbar.ImageScanner()
+      #scanner.parse_config('enable')
+      #imagez = zbar.Image(warped.shape[0],warped.shape[1],'Y800',warped.tostring())
+      
+      #print "scanning result "
+      #rezult = scanner.scan(imagez)
+      #print rezult
+
+      #for symbol in imagez:
+      #  print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
 
   cv2.imshow("rect",img)
   key = cv2.waitKey(1) & 0xFF
