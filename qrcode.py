@@ -282,10 +282,10 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       codes = zbarlight.scan_codes('qrcode', Image.fromarray(scanimg))
       print('QR codes: %s' % codes)
 
-      print "Outputting to file"
-      wimg = Image.fromarray(scanimg)
+      #print "Outputting to file"
+      #wimg = Image.fromarray(scanimg)
       #wimg.transpose(Image.FLIP_LEFT_RIGHT)
-      wimg.save("your_file.jpeg")
+      #wimg.save("your_file.jpeg")
       
       #DRAW DETECTED LINES
       tempL = []
