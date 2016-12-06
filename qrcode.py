@@ -184,7 +184,9 @@ def getIntersection(a1,a2,b1,b2,intersection):
 print "Starting capture..."
 camera = PiCamera()
 camera.resolution = (640,480)
-camera.framerate = 32
+camera.framerate = 20
+camera.hlip = True
+
 rawCapture = PiRGBArray(camera,size=(640,480))
 time.sleep(0.1)
 for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=True):
