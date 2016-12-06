@@ -7,7 +7,7 @@ import time
 import cv2
 import math
 import numpy as np
-import zbar
+import zbarlight
 import imutils
 from PIL import Image
 
@@ -275,20 +275,13 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
 
     if(top < len(contours) and right < len(contours) and bottom < len(contours) and cv2.contourArea(contours[top]) > 10 and cv2.contourArea(contours[right]) > 10 and cv2.contourArea(contours[bottom]) > 10):
       #FLIP, SCAN, AND SAVE BEFORE ADDING COLOURS 
-      scanner = zbar.ImageScanner()
-      scanner.parse_config('enable')
       scanimg = cv2.flip(img,1)
-      imagez = zbar.Image(scanimg.shape[0],scanimg.shape[1],'Y800',scanimg.tostring())
-      scanresult = scanner.scan(imagez)
+      #scanimg = cv2.cvtColor(scanimg,cv2.COLOR_BGR2GRAY)
+      codes = zbarlight.scan_codes('qrcode', scanimg)
+      print('QR codes: %s' % codes)
 
-      print "\nScan result ", 
-      print scanresult
-      for symbol in imagez:
-        print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
-      
       print "Outputting to file"
       wimg = Image.fromarray(scanimg)
-      #warped = cv2.cvtColor(warped,cv2.COLOR_BGR2GRAY)
       #wimg.transpose(Image.FLIP_LEFT_RIGHT)
       wimg.save("your_file.jpeg")
       
