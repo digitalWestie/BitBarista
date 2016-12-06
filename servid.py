@@ -1,7 +1,5 @@
-import io
-import time
-import picamera
-from PIL import Image
+from time import sleep
+from picamera import PiCamera
 
 camera = PiCamera()
 camera.resolution = (640,480)
