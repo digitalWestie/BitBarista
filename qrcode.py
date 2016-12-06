@@ -187,7 +187,7 @@ print "Starting capture..."
 camera = PiCamera()
 camera.resolution = (640,480)
 camera.framerate = 20
-#camera.hlip = False
+camera.hlip = True
 
 rawCapture = PiRGBArray(camera,size=(640,480))
 time.sleep(0.1)
@@ -296,13 +296,6 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       #warped = four_point_transform(img,src)
       #cv2.imshow("warped",warped)
 
-      cv2.circle(img,N,1,(0,0,255),2)
-      cv2.drawContours(img,contours,top,(255,0,0),2)
-      cv2.drawContours(img,contours,right,(0,255,0),2)
-      cv2.drawContours(img,contours,bottom,(0,0,255),2)
-      
-      #warped = cv2.cvtColor(warped,cv2.COLOR_BGR2GRAY)
-      
       scanner = zbar.ImageScanner()
       scanner.parse_config('enable')
       imagez = zbar.Image(img.shape[0],img.shape[1],'Y800',img.tostring())
@@ -315,6 +308,13 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       for symbol in imagez:
         print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
 
+      cv2.circle(img,N,1,(0,0,255),2)
+      cv2.drawContours(img,contours,top,(255,0,0),2)
+      cv2.drawContours(img,contours,right,(0,255,0),2)
+      cv2.drawContours(img,contours,bottom,(0,0,255),2)
+      
+      #warped = cv2.cvtColor(warped,cv2.COLOR_BGR2GRAY)
+      
   cv2.imshow("rect",img)
   key = cv2.waitKey(1) & 0xFF
   rawCapture.truncate(0)
