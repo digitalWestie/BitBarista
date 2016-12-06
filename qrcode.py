@@ -305,7 +305,7 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       rezult = scanner.scan(imagez)
       print rezult
 
-      for symbol in scanner.get_results():
+      for symbol in imagez:
         print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
 
   cv2.imshow("rect",img)
