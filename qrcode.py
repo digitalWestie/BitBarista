@@ -300,6 +300,8 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       scanner = zbar.ImageScanner()
       scanner.parse_config('enable')
       imagez = zbar.Image(warped.shape[0],warped.shape[1],'Y800',warped.tostring())
+      
+      print "scanning..."
       scanner.scan(imagez)
       
       for symbol in imagez:
