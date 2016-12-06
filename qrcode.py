@@ -168,7 +168,7 @@ def four_point_transform(image, pts):
 
   # compute the perspective transform matrix and then apply it
   M = cv2.getPerspectiveTransform(pts, dst)
-  warped = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
+  warped = cv2.warpPerspective(image, M, (maxWidth+10, maxHeight+10))
 
   # return the warped image
   return warped
@@ -303,7 +303,7 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       wimg = Image.fromarray(warped)
       codes = zbarlight.scan_codes('qrcode', wimg)
       print('QR codes: %s' % codes)
-      im.save("your_file.jpeg")
+      wimg.save("your_file.jpeg")
 
   cv2.imshow("rect",img)
   key = cv2.waitKey(1) & 0xFF
