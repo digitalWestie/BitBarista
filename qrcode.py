@@ -300,19 +300,8 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       cv2.drawContours(img,contours,bottom,(0,0,255),2)
       warped = cv2.cvtColor(warped,cv2.COLOR_BGR2GRAY)
       
-      codes = zbarlight.scan_codes('qrcode', warped)
-      print('QR codes: %s' % codes)
-
-      #scanner = zbar.ImageScanner()
-      #scanner.parse_config('enable')
-      #imagez = zbar.Image(warped.shape[0],warped.shape[1],'Y800',warped.tostring())
-      
-      #print "scanning result "
-      #rezult = scanner.scan(imagez)
-      #print rezult
-
-      #for symbol in imagez:
-      #  print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
+      codes = zbarlight.scan_codes('qrcode', image.convert('L'))
+			print('QR codes: %s' % codes)
 
   cv2.imshow("rect",img)
   key = cv2.waitKey(1) & 0xFF
