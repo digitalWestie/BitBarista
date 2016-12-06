@@ -272,24 +272,26 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
     areatop = 0.0
     arearight = 0.0
     areabottom = 0.0
-    
+
     if(top < len(contours) and right < len(contours) and bottom < len(contours) and cv2.contourArea(contours[top]) > 10 and cv2.contourArea(contours[right]) > 10 and cv2.contourArea(contours[bottom]) > 10):
       #FLIP, SCAN, AND SAVE BEFORE ADDING COLOURS 
       scanner = zbar.ImageScanner()
       scanner.parse_config('enable')
       scanimg = cv2.flip(img,1)
       imagez = zbar.Image(scanimg.shape[0],scanimg.shape[1],'Y800',scanimg.tostring())
-      scanner.scan(imagez)
+      scanresult = scanner.scan(imagez)
 
+      print "\nScan result ", 
+      print scanresult
+      for symbol in imagez:
+        print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
+      
       print "Outputting to file"
       wimg = Image.fromarray(scanimg)
       #warped = cv2.cvtColor(warped,cv2.COLOR_BGR2GRAY)
       #wimg.transpose(Image.FLIP_LEFT_RIGHT)
       wimg.save("your_file.jpeg")
       
-      for symbol in imagez:
-        print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
-
       #DRAW DETECTED LINES
       tempL = []
       tempM = []
