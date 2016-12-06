@@ -15,3 +15,4 @@ for i in range(10):
   stream.seek(0)
   image = Image.open(stream)
   image.save('image%02d.jpg' % i)
+  stream.flush()
