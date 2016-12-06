@@ -132,6 +132,44 @@ def cross(v1,v2):
 	cr = v1[0]*v2[1] - v1[1]*v2[0]
 	return cr
 
+
+def four_point_transform(image, pts):
+  # compute the width of the new image, which will be the
+  # maximum distance between bottom-right and bottom-left
+  # x-coordiates or the top-right and top-left x-coordinates
+  widthA = np.sqrt(
+      ((pts[2][0] - pts[3][0]) ** 2) + ((pts[2][1] - pts[3][1]) ** 2))
+  widthB = np.sqrt(
+      ((pts[1][0] - pts[0][0]) ** 2) + ((pts[1][1] - pts[0][1]) ** 2))
+  maxWidth = max(int(widthA), int(widthB))
+
+  # compute the height of the new image, which will be the
+  # maximum distance between the top-right and bottom-right
+  # y-coordinates or the top-left and bottom-left y-coordinates
+  heightA = np.sqrt(
+      ((pts[1][0] - pts[2][0]) ** 2) + ((pts[1][1] - pts[2][1]) ** 2))
+  heightB = np.sqrt(
+      ((pts[0][0] - pts[3][0]) ** 2) + ((pts[0][1] - pts[3][1]) ** 2))
+  maxHeight = max(int(heightA), int(heightB))
+
+  # now that we have the dimensions of the new image, construct
+  # the set of destination points to obtain a "birds eye view",
+  # (i.e. top-down view) of the image, again specifying points
+  # in the top-left, top-right, bottom-right, and bottom-left
+  # order
+  dst = np.array([
+      [0, 0],
+      [maxWidth - 1, 0],
+      [maxWidth - 1, maxHeight - 1],
+      [0, maxHeight - 1]], dtype="float32")
+
+  # compute the perspective transform matrix and then apply it
+  M = cv2.getPerspectiveTransform(pts, dst)
+  warped = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
+
+  # return the warped image
+  return warped
+
 def getIntersection(a1,a2,b1,b2,intersection):
 	p = a1
 	q = b1
@@ -269,40 +307,3 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
 	rawCapture.truncate(0)
 	if key == ord("q"):
 		break
-
-def four_point_transform(image, pts):
-  # compute the width of the new image, which will be the
-  # maximum distance between bottom-right and bottom-left
-  # x-coordiates or the top-right and top-left x-coordinates
-  widthA = np.sqrt(
-      ((pts[2][0] - pts[3][0]) ** 2) + ((pts[2][1] - pts[3][1]) ** 2))
-  widthB = np.sqrt(
-      ((pts[1][0] - pts[0][0]) ** 2) + ((pts[1][1] - pts[0][1]) ** 2))
-  maxWidth = max(int(widthA), int(widthB))
-
-  # compute the height of the new image, which will be the
-  # maximum distance between the top-right and bottom-right
-  # y-coordinates or the top-left and bottom-left y-coordinates
-  heightA = np.sqrt(
-      ((pts[1][0] - pts[2][0]) ** 2) + ((pts[1][1] - pts[2][1]) ** 2))
-  heightB = np.sqrt(
-      ((pts[0][0] - pts[3][0]) ** 2) + ((pts[0][1] - pts[3][1]) ** 2))
-  maxHeight = max(int(heightA), int(heightB))
-
-  # now that we have the dimensions of the new image, construct
-  # the set of destination points to obtain a "birds eye view",
-  # (i.e. top-down view) of the image, again specifying points
-  # in the top-left, top-right, bottom-right, and bottom-left
-  # order
-  dst = np.array([
-      [0, 0],
-      [maxWidth - 1, 0],
-      [maxWidth - 1, maxHeight - 1],
-      [0, maxHeight - 1]], dtype="float32")
-
-  # compute the perspective transform matrix and then apply it
-  M = cv2.getPerspectiveTransform(pts, dst)
-  warped = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
-
-  # return the warped image
-  return warped
