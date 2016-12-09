@@ -187,11 +187,11 @@ def getIntersection(a1,a2,b1,b2,intersection):
 
 print "Starting capture..."
 camera = PiCamera()
-camera.resolution = (640,480)
+camera.resolution = (320,240)
 camera.framerate = 24
 camera.hlip = False
 
-rawCapture = PiRGBArray(camera,size=(640,480))
+rawCapture = PiRGBArray(camera,size=(320,240))
 time.sleep(0.1)
 for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=True):
   image = frame.array
@@ -304,9 +304,13 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
       cv2.drawContours(img,contours,top,(255,0,0),2)
       cv2.drawContours(img,contours,right,(0,255,0),2)
       cv2.drawContours(img,contours,bottom,(0,0,255),2)
+
   
   #DISPLAY      
   img = cv2.flip(img,1)
+  #draw lines
+  img = cv2.line(img,(80,0),(70,140),(255,0,0),1)
+  img = cv2.line(img,(160,0),(170,140),(255,0,0),1)
   
   cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
   cv2.setWindowProperty("window", cv2.WND_PROP_FULLSCREEN, 1)
