@@ -332,9 +332,8 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
   s_img = cv2.imread("ghost.png", -1)
   x_offset=y_offset=50
   for c in range(0,3):
-    img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1], c] =  
-    s_img[:,:,c] * (s_img[:,:,3]/255.0) +  img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1], c] * (1.0 - s_img[:,:,3]/255.0)
-
+    img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1], c] = s_img[:,:,c] * (s_img[:,:,3]/255.0) +  img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1], c] * (1.0 - s_img[:,:,3]/255.0)
+  
   #add text
   cv2.putText(img, "Show your address QR code", (50, 50), cv2.FONT_HERSHEY_PLAIN, 2, (0,255,0), 2, cv2.CV_AA)
 
