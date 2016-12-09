@@ -9,8 +9,8 @@ import urllib
 import csv
 import random
 #import fake_board_reader as board_reader #board_reader on pi
-import board_reader as board_reader 
-import qr_reader as qr_reader
+import board_reader as board_reader
+import qrcode as qrcode
 
 app = Flask(__name__)
 
@@ -55,8 +55,10 @@ def get_state():
 
 @app.route('/qr/')
 def get_qr():
-  result = qr_reader.read_qr()
-  return jsonify(**result)
+  #result = qr_reader.read_qr()
+  result = qrcode.start()
+  print result
+  return jsonify(result)
 
 
 @app.route('/sale/<offer>')

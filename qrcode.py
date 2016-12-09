@@ -200,152 +200,154 @@ def getIntersection(a1,a2,b1,b2,intersection):
 
 #############################
 
-print "Starting capture..."
-camera = PiCamera()
-camera.resolution = (640,480)
-camera.framerate = 24
-camera.hlip = False
+def start():
+  print "Starting capture..."
+  camera = PiCamera()
+  camera.resolution = (640,480)
+  camera.framerate = 24
+  camera.hlip = False
 
-rawCapture = PiRGBArray(camera,size=(640,480))
-time.sleep(0.1)
-for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=True):
-  image = frame.array
-  img = image
-  
-  edges = cv2.Canny(image,100,200)
-  contours,hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-  mu = []
-  mc = []
-  mark = 0
-  for x in range(0,len(contours)):
-    mu.append(cv2.moments(contours[x]))
+  rawCapture = PiRGBArray(camera,size=(640,480))
+  time.sleep(0.1)
+  for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=True):
+    image = frame.array
+    img = image
+    
+    edges = cv2.Canny(image,100,200)
+    contours,hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+    mu = []
+    mc = []
+    mark = 0
+    for x in range(0,len(contours)):
+      mu.append(cv2.moments(contours[x]))
 
-  for m in mu:
-    if m['m00'] != 0:
-      mc.append((m['m10']/m['m00'],m['m01']/m['m00']))
-    else:
-      mc.append((0,0))
+    for m in mu:
+      if m['m00'] != 0:
+        mc.append((m['m10']/m['m00'],m['m01']/m['m00']))
+      else:
+        mc.append((0,0))
 
-  for x in range(0,len(contours)):
-    k = x
-    c = 0
-    while(hierarchy[0][k][2] != -1):
-      k = hierarchy[0][k][2]
-      c = c + 1
-    if hierarchy[0][k][2] != -1:
-      c = c + 1
+    for x in range(0,len(contours)):
+      k = x
+      c = 0
+      while(hierarchy[0][k][2] != -1):
+        k = hierarchy[0][k][2]
+        c = c + 1
+      if hierarchy[0][k][2] != -1:
+        c = c + 1
 
-    if c >= 5:
-      if mark == 0:
-        A = x
-      elif mark == 1:
-        B = x
-      elif mark == 2:
-        C = x
-      mark = mark+1
+      if c >= 5:
+        if mark == 0:
+          A = x
+        elif mark == 1:
+          B = x
+        elif mark == 2:
+          C = x
+        mark = mark+1
 
-  if mark >2 :
-    AB = distance(mc[A],mc[B])
-    BC = distance(mc[B],mc[C])
-    AC = distance(mc[A],mc[C])
+    if mark >2 :
+      AB = distance(mc[A],mc[B])
+      BC = distance(mc[B],mc[C])
+      AC = distance(mc[A],mc[C])
 
-    if(AB>BC and AB>AC):
-      outlier = C
-      median1 = A
-      median2 = B
-    elif(AC>AB and AC>BC):
-      outlier = B
-      median1 = A 
-      median2 = C 
-    elif(BC>AB and BC>AC):
-      outlier = A 
-      median1 = B
-      median2 = C
+      if(AB>BC and AB>AC):
+        outlier = C
+        median1 = A
+        median2 = B
+      elif(AC>AB and AC>BC):
+        outlier = B
+        median1 = A 
+        median2 = C 
+      elif(BC>AB and BC>AC):
+        outlier = A 
+        median1 = B
+        median2 = C
 
-    top = outlier
-    dist = lineEquation(mc[median1],mc[median2],mc[outlier])
-    slope,align = lineSlope(mc[median1],mc[median2])
+      top = outlier
+      dist = lineEquation(mc[median1],mc[median2],mc[outlier])
+      slope,align = lineSlope(mc[median1],mc[median2])
 
-    if align == 0:
-      bottom = median1
-      right = median2
-    elif(slope < 0 and dist < 0):
-      bottom = median1
-      right = median2
-      orientation = 0
-    elif(slope > 0 and dist < 0):
-      right = median1
-      bottom = median2
-      orientation = 1
-    elif(slope < 0 and dist > 0):
-      right = median1
-      bottom = median2
-      orientation = 2
-    elif(slope > 0 and dist > 0):
-      bottom = median1
-      right = median2
-      orientation = 3
+      if align == 0:
+        bottom = median1
+        right = median2
+      elif(slope < 0 and dist < 0):
+        bottom = median1
+        right = median2
+        orientation = 0
+      elif(slope > 0 and dist < 0):
+        right = median1
+        bottom = median2
+        orientation = 1
+      elif(slope < 0 and dist > 0):
+        right = median1
+        bottom = median2
+        orientation = 2
+      elif(slope > 0 and dist > 0):
+        bottom = median1
+        right = median2
+        orientation = 3
 
-    areatop = 0.0
-    arearight = 0.0
-    areabottom = 0.0
+      areatop = 0.0
+      arearight = 0.0
+      areabottom = 0.0
 
-    if(top < len(contours) and right < len(contours) and bottom < len(contours) and cv2.contourArea(contours[top]) > 10 and cv2.contourArea(contours[right]) > 10 and cv2.contourArea(contours[bottom]) > 10):
-      #FLIP, SCAN, AND SAVE BEFORE ADDING COLOURS 
-      scanimg = cv2.flip(img,1)
-      #scanimg = cv2.cvtColor(scanimg,cv2.COLOR_BGR2GRAY)
-      codes = zbarlight.scan_codes('qrcode', Image.fromarray(scanimg))
-      print('QR codes: %s' % codes)
+      if(top < len(contours) and right < len(contours) and bottom < len(contours) and cv2.contourArea(contours[top]) > 10 and cv2.contourArea(contours[right]) > 10 and cv2.contourArea(contours[bottom]) > 10):
+        #FLIP, SCAN, AND SAVE BEFORE ADDING COLOURS 
+        scanimg = cv2.flip(img,1)
+        #scanimg = cv2.cvtColor(scanimg,cv2.COLOR_BGR2GRAY)
+        codes = zbarlight.scan_codes('qrcode', Image.fromarray(scanimg))
+        print('QR codes: %s' % codes)
 
-      #print "Outputting to file"
-      #wimg = Image.fromarray(scanimg)
-      #wimg.transpose(Image.FLIP_LEFT_RIGHT)
-      #wimg.save("your_file.jpeg")
-      
-      #DRAW DETECTED LINES
-      tempL = []
-      tempM = []
-      tempO = []
-      N = (0,0)
-      tempL = getVertices(contours,top,slope,tempL)
-      tempM = getVertices(contours,right,slope,tempM)
-      tempO = getVertices(contours,bottom,slope,tempO)
-      L = updateCornerOr(orientation,tempL)
-      M = updateCornerOr(orientation,tempM)
-      O = updateCornerOr(orientation,tempO)
-      
-      iflag,N = getIntersection(M[1],M[2],O[3],O[2],N)
-      cv2.circle(img,N,1,(0,0,255),2)
-      cv2.drawContours(img,contours,top,(255,0,0),2)
-      cv2.drawContours(img,contours,right,(0,255,0),2)
-      cv2.drawContours(img,contours,bottom,(0,0,255),2)
+        #print "Outputting to file"
+        #wimg = Image.fromarray(scanimg)
+        #wimg.transpose(Image.FLIP_LEFT_RIGHT)
+        #wimg.save("your_file.jpeg")
+        
+        #DRAW DETECTED LINES
+        tempL = []
+        tempM = []
+        tempO = []
+        N = (0,0)
+        tempL = getVertices(contours,top,slope,tempL)
+        tempM = getVertices(contours,right,slope,tempM)
+        tempO = getVertices(contours,bottom,slope,tempO)
+        L = updateCornerOr(orientation,tempL)
+        M = updateCornerOr(orientation,tempM)
+        O = updateCornerOr(orientation,tempO)
+        
+        iflag,N = getIntersection(M[1],M[2],O[3],O[2],N)
+        cv2.circle(img,N,1,(0,0,255),2)
+        cv2.drawContours(img,contours,top,(255,0,0),2)
+        cv2.drawContours(img,contours,right,(0,255,0),2)
+        cv2.drawContours(img,contours,bottom,(0,0,255),2)
 
-  
-  #DISPLAY      
-  img = cv2.flip(img,1)
-  #draw lines
-  cv2.line(img,(630,470),(590,430),(240,240,240),2)
-  cv2.line(img,(630,470),(630,460),(240,240,240),2)
-  cv2.line(img,(630,470),(620,470),(240,240,240),2)
-  #cv2.rectangle(img,(210,130),(430,350), (200,200,200,0.1),1)
+    
+    #DISPLAY      
+    img = cv2.flip(img,1)
+    #draw lines
+    cv2.line(img,(630,470),(590,430),(240,240,240),2)
+    cv2.line(img,(630,470),(630,460),(240,240,240),2)
+    cv2.line(img,(630,470),(620,470),(240,240,240),2)
+    #cv2.rectangle(img,(210,130),(430,350), (200,200,200,0.1),1)
 
-  #Add overlay
-  #s_img = cv2.imread("ghost.png", -1)
-  #x_offset=220
-  #y_offset=80
-  
-  #for c in range(0,3):
-  #  img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1], c] = s_img[:,:,c] * (s_img[:,:,3]/255.0) +  img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1], c] * (1.0 - s_img[:,:,3]/255.0)
-  
-  #add text
-  cv2.putText(img, "Show your address QR code", (50, 50), cv2.FONT_HERSHEY_PLAIN, 2, (240,240,240), 2, cv2.CV_AA)
-  cv2.putText(img, "Camera", (560, 420), cv2.FONT_HERSHEY_PLAIN, 1, (240,240,240), 2, cv2.CV_AA)
+    #Add overlay
+    #s_img = cv2.imread("ghost.png", -1)
+    #x_offset=220
+    #y_offset=80
+    
+    #for c in range(0,3):
+    #  img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1], c] = s_img[:,:,c] * (s_img[:,:,3]/255.0) +  img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1], c] * (1.0 - s_img[:,:,3]/255.0)
+    
+    #add text
+    cv2.putText(img, "Show your address QR code", (50, 50), cv2.FONT_HERSHEY_PLAIN, 2, (240,240,240), 2, cv2.CV_AA)
+    cv2.putText(img, "Camera", (560, 420), cv2.FONT_HERSHEY_PLAIN, 1, (240,240,240), 2, cv2.CV_AA)
 
-  cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
-  cv2.setWindowProperty("window", cv2.WND_PROP_FULLSCREEN, 1)
-  cv2.imshow("window", img)
+    cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("window", cv2.WND_PROP_FULLSCREEN, 1)
+    cv2.imshow("window", img)
 
-  key = cv2.waitKey(1) & 0xFF
-  rawCapture.truncate(0)
-  if key == ord("q"):
-    break
+    key = cv2.waitKey(1) & 0xFF
+    rawCapture.truncate(0)
+    if key == ord("q"):
+      break
+      return "BLAH"

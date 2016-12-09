@@ -17,9 +17,7 @@
             </div>
 
             <div class="col-sm-6">
-              <img id="scanexample" src="assets/scanexample.gif" />
-              <img id="qrout" src="" style="width:80%; display:block;"/>
-              <p id="result"></p><p id="attempt"></p>
+              <img id="scanexample" src="assets/scanexample.gif"/>
               <div style="clear:both;"></div>
             </div>
           </div>
@@ -36,40 +34,13 @@
 {% block javascript %}
 <script>
 $(document).ready(function(){
-
-  $('#qrout').hide();
-
-  setTimeout(function(){ $('#message').fadeOut(); },2599);
-
-  var attempts = 0;
-  function poll() {
-
-    setTimeout(function() {
-      $.ajax({ url: "http://localhost:5000/qr/",
-        success: function(data) {
-          attempts++;
-          
-          $('#result').text(JSON.stringify(data));
-          $('#attempt').text(attempts);
-
-          $('#scanexample').hide();
-          
-          $('#qrout').attr('src', '/assets/scan.jpg?'+new Date().getTime());
-          $('#qrout').show();
-
-          if (attempts >= 50){ //give up!
-            window.location.replace("http://localhost:5000/");
-          } else if (data.success) {
-            //window.location.replace("http://localhost:5000/serve/{{ offer }}");
-          }
-        },
-        dataType: "json",
-        complete: poll
-      });
-    }, 500);
-  }
-
-  poll();
+  /*setTimeout(function(){ 
+    $('#message').fadeOut();
+  }, 2599);*/
+  $('#scanexample').click(function(){
+    $.ajax({ url: "http://localhost:5000/qr/", success: function(data) {});
+  });
+  
 });
 </script>
 {% endblock %}
