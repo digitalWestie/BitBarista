@@ -11,6 +11,27 @@ import zbarlight
 import imutils
 from PIL import Image
 
+def parseUrl(url):
+  #separate address & params
+  result = { 'success': True, 'params': {} }
+  split = url.split('?')
+  #extract address
+  address_half = split[0]
+  address_split = address_half.split('bitcoin:')
+  if len(address_split) == 2:
+    result['address'] = address_split[1]
+  else:
+    return { 'success': False, 'params': {} }
+  #extract params
+  if len(split) > 1:
+    params_half = split[1]
+    params = params_half.split('&')
+    for param in params:
+      print param
+      pair = param.split('=')
+      result['params'][pair[0]] = pair[1] 
+  return result
+
 def overlayImage(src, overlay, posx, posy, S, D):
   for x in range(overlay.width):
     if x+posx < src.width:
@@ -209,6 +230,9 @@ def start():
 
   rawCapture = PiRGBArray(camera,size=(640,480))
   time.sleep(0.1)
+
+  qrResult = { }
+
   for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=True):
     image = frame.array
     img = image
@@ -295,13 +319,14 @@ def start():
         #FLIP, SCAN, AND SAVE BEFORE ADDING COLOURS 
         scanimg = cv2.flip(img,1)
         #scanimg = cv2.cvtColor(scanimg,cv2.COLOR_BGR2GRAY)
-        codes = zbarlight.scan_codes('qrcode', Image.fromarray(scanimg))
-        print('QR codes: %s' % codes)
-
-        #print "Outputting to file"
-        #wimg = Image.fromarray(scanimg)
-        #wimg.transpose(Image.FLIP_LEFT_RIGHT)
-        #wimg.save("your_file.jpeg")
+        code = zbarlight.scan_codes('qrcode', Image.fromarray(scanimg))
+        
+        if code == None:
+          print "No qr found"
+        elif len(code) == 1:
+          qrResult = parseUrl(code[0])
+          if qrResult['success']:
+            break
         
         #DRAW DETECTED LINES
         tempL = []
@@ -324,19 +349,10 @@ def start():
     
     #DISPLAY      
     img = cv2.flip(img,1)
-    #draw lines
+    #draw arrow
     cv2.line(img,(630,470),(590,430),(240,240,240),2)
     cv2.line(img,(630,470),(630,460),(240,240,240),2)
     cv2.line(img,(630,470),(620,470),(240,240,240),2)
-    #cv2.rectangle(img,(210,130),(430,350), (200,200,200,0.1),1)
-
-    #Add overlay
-    #s_img = cv2.imread("ghost.png", -1)
-    #x_offset=220
-    #y_offset=80
-    
-    #for c in range(0,3):
-    #  img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1], c] = s_img[:,:,c] * (s_img[:,:,3]/255.0) +  img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1], c] * (1.0 - s_img[:,:,3]/255.0)
     
     #add text
     cv2.putText(img, "Show your address QR code", (50, 50), cv2.FONT_HERSHEY_PLAIN, 2, (240,240,240), 2, cv2.CV_AA)
@@ -350,4 +366,5 @@ def start():
     rawCapture.truncate(0)
     if key == ord("q"):
       break
-      return "BLAH"
+
+  return qrResult

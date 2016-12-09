@@ -57,7 +57,8 @@ def get_state():
 def get_qr():
   result = qrcode.start()
   print result
-  return jsonify(result)
+  return jsonify(**result)
+
 
 @app.route('/sale/<offer>')
 def sale(offer):
