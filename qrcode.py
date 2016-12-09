@@ -367,6 +367,6 @@ def start():
     if key == ord("q"):
       break
 
-  rawCapture.release()
+  rawCapture.flush()
   cv2.destroyAllWindows()
   return qrResult
