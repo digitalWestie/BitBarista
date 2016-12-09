@@ -367,7 +367,7 @@ def start():
     if key == ord("q"):
       break
 
-  rawCapture.flush()
   camera.close()
   cv2.destroyWindow("window")
+  cv2.waitKey(0)
   return qrResult
