@@ -328,7 +328,7 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
   #cv2.line(img,(320,470),(330,140),(255,0,0),1)
   #cv2.rectangle(img,(210,130),(430,350), (200,200,200,0.1),1)
 
-  overlay = cv2.LoadImage("ghost.png")   # Load an image to overlay
+  overlay = cv2.cv.LoadImage("ghost.png")   # Load an image to overlay
   S = (0.5, 0.5, 0.5, 0.5)      # Define blending coefficients S and D
   D = (0.5, 0.5, 0.5, 0.5)      
   overlayImage(img, overlay, 170, 100, S, D)
