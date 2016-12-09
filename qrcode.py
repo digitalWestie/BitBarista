@@ -187,11 +187,11 @@ def getIntersection(a1,a2,b1,b2,intersection):
 
 print "Starting capture..."
 camera = PiCamera()
-camera.resolution = (320,240)
+camera.resolution = (640,480)
 camera.framerate = 24
 camera.hlip = False
 
-rawCapture = PiRGBArray(camera,size=(320,240))
+rawCapture = PiRGBArray(camera,size=(640,480))
 time.sleep(0.1)
 for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=True):
   image = frame.array
@@ -311,7 +311,11 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
   #draw lines
   img = cv2.line(img,(80,0),(70,140),(255,0,0),1)
   img = cv2.line(img,(160,0),(170,140),(255,0,0),1)
-  
+
+  #add text
+  #cv2.putText(img, "Scan your address QR", (50, 10), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
+
+
   cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
   cv2.setWindowProperty("window", cv2.WND_PROP_FULLSCREEN, 1)
   cv2.imshow("window", img)
