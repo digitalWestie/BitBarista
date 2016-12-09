@@ -368,5 +368,6 @@ def start():
       break
 
   rawCapture.flush()
+  camera.close()
   cv2.destroyWindow("window")
   return qrResult
