@@ -11,21 +11,21 @@ import zbarlight
 import imutils
 from PIL import Image
 
-def OverlayImage(src, overlay, posx, posy, S, D):
+def overlayImage(src, overlay, posx, posy, S, D):
   for x in range(overlay.width):
     if x+posx < src.width:
       for y in range(overlay.height):
         if y+posy < src.width:
 
-          source = cv.Get2D(src, y+posy, x+posx)
-          over   = cv.Get2D(overlay, y, x)
+          source = cv2.cv.Get2D(src, y+posy, x+posx)
+          over   = cv2.cv.Get2D(overlay, y, x)
           merger = [0, 0, 0, 0]
 
           for i in range(3):
             merger[i] = (S[i]*source[i]+D[i]*over[i])
 
           merged = tuple(merger)
-          cv.Set2D(src, y+posy, x+posx, merged)
+          cv2.cv.Set2D(src, y+posy, x+posx, merged)
 
 def distance(p,q):
   return math.sqrt(math.pow(math.fabs(p[0]-q[0]),2)+math.pow(math.fabs(p[1]-q[1]),2))
@@ -327,11 +327,11 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
   #cv2.line(img,(300,470),(290,140),(255,0,0),1)
   #cv2.line(img,(320,470),(330,140),(255,0,0),1)
   #cv2.rectangle(img,(210,130),(430,350), (200,200,200,0.1),1)
-  
-  overlay = cv.LoadImage("ghost.png")   # Load an image to overlay
+
+  overlay = cv2.LoadImage("ghost.png")   # Load an image to overlay
   S = (0.5, 0.5, 0.5, 0.5)      # Define blending coefficients S and D
   D = (0.5, 0.5, 0.5, 0.5)      
-  OverlayImage(img, overlay, 170, 100, S, D)
+  overlayImage(img, overlay, 170, 100, S, D)
 
   #add text
   cv2.putText(img, "Show your address QR code", (50, 50), cv2.FONT_HERSHEY_PLAIN, 2, (0,255,0), 2, cv2.CV_AA)
