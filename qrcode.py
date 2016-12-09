@@ -309,12 +309,12 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
   #DISPLAY      
   img = cv2.flip(img,1)
   #draw lines
-  img = cv2.line(img,(80,0),(70,140),(255,0,0),1)
-  img = cv2.line(img,(160,0),(170,140),(255,0,0),1)
+  #cv2.line(img,(300,470),(290,140),(255,0,0),1)
+  #cv2.line(img,(320,470),(330,140),(255,0,0),1)
+  cv2.rectangle(img,(210,130),(430,350), (200,200,200,0.1),1)
 
   #add text
-  #cv2.putText(img, "Scan your address QR", (50, 10), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
-
+  cv2.putText(img, "Show your address QR code", (50, 50), cv2.FONT_HERSHEY_PLAIN, 2, (0,255,0), 2, cv2.CV_AA)
 
   cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
   cv2.setWindowProperty("window", cv2.WND_PROP_FULLSCREEN, 1)
