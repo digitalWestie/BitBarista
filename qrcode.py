@@ -231,7 +231,7 @@ def start():
   rawCapture = PiRGBArray(camera,size=(640,480))
   time.sleep(0.1)
 
-  qrResult = { }
+  qrResult = {}
 
   for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=True):
     image = frame.array
@@ -327,7 +327,7 @@ def start():
           qrResult = parseUrl(code[0])
           if qrResult['success']:
             break
-        
+
         #DRAW DETECTED LINES
         tempL = []
         tempM = []
@@ -367,4 +367,6 @@ def start():
     if key == ord("q"):
       break
 
+  rawCapture.release()
+  cv2.destroyAllWindows()
   return qrResult
