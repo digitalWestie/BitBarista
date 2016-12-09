@@ -17,7 +17,7 @@
             </div>
 
             <div class="col-sm-6">
-              <img id="scanexample" src="assets/scanexample.gif"/>
+              <img id="scanexample" src="/assets/scanexample.gif"/>
               <div style="clear:both;"></div>
             </div>
           </div>
@@ -34,13 +34,18 @@
 {% block javascript %}
 <script>
 $(document).ready(function(){
-  /*setTimeout(function(){ 
-    $('#message').fadeOut();
-  }, 2599);*/
-  $('#scanexample').click(function(){
-    $.ajax({ url: "http://localhost:5000/qr/", success: function(data) {});
-  });
   
+  $('#scanexample').click(function(){
+    $.ajax({ url: "http://localhost:5000/qr/",
+    success: function(data){}, 
+    dataType: "json", 
+    complete: function(){} });
+  });
+
+  setTimeout(function(){ 
+    $('#message').fadeOut();
+  }, 2599);
+
 });
 </script>
 {% endblock %}

@@ -7,3 +7,4 @@ board_reader.pyc
 qr_reader.pyc
 imutils.pyc
 assets/scan.jpg
+qrcode.pyc
