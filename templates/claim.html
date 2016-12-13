@@ -36,10 +36,13 @@
 $(document).ready(function(){
   
   $('#scanexample').click(function(){
-    $.ajax({ url: "http://localhost:5000/qr/",
-    success: function(data){}, 
-    dataType: "json", 
-    complete: function(){} });
+    $.ajax({ 
+      url: "http://localhost:5000/qr/",
+      dataType: "json",
+      success: function(data){ "success: " + alert(JSON.stringify(data)); },
+      error: function(data){ "error: " + alert(JSON.stringify(data)); },
+      complete: function(data){ alert("complete: " + JSON.stringify(data)); }
+    });
   });
 
   setTimeout(function(){ 
