@@ -36,13 +36,26 @@
 <script>
 $(document).ready(function(){
   
+  var animateBlink = function(){
+    $('.blink').each(function() {
+      var elem = $(this);
+      setInterval(function() {
+        if (elem.css('visibility') == 'hidden') {
+          elem.css('visibility', 'visible');
+        } else {
+          elem.css('visibility', 'hidden');
+        }
+    }, 100);
+  };
+
   $('#scanexample').click(function(){
     $.ajax({ 
       url: "http://localhost:5000/qr/",
       dataType: "json",
       success: function(data){
-        $("#scanexample").replaceWith('<img id="scanexample" src="/assets/spinner.png"/>');
-        $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+data['address']+'</div>');
+        $("#scanexample").hide();
+        $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+data['address']+'<span class="blink">...</span></div>');
+        animateBlink();
       },
       error: function(data){
         $("#scanmessage").replaceWith('<div id="scanmessage">Couldn\'t scan QR code, please try again.</div>');
