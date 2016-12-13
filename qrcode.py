@@ -368,6 +368,8 @@ def start():
       break
 
   camera.close()
-  cv2.destroyWindow("window")
-  cv2.waitKey(0)
+  cv2.destroyAllWindows()
+  for i in range (1,5):
+    cv2.waitKey(1)
+  print("Destroyed window")
   return qrResult
