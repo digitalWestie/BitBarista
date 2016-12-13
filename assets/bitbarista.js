@@ -89,17 +89,13 @@ $( document ).ready(function() {
             	elem.css('visibility', 'hidden');
         	}    
 
-    	}, 100);
-
+    	}, 100);   
+	});
 
     setInterval(function() {
       console.log("callPage");
       //$("#goToStart").click();
       window.location.href = "/start";
-     },10000);
-    
-	});
-
-	
+    },10000);
 });
 
