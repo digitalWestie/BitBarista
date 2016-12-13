@@ -54,9 +54,13 @@ $(document).ready(function(){
       url: "http://localhost:5000/qr/",
       dataType: "json",
       success: function(data){
-        $("#scanexample").hide();
-        $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+data['address']+'<span class="blink">...</span></div>');
-        animateBlink();
+        if (data["success"] == true){
+          $("#scanexample").hide();
+          $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+data['address']+'<span class="blink">...</span></div>');
+          animateBlink();
+        } else {
+          $("#scanmessage").replaceWith('<div id="scanmessage">Couldn\'t scan QR code, please try again.</div>');
+        }
       },
       error: function(data){
         $("#scanmessage").replaceWith('<div id="scanmessage">Couldn\'t scan QR code, please try again.</div>');
