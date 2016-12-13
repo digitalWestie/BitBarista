@@ -233,8 +233,15 @@ def start():
 
   qrResult = {}
   confirmationFrames = 5
+  frameCountdown = 200
 
   for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=True):
+    #GIVEUP AFTER SO MANY FRAMES
+    frameCountdown-=1
+    if (frameCountdown <= 0):
+      break
+
+
     image = frame.array
     img = image
     
