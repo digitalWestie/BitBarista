@@ -232,6 +232,7 @@ def start():
   time.sleep(0.1)
 
   qrResult = {}
+  confirmationFrames = 5
 
   for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=True):
     image = frame.array
@@ -342,8 +343,9 @@ def start():
         if code == None:
           print "No qr found"
         elif len(code) == 1:
+          confirmationFrames -= 1
           qrResult = parseUrl(code[0])
-          if qrResult['success']:
+          if qrResult['success'] and (confirmationFrames <= 0):
             break
     
     #DISPLAY      
@@ -370,5 +372,4 @@ def start():
   cv2.destroyAllWindows()
   for i in range (1,5):
     cv2.waitKey(1)
-  print("Destroyed window")
   return qrResult
