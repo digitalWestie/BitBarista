@@ -18,6 +18,7 @@
 
             <div class="col-sm-6">
               <img id="scanexample" src="/assets/scanexample.gif"/>
+              <div id="scanmessage"></div>
               <div style="clear:both;"></div>
             </div>
           </div>
@@ -39,16 +40,14 @@ $(document).ready(function(){
     $.ajax({ 
       url: "http://localhost:5000/qr/",
       dataType: "json",
-      success: function(data){ 
-        alert("success: " + JSON.stringify(data));
-        var str = '<div class="progress"><div>Paying address: '+data['address']+'</div></div>';
-        $("#scanexample").replaceWith(str);
+      success: function(data){
+        $("#scanexample").replaceWith('<img id="scanexample" src="/assets/spinner.png"/>');
+        $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+data['address']+'</div>');
       },
-      error: function(data){ alert("error: " + JSON.stringify(data)); },
-      complete: function(data){
-        var str = '<div class="progress"><div>Complete: '+ JSON.stringify(data) +'</div></div>';
-        $("#scanexample").replaceWith(str);
-      }
+      error: function(data){
+        $("#scanmessage").replaceWith('<div id="scanmessage">Couldn\'t scan QR code, please try again.</div>');
+      },
+      complete: function(data){}
     });
   });
 
