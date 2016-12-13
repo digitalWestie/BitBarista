@@ -318,15 +318,6 @@ def start():
       if(top < len(contours) and right < len(contours) and bottom < len(contours) and cv2.contourArea(contours[top]) > 10 and cv2.contourArea(contours[right]) > 10 and cv2.contourArea(contours[bottom]) > 10):
         #FLIP, SCAN, AND SAVE BEFORE ADDING COLOURS 
         scanimg = cv2.flip(img,1)
-        #scanimg = cv2.cvtColor(scanimg,cv2.COLOR_BGR2GRAY)
-        code = zbarlight.scan_codes('qrcode', Image.fromarray(scanimg))
-        
-        if code == None:
-          print "No qr found"
-        elif len(code) == 1:
-          qrResult = parseUrl(code[0])
-          if qrResult['success']:
-            break
 
         #DRAW DETECTED LINES
         tempL = []
@@ -346,6 +337,14 @@ def start():
         cv2.drawContours(img,contours,right,(0,255,0),2)
         cv2.drawContours(img,contours,bottom,(0,0,255),2)
 
+        #SCAN FLIPPED
+        code = zbarlight.scan_codes('qrcode', Image.fromarray(scanimg))
+        if code == None:
+          print "No qr found"
+        elif len(code) == 1:
+          qrResult = parseUrl(code[0])
+          if qrResult['success']:
+            break
     
     #DISPLAY      
     img = cv2.flip(img,1)
