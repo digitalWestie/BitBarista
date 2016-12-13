@@ -39,8 +39,12 @@ $(document).ready(function(){
     $.ajax({ 
       url: "http://localhost:5000/qr/",
       dataType: "json",
-      success: function(data){ "success: " + alert(JSON.stringify(data)); },
-      error: function(data){ "error: " + alert(JSON.stringify(data)); },
+      success: function(data){ 
+        alert("success: " + JSON.stringify(data));
+        var str = '<div class="progress"><div>Paying address: '+data['address']+'</div></div>';
+        $("#scanexample").replaceWith(str);
+      },
+      error: function(data){ alert("error: " + JSON.stringify(data)); },
       complete: function(data){ alert("complete: " + JSON.stringify(data)); }
     });
   });
