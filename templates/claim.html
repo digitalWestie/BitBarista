@@ -87,7 +87,7 @@ $(document).ready(function(){
       url: "http://localhost:5000/qr/",
       dataType: "json",
       success: function(data) {
-        if (data["success"]) { sendPayment("{{ address }}","{{ amount }}"); } else { scanError(); }
+        if (data["success"]) { sendPayment(data["address"],"{{ amount }}"); } else { scanError(); }
       },
       error: function(data){ scanError(); }
     });
