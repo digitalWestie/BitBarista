@@ -71,7 +71,7 @@ $(document).ready(function(){
       success: function(data){
         if (data["success"]){
           $("#scanmessage").replaceWith('<div id="scanmessage">Payment sent!</div>');
-          setTimeout(function(){ window.location.replace("http://localhost:5000/"); }, 1600);
+          setTimeout(function(){ window.location.replace("http://localhost:5000/"); }, 1900);
         } else {
           paymentError();
         }
