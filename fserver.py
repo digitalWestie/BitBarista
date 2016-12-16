@@ -10,6 +10,7 @@ import random
 #import fake_board_reader as board_reader #board_reader on pi
 import board_reader as board_reader
 import qrcode as qrcode
+import random
 
 app = Flask(__name__)
 
@@ -119,11 +120,9 @@ def payment_request(address):
 @app.route("/pay/<address>/<amount>", methods = ['POST'])
 def pay(address):
   if request.method == 'POST':
-    result = send_payment(address, offers["single"])
-    if result:
-      return "Paid!"
-    else:
-      return redirect("/error", code=302)
+    #r = send_payment(address, offers["single"])
+    bool(random.getrandbits(1))
+    return jsonify(**{ success: r })
   else:
     return redirect("/", code=302)
 
