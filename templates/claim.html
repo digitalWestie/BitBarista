@@ -37,7 +37,7 @@
 $(document).ready(function(){
   
   var animateBlink = function(){
-    $('.blink').each(function() {
+    $('.blink').each(function(){
       var elem = $(this);
       setInterval(function() {
         if (elem.css('visibility') == 'hidden') {
@@ -53,8 +53,8 @@ $(document).ready(function(){
     $.ajax({ 
       url: "http://localhost:5000/qr/",
       dataType: "json",
-      success: function(data){
-        if (data["success"] == true){
+      success: function(data) {
+        if (data["success"] == true) {
           $("#scanexample").hide();
           $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+data['address']+'<span class="blink">...</span></div>');
           animateBlink();

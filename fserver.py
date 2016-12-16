@@ -117,13 +117,16 @@ def payment_request(address):
     abort(500)
 
 
-@app.route("/pay/<address>")
+@app.route("/pay/<address>/<amount>", methods = ['POST'])
 def pay(address):
-  result = send_payment(address, offers["single"])
-  if result:
-    return "Paid!"
+  if request.method == 'POST':
+    result = send_payment(address, offers["single"])
+    if result:
+      return "Paid!"
+    else:
+      return redirect("/error", code=302)
   else:
-    return redirect("/error", code=302)
+    return redirect("/", code=302)
 
 
 @app.route("/error")
@@ -183,7 +186,7 @@ def send_payment(address, amount):
 
 
 def generate_request(amount):
-  p = Popen(['electrum', 'addrequest', str(amount), '-m', 'Coffee Sale Test'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  p = Popen(['electrum', 'addrequest', str(amount), '-m', 'Coffee Sale'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
   if p.returncode == 0:
     return json.loads(output)

@@ -241,7 +241,6 @@ def start():
     if (frameCountdown <= 0):
       break
 
-
     image = frame.array
     img = image
     
