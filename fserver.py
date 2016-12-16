@@ -118,7 +118,7 @@ def payment_request(address):
 
 
 @app.route("/pay/<address>/<amount>", methods = ['POST'])
-def pay(address):
+def pay(address, amount):
   print "received pay request"
   if request.method == 'POST':
     #r = send_payment(address, offers["single"])
