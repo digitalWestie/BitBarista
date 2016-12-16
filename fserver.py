@@ -119,9 +119,10 @@ def payment_request(address):
 
 @app.route("/pay/<address>/<amount>", methods = ['POST'])
 def pay(address):
+  print "received pay request"
   if request.method == 'POST':
     #r = send_payment(address, offers["single"])
-    bool(random.getrandbits(1))
+    r=bool(random.getrandbits(1))
     return jsonify(**{ success: r })
   else:
     return redirect("/", code=302)
