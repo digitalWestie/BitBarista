@@ -17,7 +17,7 @@
             </div>
 
             <div class="col-sm-6">
-              <img id="scanexample" src="/assets/scanexample.gif"/>
+              <img id="scanexample" src="/assets/scanexample.png"/>
               <div id="scanmessage"></div>
               <div style="clear:both;"></div>
             </div>
@@ -49,23 +49,47 @@ $(document).ready(function(){
     });
   };
 
+  var scanError = function(){
+    $("#scanmessage").replaceWith('<div id="scanmessage">Couldn\'t scan QR code, please try again</div>');
+  };
+
+  var paymentError = function(){
+    $("#scanmessage").replaceWith('<div id="scanmessage">Problem sending payment, please try again</div>');
+    $("#scanexample").show();
+  };
+
+  var sendPayment = function(address, amount){
+    $("#scanexample").hide(); //Maybe replace this with a different image?
+    $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+data['address']+'<span class="blink">...</span></div>');
+    animateBlink();
+
+    $.ajax({
+      url: "http://localhost:5000/pay/"+address+"/"+amount,
+      dataType: "json",
+      method: "POST",
+      data: {},
+      success: function(data){
+        if (data["success"]){
+          $("#scanmessage").replaceWith('<div id="scanmessage">Payment sent!</div>');
+          setTimeout(function(){ window.location.replace("http://localhost:5000/"); }, 1600);
+        } else {
+          paymentError();
+        }
+      },
+      error: function(data){
+        paymentError();
+      }
+    });
+  };
+
   $('#scanexample').click(function(){
     $.ajax({ 
       url: "http://localhost:5000/qr/",
       dataType: "json",
       success: function(data) {
-        if (data["success"] == true) {
-          $("#scanexample").hide();
-          $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+data['address']+'<span class="blink">...</span></div>');
-          animateBlink();
-        } else {
-          $("#scanmessage").replaceWith('<div id="scanmessage">Couldn\'t scan QR code, please try again.</div>');
-        }
+        if (data["success"]) { sendPayment("{{ address }}","{{ amount }}"); } else { scanError(); }
       },
-      error: function(data){
-        $("#scanmessage").replaceWith('<div id="scanmessage">Couldn\'t scan QR code, please try again.</div>');
-      },
-      complete: function(data){}
+      error: function(data){ scanError(); }
     });
   });
 
