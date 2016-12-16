@@ -6,7 +6,6 @@ from flask import request
 from subprocess import Popen, PIPE
 import json
 import urllib
-import csv
 import random
 #import fake_board_reader as board_reader #board_reader on pi
 import board_reader as board_reader
@@ -152,12 +151,6 @@ def claim(amount):
   return render_template('claim.html', amount=amount, message=message)
 
 
-@app.route("/settle_payouts")
-def settle():
-  count = settle_payouts()
-  return "Settled " + str(count) + " payouts."
-
-
 def check_request(address):
   p = Popen(['electrum', 'getrequest', address], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   output, err = p.communicate()
@@ -210,119 +203,6 @@ def bitbarista_history():
     return json.loads(output)
   else:
     return False
-
-
-#Labels last transaction with payout reference
-def ref_last_transaction(ref):
-  history = bitbarista_history()
-  if history:
-    last_tx = history[-1]
-    p = Popen(['electrum', 'setlabel', last_tx["txid"], "ref:"+ref], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    output, err = p.communicate()
-    if (p.returncode == 0):
-      print output
-      return True
-    else:
-      return False
-
-
-#Pay everyone in the request list
-def settle_payouts():
-  payouts = retrieve_payouts()
-  valid_refs = payout_references()
-  i = 0
-  for payout in payouts:
-    reference = payout["reference"]
-    if valid_reference(reference):
-      result = send_payment(payout["address"], valid_refs[reference])
-      if result: 
-        i = i + 1
-        ref_last_transaction(reference)
-  return i
-
-
-#Reads payout references
-def payout_references():
-  reader = csv.reader(open('references.csv', 'r'))
-  d = {}
-  try: 
-    d = dict(reader)
-  except Exception as error:
-    print "Failed to read references csv \n", str(error)
-  return d
-
-
-#Checks if provided reference is eligible and hasn't been used yet
-def valid_reference(ref):
-  valid = False
-  valid = (ref in payout_references().keys())
-  valid = valid & (ref not in used_references())
-  return valid
-
-
-#Randomly generates a new reference string that hasn't already been used
-def generate_reference():
-  existing = used_references()
-  existing = existing + payout_references().keys()
-  generating = True
-  ref = ''
-  while generating:
-    ref = ''.join(random.choice('0123456789abcdefghijklmnopqrstuvwxyz') for i in range(4))
-    generating = (ref in existing)
-  return ref
-
-
-def save_reference(ref,amount):
-  try:
-    with open("references.csv", "a") as references:
-      nextline = ""
-      if len(payout_references()) >= 1:
-        nextline = "\n"
-      references.write(nextline+ref+","+str(amount))
-    return True
-  except:
-    return False
-
-
-#Collects payout references that have been labelled against historical transactions
-def used_references():
-  references = []
-  for tx in bitbarista_history():
-    if tx["label"][0:4] == "ref:":
-      references.append(tx["label"].split("ref:")[1])
-  return references
-
-
-def retrieve_payouts():
-  filepath = "payouts.csv"
-  try:
-    targetfile = urllib.URLopener()
-    targetfile.retrieve(config["payouts_url"], filepath)
-  except Exception as error:
-    print "Failed to get payout csv \n", str(error)
-  entries = read_csv(filepath)
-  payouts = []
-  for entry in entries:
-    split = entry['body'].split()
-    if len(split) == 2:
-      entry['address'] = split[0]
-      entry['reference'] = split[1]
-      payouts.append(entry)
-  return payouts
-
-
-def read_csv(filepath):
-  arr = []
-  try:
-    with open(filepath, 'r') as csvfile:
-      fileDialect = csv.Sniffer().sniff(csvfile.read(1024))
-      csvfile.seek(0)
-      dictReader = csv.DictReader(csvfile, dialect=fileDialect)
-      for row in dictReader:
-        arr.append(row)
-  except Exception as error:
-    print "Failed to read csv file \n", str(error)
-  return arr
 
 
 if __name__ == "__main__":
