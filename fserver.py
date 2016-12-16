@@ -121,9 +121,9 @@ def payment_request(address):
 def pay(address, amount):
   print "received pay request"
   if request.method == 'POST':
-    #r = send_payment(address, offers["single"])
+    #r = send_payment(address, amount)
     r=bool(random.getrandbits(1))
-    return jsonify(**{ success: r })
+    return jsonify(**{ 'success': r })
   else:
     return redirect("/", code=302)
 
