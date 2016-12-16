@@ -18,7 +18,7 @@
 
             <div class="col-sm-6">
               <img id="scanexample" style="width:95%;" src="/assets/scanexample.png"/>
-              <div id="scanmessage">test</div>
+              <div id="scanmessage"></div>
               <div style="clear:both;"></div>
             </div>
           </div>
@@ -60,7 +60,7 @@ $(document).ready(function(){
 
   var sendPayment = function(address, amount){
     $("#scanexample").hide(); //Maybe replace this with a different image?
-    $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+data['address']+'<span class="blink">...</span></div>');
+    $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+address+'<span class="blink">...</span></div>');
     animateBlink();
 
     $.ajax({
