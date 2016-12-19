@@ -6,6 +6,5 @@ cd ~/BitBarista
 
 electrum daemon start
 
-xdg-open http://localhost:5000/ &
+lxterminal -e python ~/BitBarista/fserver.py
 
-python ~/BitBarista/fserver.py
