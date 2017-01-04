@@ -141,12 +141,17 @@ def read_state():
   elif test_steady(all_channel_averages):
     state["overall"] = 'steady'
     state["message"] = "Something's not right!"
+    print "Channels are steady"
+    print "Channel averages: ", all_channel_averages
+    print "Column averages: ", column_averages
   else:
     state["overall"] = 'other'
     state["message"] = "Not sure what, but something's not right!"
-  print state["overall"]
-  return state
+    print "State of flux / flashing detected"
+    print "Channel averages: ", all_channel_averages
+    print "Column averages: ", column_averages
 
+  return state
 
 def test_sig(sig, averages, margin=7.0):
   passed = True
@@ -250,7 +255,10 @@ def log_results():
 
 def log_state():
   while True:
-    read_state()
+    print "\n-------------"
+    result = read_state()
+    print "Result: ", result["overall"]
+    time.sleep(0.2)
 
 def cleanup():
   print "Running GPIO.cleanup()"
@@ -258,3 +266,4 @@ def cleanup():
 
 if __name__ == '__main__': 
   print "Reading board"
+  log_state()
