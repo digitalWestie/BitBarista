@@ -33,10 +33,16 @@ CHANNEL_NAMES = ["serbatoio","al_fondi","al_generico","al_calcif","premacinato",
 #WATER_EMPTY_SIG = [71.868, 36.713, 5.110, 0, 5.028, 70.624, 41.004, 0]
 #NEW BOARD:
 READY_SIG = [0.0, 31.0, 2.1, 0.0, 0.0, 31.0, 31.0, 2.0]
+TAZZA2_SIG = [0.055, 30.35, 0.0, 0.0, 0.01, 0.0, 30.7, 0.0]
 WATER_EMPTY_SIG = [0.0, 29.0, 0.0, 0.0, 0.0, 56.2, 29.5, 0.0]
 EMPTY_GRINDS_SIG = [0.0, 57.49, 0.0, 0.0, 0.0, 30.4, 57.39, 0.0]
+
 OFF_SIG = [0.0, 2.0, 2.0, 0.0, 0.10, 2.0, 2.0, 2.0]
 OFF_AT_WALL_SIG = [0.0, 11.0, 11.0, 5.0, 2.10, 11.0, 10.5, 11.0]
+
+NO_BEANS_SINGLE_SIG = [0.12, 13.8, 0.0, 0.1, 0.01, 30.51, 13.85, 0.0]
+NO_BEANS_DOUBLE_SIG = [0.08, 44.3, 0.0, 0.0026, 0.0, 0.0, 44.0,  0.0]
+NO_BEANS_ALL_SIG    = [0.08, 44.0, 0.0, 0.0026, 0.0, 30.1, 43.7, 0.0] #shows after an empty dbl/single
 
 # LED pin numbering from control board ribbon (NOT GPIO!)
 # serbatoio   #pin 10
@@ -148,15 +154,20 @@ def read_state():
     print "Channel averages: ", all_channel_averages
     print "Column averages: ", column_averages
   else:
-    state["overall"] = 'other'
-    state["message"] = "Not sure what, but something's not right!"
-    print "State of flux / flashing detected"
-    print "Channel averages: ", all_channel_averages
-    print "Column averages: ", column_averages
+    if test_sig(NO_BEANS_SIG, column_averages):
+      state["overall"] = 'no_beans'
+      state["message"] = "There are no more beans left!"
+    else:
+      state["overall"] = 'other'
+      state["message"] = "Not sure what, but something's not right!"
+      print "State of flux / flashing detected"
+      print "Channel averages: ", all_channel_averages
+      print "Column averages: ", column_averages
 
   return state
 
-  # TODO: other states 
+  # TODO: CHECK FOR ALL NO BEANS STATES 
+
   # no more beans = serving light steady + coffee ground light (al fondi) flashing
   # warming up = tazza1 + tazza2 flashing   
   # needs cleaning = descaling light is flashing
