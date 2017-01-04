@@ -34,6 +34,7 @@ CHANNEL_NAMES = ["serbatoio","al_fondi","al_generico","al_calcif","premacinato",
 #NEW BOARD:
 READY_SIG = [0.0, 31.0, 2.1, 0.0, 0.0, 31.0, 31.0, 2.0]
 WATER_EMPTY_SIG = [0.0, 29.0, 0.0, 0.0, 0.0, 56.2, 29.5, 0.0]
+EMPTY_GRINDS_SIG = [0.0, 57.49, 0.0, 0.0, 0.0, 30.4, 57.39, 0.0]
 OFF_SIG = [0.0, 2.0, 2.0, 0.0, 0.10, 2.0, 2.0, 2.0]
 OFF_AT_WALL_SIG = [0.0, 11.0, 11.0, 5.0, 2.10, 11.0, 10.5, 11.0]
 
@@ -137,6 +138,9 @@ def read_state():
   elif test_sig(READY_SIG, column_averages):
     state["overall"] = 'ready'
     state["message"] = "Ready to serve!"
+  elif test_sig(EMPTY_GRINDS_SIG, column_averages):
+    state["overall"] = 'empty_grinds'
+    state["message"] = "The coffee grinds tray is full, can you empty it?"
   elif test_steady(all_channel_averages):
     state["overall"] = 'steady'
     state["message"] = "Something's not right!"
@@ -151,6 +155,13 @@ def read_state():
     print "Column averages: ", column_averages
 
   return state
+
+  # TODO: other states 
+  # no more beans = serving light steady + coffee ground light (al fondi) flashing
+  # warming up = tazza1 + tazza2 flashing   
+  # needs cleaning = descaling light is flashing
+  # delivering coffee = single tazza1 or tazza2 light is on
+  # currently cleaning = descaling light is on
 
 def test_sig(sig, averages, margin=7.0):
   passed = True
