@@ -121,8 +121,7 @@ def read_state():
 
   for col in range(8):
     column_averages[col] = column_averages[col]/len(results)
-    print column_averages[col],
-    
+  
   #test if machine is off
   all_off=False
   all_off=test_sig(OFF_AT_WALL_SIG, column_averages)
@@ -255,7 +254,7 @@ def log_results():
 
 def log_state():
   while True:
-    print "\n-------------"
+    print "-------------"
     result = read_state()
     print "Result: ", result["overall"]
     time.sleep(0.2)
