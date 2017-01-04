@@ -4,6 +4,7 @@ newtxn
 payouts.csv
 references.csv
 board_reader.pyc
+fake_board_reader.pyc
 qr_reader.pyc
 imutils.pyc
 assets/scan.jpg
