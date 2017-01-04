@@ -1,0 +1,213 @@
+  GPIO.setup(11, GPIO.OUT)
+Reading board
+-------------
+Result:  ready
+-------------
+Result:  ready
+-------------
+Result:  ready
+-------------
+Result:  ready
+-------------
+Result:  ready
+-------------
+Result:  ready
+-------------
+Result:  ready
+-------------
+Result:  ready
+-------------
+Result:  ready
+-------------
+State of flux / flashing detected
+Channel averages:  [11.88625, 11.65375, 12.2025, 6.9925, 3.9812499999999997, 3.8875]
+Column averages:  [8.785, 13.825000000000001, 0.0, 0.0, 0.0, 30.94333333333333, 13.918333333333331, 0.0]
+Result:  other
+-------------
+Channels are steady
+Channel averages:  [3.925, 3.80875, 3.7725, 3.8075, 3.8649999999999998, 3.6925000000000003]
+Column averages:  [0.22999999999999998, 0.0, 0.0, 0.023333333333333334, 0.015, 30.22666666666667, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.71375, 3.7987499999999996, 3.895, 3.8, 3.94625, 3.8775]
+Column averages:  [0.17500000000000002, 0.0, 0.01, 0.0, 0.0, 30.513333333333335, 0.01, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.82625, 3.9499999999999997, 3.71875, 3.79125, 3.8712500000000003, 3.80875]
+Column averages:  [0.18999999999999997, 0.0, 0.0, 0.0, 0.024999999999999998, 30.406666666666666, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.7275, 3.885, 4.0575, 3.9587499999999998, 3.87625, 3.79625]
+Column averages:  [0.21, 0.0, 0.0, 0.0, 0.0, 30.845, 0.013333333333333334, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.82375, 3.805, 3.75125, 3.80125, 3.8687500000000004, 3.825]
+Column averages:  [0.24, 0.0, 0.0, 0.024999999999999998, 0.02, 30.215000000000003, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.7337499999999997, 3.8000000000000003, 3.83, 3.7275, 3.8850000000000002, 3.805]
+Column averages:  [0.3083333333333333, 0.0, 0.0, 0.0, 0.016666666666666666, 30.05, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [4.04, 3.81125, 3.895, 3.8737500000000002, 3.98, 3.7325]
+Column averages:  [0.26666666666666666, 0.0, 0.0, 0.0016666666666666668, 0.0, 30.833333333333332, 0.008333333333333333, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.74125, 3.8049999999999997, 3.945, 3.82375, 3.815, 3.9075]
+Column averages:  [0.18333333333333335, 0.0, 0.0, 0.0, 0.01, 30.52333333333333, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.85875, 3.78125, 3.70125, 3.8562499999999997, 3.8587499999999997, 3.8200000000000003]
+Column averages:  [0.05000000000000001, 0.0, 0.0, 0.0, 0.0, 30.451666666666668, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [4.01875, 3.79375, 3.9325, 3.9825000000000004, 3.81, 3.95375]
+Column averages:  [0.18166666666666667, 0.021666666666666667, 0.0, 0.015, 0.021666666666666667, 31.076666666666668, 0.005, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [4.1, 3.8562499999999997, 3.7525, 3.8725, 3.7075, 3.8587499999999997]
+Column averages:  [0.043333333333333335, 0.0, 0.0, 0.0, 0.0, 30.819999999999993, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.7775, 3.625, 3.855, 3.9375, 3.955, 3.95125]
+Column averages:  [0.07333333333333333, 0.0, 0.0, 0.0, 0.0, 30.728333333333335, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [4.0325, 3.9975, 3.7875, 3.92875, 3.7800000000000002, 3.6999999999999997]
+Column averages:  [0.08166666666666668, 0.0, 0.0033333333333333335, 0.0, 0.0, 30.883333333333336, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.6275000000000004, 3.71875, 3.77875, 3.93625, 3.85625, 3.7087499999999998]
+Column averages:  [0.041666666666666664, 0.0, 0.0, 0.0, 0.0, 30.12666666666667, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [4.035, 3.8625000000000003, 3.79125, 3.78125, 3.85625, 3.785]
+Column averages:  [0.08666666666666667, 0.0, 0.0, 0.0, 0.0, 30.728333333333335, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.77625, 3.86, 3.77625, 3.78, 3.87375, 3.78375]
+Column averages:  [0.030000000000000002, 0.0, 0.0, 0.0, 0.0, 30.426666666666662, 0.01, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.8825, 3.7325000000000004, 3.71625, 3.79, 3.88375, 3.8625000000000003]
+Column averages:  [0.12833333333333333, 0.0, 0.0, 0.0, 0.0033333333333333335, 30.349999999999998, 0.008333333333333333, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.9299999999999997, 3.71, 3.6350000000000002, 3.8962499999999998, 3.87125, 3.7875]
+Column averages:  [0.15166666666666664, 0.0, 0.006666666666666667, 0.0, 0.023333333333333334, 30.24, 0.011666666666666667, 0.006666666666666667]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.7775, 3.95375, 3.93125, 3.9524999999999997, 3.78375, 3.78125]
+Column averages:  [0.13333333333333333, 0.0, 0.0, 0.0, 0.018333333333333333, 30.755000000000006, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.88625, 3.805, 3.9475, 3.855, 3.7912500000000002, 3.79625]
+Column averages:  [0.12833333333333335, 0.0, 0.0033333333333333335, 0.0, 0.0, 30.643333333333334, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.9987500000000002, 3.8, 3.96625, 3.73875, 3.895, 3.925]
+Column averages:  [0.265, 0.0, 0.0, 0.0, 0.018333333333333333, 30.814999999999998, 0.0, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [3.64625, 3.905, 3.7975, 3.9074999999999998, 3.72875, 3.95625]
+Column averages:  [0.215, 0.0, 0.0, 0.0033333333333333335, 0.0, 30.37, 0.0, 0.0]
+Result:  steady
+-------------
+State of flux / flashing detected
+Channel averages:  [10.7575, 10.34875, 3.88, 3.7312499999999997, 4.67875, 10.63625]
+Column averages:  [0.11499999999999999, 14.201666666666668, 0.0, 0.0, 0.0, 30.3, 14.093333333333334, 0.0]
+Result:  other
+-------------
+State of flux / flashing detected
+Channel averages:  [7.109999999999999, 3.79375, 3.94875, 5.86125, 10.7625, 10.561250000000001]
+Column averages:  [0.11499999999999999, 12.748333333333333, 0.0, 0.0, 0.0, 30.81166666666667, 12.375, 0.0]
+Result:  other
+-------------
+State of flux / flashing detected
+Channel averages:  [3.8287500000000003, 3.8024999999999998, 7.0375, 10.6775, 10.9175, 8.950000000000001]
+Column averages:  [0.12166666666666666, 14.635, 0.0, 0.0, 0.018333333333333333, 30.50333333333333, 15.006666666666668, 0.0]
+Result:  other
+-------------
+State of flux / flashing detected
+Channel averages:  [3.7575, 8.38625, 10.65625, 10.75375, 7.56875, 3.865]
+Column averages:  [0.09500000000000001, 14.82, 0.0, 0.01, 0.021666666666666667, 30.281666666666666, 14.755, 0.0]
+Result:  other
+-------------
+State of flux / flashing detected
+Channel averages:  [9.535, 10.7475, 10.969999999999999, 6.43125, 3.7937499999999997, 3.79625]
+Column averages:  [0.07833333333333335, 15.086666666666668, 0.0, 0.0, 0.0, 30.291666666666668, 14.908333333333333, 0.0]
+Result:  other
+-------------
+State of flux / flashing detected
+Channel averages:  [10.99375, 10.62875, 5.15, 3.9675000000000002, 3.7337499999999997, 8.71]
+Column averages:  [0.06166666666666667, 13.093333333333334, 0.0, 0.0016666666666666668, 0.0, 30.958333333333332, 13.463333333333333, 0.0]
+Result:  other
+-------------
+State of flux / flashing detected
+Channel averages:  [8.69625, 3.865, 3.71, 4.33875, 10.76125, 10.686250000000001]
+Column averages:  [0.056666666666666664, 12.833333333333334, 0.0, 0.0, 0.0, 30.091666666666665, 13.095, 0.0]
+Result:  other
+-------------
+State of flux / flashing detected
+Channel averages:  [3.93125, 3.87, 5.51375, 10.54625, 10.838750000000001, 10.69875]
+Column averages:  [0.13833333333333334, 14.913333333333334, 0.0, 0.024999999999999998, 0.018333333333333333, 30.706666666666667, 14.729999999999999, 0.0]
+Result:  other
+-------------
+State of flux / flashing detected
+Channel averages:  [3.805, 7.39375, 10.69, 10.84, 8.26, 3.8125]
+Column averages:  [0.13833333333333334, 14.37, 0.0, 0.0, 0.0033333333333333335, 30.598333333333333, 14.625, 0.0]
+Result:  other
+-------------
+State of flux / flashing detected
+Channel averages:  [9.37125, 10.612499999999999, 10.633750000000001, 6.3725000000000005, 4.06375, 3.7512499999999998]
+Column averages:  [0.19666666666666666, 14.418333333333331, 0.0, 0.0, 0.018333333333333333, 31.00666666666666, 14.1, 0.0]
+Result:  other
+-------------
+State of flux / flashing detected
+Channel averages:  [10.69875, 10.68625, 4.22875, 3.98, 3.96375, 8.47125]
+Column averages:  [0.19333333333333336, 12.296666666666667, 0.0, 0.0, 0.0, 30.89833333333333, 12.65, 0.0]
+Result:  other
+-------------
+Channels are steady
+Channel averages:  [18.2025, 18.10875, 18.1825, 18.195, 18.02625, 18.02625]
+Column averages:  [0.0, 57.578333333333326, 0.0, 0.006666666666666667, 0.0, 29.90666666666667, 57.49666666666667, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [18.11125, 18.10375, 18.197499999999998, 18.105, 17.95125, 17.783749999999998]
+Column averages:  [0.0, 57.504999999999995, 0.0, 0.008333333333333333, 0.0, 29.301666666666666, 57.521666666666675, 0.0]
+Result:  steady
+-------------
+^CTraceback (most recent call last):
+  File "board_reader.py", line 268, in <module>
+    log_state()
+  File "board_reader.py", line 258, in log_state
+    result = read_state()
+  File "board_reader.py", line 104, in read_state
+    results.append(collect_readings())
+  File "board_reader.py", line 198, in collect_readings
+    channel_value = readadc(channel, SPICLK, SPIMOSI, SPIMISO, SPICS) # read the analog pin
+  File "board_reader.py", line 83, in readadc
+    GPIO.output(clockpin, False)
+KeyboardInterrupt

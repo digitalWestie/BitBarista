@@ -1,0 +1,58 @@
+Reading board
+-------------
+Channels are steady
+Channel averages:  [17.9925, 18.0875, 18.158749999999998, 18.13125, 18.0775, 17.995]
+Column averages:  [0.0, 57.449999999999996, 0.0, 0.0, 0.0, 29.766666666666666, 57.373333333333335, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [18.2375, 18.08625, 18.083750000000002, 18.235, 18.2375, 18.00625]
+Column averages:  [0.0, 57.44833333333333, 0.0, 0.0033333333333333335, 0.0, 30.29166666666666, 57.43833333333333, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [18.17, 18.09625, 18.083750000000002, 18.10125, 18.26, 18.32625]
+Column averages:  [0.0, 57.453333333333326, 0.0, 0.0, 0.0, 30.43166666666666, 57.498333333333335, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [18.15, 17.9925, 18.16, 18.15625, 18.232499999999998, 18.1675]
+Column averages:  [0.0, 57.47, 0.0, 0.0, 0.0, 30.278333333333332, 57.39666666666667, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [18.17, 18.15125, 18.3175, 18.0875, 18.16875, 18.23]
+Column averages:  [0.0, 57.511666666666656, 0.0, 0.0, 0.0, 30.586666666666662, 57.401666666666664, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [18.17125, 18.23125, 18.0925, 18.08125, 18.0125, 18.1575]
+Column averages:  [0.0, 57.46, 0.0, 0.0016666666666666668, 0.0, 30.091666666666665, 57.44166666666666, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [18.16875, 18.09875, 18.16375, 18.085, 18.153750000000002, 18.07875]
+Column averages:  [0.0, 57.43000000000001, 0.0, 0.0, 0.0, 30.08, 57.48833333333334, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [18.1675, 18.24375, 17.91625, 18.085, 18.23875, 18.07375]
+Column averages:  [0.0, 57.42833333333334, 0.0, 0.0, 0.0, 30.09333333333333, 57.44499999999999, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [18.07875, 18.26, 18.165, 18.18125, 18.23875, 18.3925]
+Column averages:  [0.0, 57.54666666666666, 0.0, 0.0, 0.0, 30.793333333333333, 57.415, 0.0]
+Result:  steady
+-------------
+Channels are steady
+Channel averages:  [18.41125, 17.923750000000002, 18.085, 18.32125, 17.99875, 17.925]
+Column averages:  [0.0, 57.45666666666667, 0.0, 0.0, 0.0, 29.99333333333333, 57.43666666666667, 0.0]
+Result:  steady
+^CTraceback (most recent call last):
+  File "board_reader.py", line 268, in <module>
+    log_state()
+  File "board_reader.py", line 260, in log_state
+    time.sleep(0.2)
+KeyboardInterrupt
+
