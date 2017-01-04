@@ -255,3 +255,6 @@ def log_state():
 def cleanup():
   print "Running GPIO.cleanup()"
   GPIO.cleanup()
+
+if __name__ == '__main__': 
+  print "Reading board"
