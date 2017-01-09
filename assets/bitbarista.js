@@ -99,3 +99,16 @@ $( document ).ready(function() {
     },10000);
 });
 
+var stateCallback = function(data) {
+  $('#issue-message').html('');
+  if (data.overall == 'ready') {
+    $('#offers').show();
+    $('#issues').hide();
+  } else if (data.overall == 'water') {
+    window.location.replace("http://localhost:5000/water_request/");
+  } else {
+    $('#issues').show();
+    $('#offers').hide();
+    $('#issue-message').append(data.message);
+  } 
+};

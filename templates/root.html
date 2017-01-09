@@ -78,37 +78,20 @@
 
 {% block javascript %}
 <script>
-
 $(document).ready(function(){
-  //$('#issues').hide();
 
   var timeoot = 0;
   function poll() { 
     setTimeout(function() {
-      $.ajax({ url: "{{ state_url }}",
-        success: function(data) { 
-          timeoot = 6000;
-          
-          $('#issue-message').html('');
-
-          if (data.overall == 'ready') {
-            $('#offers').show();
-            $('#issues').hide();
-          } else if (data.overall == 'water') {
-            window.location.replace("http://localhost:5000/water_request/");
-          } else {
-            $('#issues').show();
-            $('#offers').hide();
-            $('#issue-message').append(data.message);
-          }
-        }, 
-        dataType: "json",
-        complete: poll
+      $.ajax({ 
+        url: "{{ state_url }}", 
+        success: stateCallback, 
+        complete: function(){ timeoot = 6000; poll(); } 
       });
     }, timeoot);
   }
-
   poll();
+
 });
 </script>
 {% endblock %}

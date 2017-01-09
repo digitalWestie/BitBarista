@@ -60,6 +60,10 @@ def get_qr():
   return jsonify(**result)
 
 
+@app.route('/choice')
+  return render_template('choice.html')
+
+
 @app.route('/sale/<offer>')
 def sale(offer):
   state = board_reader.read_state() 
@@ -139,7 +143,7 @@ def help():
 
 
 @app.route("/payout_claim/<amount>")
-def claim(amount):
+def payout_claim(amount):
   reason = request.args.get('reason')
   if (reason == "refund"):
     message = "Oops, something went wrong! Follow the steps to claim a refund..."

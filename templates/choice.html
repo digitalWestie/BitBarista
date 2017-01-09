@@ -1,0 +1,71 @@
+
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row" id="offers">
+  <div class="col-sm-offset-1 col-sm-10">
+    <p><span class="input">Which coffee would you like?</span></p>
+    
+    <div class="row">
+      <div class="col-sm-5">
+        <a class="touch-button" href="/serve" style="">
+          <span class="input">South Asian Blend Medium </span><br/>
+          <span class="input_u">Macth: Best Price</span><br/>
+        </a>
+      </div>
+
+      <div class="col-sm-5">
+        <a class="touch-button" href="/serve" style="">
+          <span class="input">Brazil Santos Medium-Dark</span><br/>
+          <span class="input_u">Match: Best Quality</span><br/>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="row" id="issues">
+  <div class="col-sm-offset-1 col-sm-10">
+
+    <p>Oh, it looks like I could do with some help!</p>
+
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="touch-button" style="">
+          <p id="issue-message"></p>
+        </div>
+      </div>
+
+      <div class="col-sm-5">
+        <a href="../help" class="touch-button" style="">
+          <p>Check troubleshooting manual</p>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+$(document).ready(function(){
+  var timeoot = 0;
+
+  function poll() { 
+    setTimeout(function() {
+      $.ajax({ 
+        url: "{{ state_url }}", 
+        success: stateCallback, 
+        complete: function(){ timeoot = 6000; poll(); } 
+      });
+    }, timeoot);
+  }
+
+  poll();
+});
+</script>
+{% endblock %}
