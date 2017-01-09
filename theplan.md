@@ -1,35 +1,61 @@
-v0.1 Plan: 
+# Developer Notes
 
-Flask: 
 
-GET "/" - js polls "/state", if okay shows offers else shows state
+### Switching on instruction page
 
-GET "/status" - shows results from various read states
+Press here to ready the machine. Please wait a moment while the machine heats up and the pipes are flushed. 
 
-GET "/state" - checks if machine is on and warmed up
+Present an intermediate page for duration of heat up.
 
-GET "/sell/<offer>" - js checks "/state" if not shows state, if ready generates an address, calculates amount for item, renders page w/ qr, js polls blockchain.info for tx for 30 seconds: 
+Once done, bounce to start page. 
 
-  - On timeout (nothing rcvd): Check for payment again? / Cancel (redirect to "/")
-  - On fail (reason: not enough, other?): Check for payment again? / Cancel (redirect to "/")
-  - On success (>= amount rcvd): Redirect to "/sell/<offer>/paid?<txparams>"
 
-GET "/sell/<offer>/paid?<txparams>" - returns received msg, polls "/state" showing state, once ready press cof button, polls "/state" again until vending state is over and shows "we're done!" then redirect to "/"
+### Water refill
 
-NB- for v0.2 /paid stage will have a cancel & refund option, and a refund for when things go wrong.
+Offer a choice of free coffee or collecting BTC
 
-v0.2
+### Grinds clearing
 
-GET "/refund?txdetails=<txdetails>" - Checks refund hasn't been carried out already then shows "Refunding X to Y", send request to API to refund txdetails:amount to txdetails:address, then polls for result
+Offer a choice of free coffee or collecting BTC, if we have time offer an ignore button
 
-  - On success: show "done" msg then redirect to "/"
-  - On timeout: Show "Try again?"
-  - On error: Show "Try again?"
+### Beans refill / no beans scenario
 
-=====
+serve-coffee:
 
-#hi there
+  if served fine, go to refill-payout
+  if no beans detected, go to beans-refill
 
-Optocouple the buttons, making sure that current isn't too high for it to control (~40mA).
+beans-refill: 
 
-Use MCP3008 to measure the 2ksps (0.0005 seconds) averaged over 100 readings.
+  show instructions: 
+
+    1. Your last payment has been refunded
+    2. Please refill the container (done)  
+    3. I'm ready to serve a free coffee (press here to serve)
+  
+  If successful go to start.
+
+
+### Possible beans refill / no beans scenario
+
+serve-coffee:
+
+  if served fine, go to refill-payout
+  if no beans detected, go to beans-refill
+
+refill-payout:
+  
+  settle payments to any owed refill payouts  
+  clear any saved refill payouts
+  go to start page
+
+beans-refill: 
+
+  show instructions:  
+
+    1. refill beans container image (next)
+    2. scan your address for a payout (scan)
+    3. thanks, your address will be credited upon the next sale of coffee! (done)
+
+  wait for scan, once we have an address, save it
+  on done, go to start
