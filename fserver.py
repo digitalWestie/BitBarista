@@ -68,10 +68,6 @@ def get_qr():
 def sale(offer):
   state = board_reader.read_state() 
   if (state['overall'] == 'ready'):
-
-    # TODO: WRITE JS TO POLL REQUEST CHECKER
-    # AFTER X RETRIES REDIRECT "/" ?
-    # TODO: WRITE PAGE FOR SERVING COFFEE
     
     request = generate_request(offers[offer])
 
