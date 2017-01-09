@@ -154,7 +154,10 @@ def read_state():
     print "Channel averages: ", all_channel_averages
     print "Column averages: ", column_averages
   else:
-    if test_sig(NO_BEANS_SIG, column_averages):
+    if test_sig(NO_BEANS_DOUBLE_SIG, column_averages):
+      state["overall"] = 'no_beans'
+      state["message"] = "There are no more beans left!"
+    if test_sig(NO_BEANS_SINGLE_SIG, column_averages):
       state["overall"] = 'no_beans'
       state["message"] = "There are no more beans left!"
     else:
