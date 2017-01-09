@@ -72,6 +72,7 @@ def sale(offer):
     request = generate_request(offers[offer])
 
     if not request:
+      print "\n Error: trouble generating request for offer"
       return redirect("/error", code=302)
     
     request["URI"] = request["URI"]+'&label=BitBarista&message=offer_'+offer
