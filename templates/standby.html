@@ -11,7 +11,7 @@
 
 <div class="row" id="warmingup">
   <div class="col-offset-1 col-sm-10">
-    <p>Flushing pipes and warming up<span class="blink">...</span></p>
+    <p><span id="message">Flushing pipes and warming up</span><span class="blink">...</span></p>
   </div>
 </div>
 
@@ -19,19 +19,33 @@
 
 {% block javascript %}
 <script>
+var checkIsFlushing = function(){
+  $.ajax({
+    url: '/state/',
+    success: function(result){
+      if(result["overall"] == 'warmup_no_water'){
+        $('#message').text("Attempted to flush pipes but no water available. Continuing to warm up");
+        setTimeout(function(){ window.location.replace("http://localhost:5000/"); }, 23000);
+      };
+    }
+  });
+};
+
+var startWarmup = function(){
+  $('#standby').hide();
+  $('#warmingup').show();
+  $.ajax({
+    url: '/press_button/on',
+    complete: function(){
+      setTimeout(checkIsFlushing,1000); 
+      setTimeout(function(){ window.location.replace("http://localhost:5000/"); }, 44000);
+    }
+  });
+};
+
 $(document).ready(function(){
   $('#warmingup').hide();  
-  $('#standby a').click(function(){
-    $('#standby').hide();
-    $('#warmingup').show();
-    $.ajax({
-      url: '/press_button/on', 
-      complete: function(){ 
-        setTimeout(function(){ window.location.replace("http://localhost:5000/");  }, 40000); 
-      }
-    });
-  });
-  
+  $('#standby a').click(startWarmup);  
 });
 </script>
 {% endblock %}
