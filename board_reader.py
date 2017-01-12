@@ -165,7 +165,7 @@ def read_state():
     elif test_sig(WARMUP_SIG, column_averages):
       state["overall"] = 'warmup'
       state["message"] = "Warming up and flushing pipes."
-    elif test_sig(WARMUP_NO_WATER, column_averages):
+    elif test_sig(WARMUP_NO_WATER_SIG, column_averages):
       state["overall"] = 'warmup_no_water'
       state["message"] = "Warming up, no water to flush pipes!"
     else:
