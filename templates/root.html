@@ -81,9 +81,9 @@
 $(document).ready(function(){
 
   var timeoot = 0;
-  function poll() { 
+  function poll() {
     setTimeout(function() {
-      $.ajax({ 
+      $.ajax({
         url: "{{ state_url }}", 
         success: stateCallback, 
         complete: function(){ timeoot = 6000; poll(); } 
