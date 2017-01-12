@@ -19,7 +19,7 @@ with open('config.json') as json_config:
 
 offers = config["offers"]
 
-state_url = "http://localhost:5000/state"
+state_url = "http://localhost:5000/state/"
 
 @app.route("/")
 def home():
