@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row" id="standby">
+  <div class="col-offset-1 col-sm-10">
+    <a class="touch-button" href="#">
+      On standby, press here to get started.
+    </a>
+   </div>
+</div>
+
+<div class="row" id="warmingup">
+  <div class="col-offset-1 col-sm-10">
+    <p>Flushing pipes and warming up<span>...</span></p>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+$(document).ready(function(){
+  $('#warmingup').hide();  
+  $('#standby a').click(function(){
+    $('#standby').hide();
+    $('#warmingup').show();
+    $.ajax({
+      url: '/press_button/on', 
+      complete: function(){ 
+        setTimeout(function(){ alert('route to start');  }, 10000); 
+      }
+    });
+  });
+  
+});
+</script>
+{% endblock %}
