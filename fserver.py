@@ -60,9 +60,14 @@ def get_qr():
   return jsonify(**result)
 
 
-@app.route('/choice')
+@app.route('/choice/')
 def choice():
   return render_template('choice.html')
+
+
+@app.route('/standby/')
+def standby():
+  return render_template('standby.html')
 
 
 @app.route('/sale/<offer>')
@@ -103,7 +108,7 @@ def serve(offer):
     return redirect("/", code=302)
 
 
-@app.route('/pressbutton/<button>')
+@app.route('/press_button/<button>')
 def press_button(button=None):
   result = board_reader.press_button(button)
   return render_template('hello.html', result=result)
