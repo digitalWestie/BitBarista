@@ -28,20 +28,22 @@ GPIO.setup(9, GPIO.OUT)
 GPIO.setup(11, GPIO.OUT)
 
 CHANNEL_NAMES = ["serbatoio","al_fondi","al_generico","al_calcif","premacinato","tazza1","tazza2","vapore"]
-#BREAD BOARD VERS:
-#READY_SIG = [56.17, 57, 23.65, 22.249, 25.947, 60.995, 64.864, 28.62]
-#WATER_EMPTY_SIG = [71.868, 36.713, 5.110, 0, 5.028, 70.624, 41.004, 0]
-#NEW BOARD:
+
+#STEADY SIGNATURES:
 READY_SIG = [0.0, 31.0, 2.1, 0.0, 0.0, 31.0, 31.0, 2.0]
 TAZZA2_SIG = [0.055, 30.35, 0.0, 0.0, 0.01, 0.0, 30.7, 0.0]
 WATER_EMPTY_SIG = [0.0, 29.0, 0.0, 0.0, 0.0, 56.2, 29.5, 0.0]
 EMPTY_GRINDS_SIG = [0.0, 57.49, 0.0, 0.0, 0.0, 30.4, 57.39, 0.0]
 
+#OFF SIGNATURES:
 OFF_SIG = [0.0, 2.0, 2.0, 0.0, 0.10, 2.0, 2.0, 2.0]
 OFF_AT_WALL_SIG = [0.0, 11.0, 11.0, 5.0, 2.10, 11.0, 10.5, 11.0]
 
-NO_BEANS_SINGLE_SIG = [0.12, 13.8, 0.0, 0.1, 0.01, 30.51, 13.85, 0.0]
-NO_BEANS_DOUBLE_SIG = [0.08, 44.3, 0.0, 0.0026, 0.0, 0.0, 44.0,  0.0]
+#FLASHING SIGNATURES:
+WARMUP_SIG          = [3.3, 16.98, 1.95, 0.5, 0.08, 16.59, 16.48, 1.6]
+WARMUP_NO_WATER_SIG = [0.0, 14.68, 0.0,  0.0, 0.0,  41.2,  14.3,  0.0]
+NO_BEANS_SINGLE_SIG = [0.12, 13.8, 0.0,  0.1, 0.01, 30.51, 13.85, 0.0]
+NO_BEANS_DOUBLE_SIG = [0.08, 44.3, 0.0, 0.0026, 0.0, 0.0,  44.0,  0.0]
 NO_BEANS_ALL_SIG    = [0.08, 44.0, 0.0, 0.0026, 0.0, 30.1, 43.7, 0.0] #shows after an empty dbl/single
 
 # LED pin numbering from control board ribbon (NOT GPIO!)
@@ -157,9 +159,15 @@ def read_state():
     if test_sig(NO_BEANS_DOUBLE_SIG, column_averages):
       state["overall"] = 'no_beans'
       state["message"] = "There are no more beans left!"
-    if test_sig(NO_BEANS_SINGLE_SIG, column_averages):
+    elif test_sig(NO_BEANS_SINGLE_SIG, column_averages):
       state["overall"] = 'no_beans'
       state["message"] = "There are no more beans left!"
+    elif test_sig(WARMUP_SIG, column_averages):
+      state["overall"] = 'warmup'
+      state["message"] = "Warming up and flushing pipes."
+    elif test_sig(WARMUP_NO_WATER, column_averages):
+      state["overall"] = 'warmup_no_water'
+      state["message"] = "Warming up, no water to flush pipes!"
     else:
       state["overall"] = 'other'
       state["message"] = "Not sure what, but something's not right!"
