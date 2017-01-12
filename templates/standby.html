@@ -27,7 +27,7 @@ $(document).ready(function(){
     $.ajax({
       url: '/press_button/on', 
       complete: function(){ 
-        setTimeout(function(){ alert('route to start');  }, 10000); 
+        setTimeout(function(){ window.location.replace("http://localhost:5000/");  }, 55000); 
       }
     });
   });
