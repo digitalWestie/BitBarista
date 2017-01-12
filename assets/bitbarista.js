@@ -3,7 +3,6 @@ function getRandomInt(min, max) {
 }
 
 var stateCallback = function(data) {
-  alert('state callback');
   $('#issue-message').html('');
   if (data.overall == 'ready') {
     $('#offers').show();
