@@ -37,7 +37,7 @@ var startWarmup = function(){
   $.ajax({
     url: '/press_button/on',
     complete: function(){
-      setTimeout(checkIsFlushing,3000); 
+      setTimeout(checkIsFlushing,3000);
       setTimeout(function(){ window.location.replace("http://localhost:5000/"); }, 44000);
     }
   });
