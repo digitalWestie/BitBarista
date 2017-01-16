@@ -35,7 +35,7 @@ $(document).ready(function(){
           if ((data.overall == 'ready') || (data.overall == 'empty_grinds')){
             window.location.replace("http://localhost:5000/payout_claim/{{ reward }}?reason=refill");
           } else if (data.overall == 'off'){
-            window.location.replace('http://localhost:5000/standby/')
+            window.location.replace('http://localhost:5000/standby/');
           }
         },
         dataType: "json",

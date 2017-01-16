@@ -62,7 +62,7 @@ def get_qr():
 
 @app.route('/choice/')
 def choice():
-  return render_template('choice.html')
+  return render_template('choice.html', state_url=state_url)
 
 
 @app.route('/standby/')
