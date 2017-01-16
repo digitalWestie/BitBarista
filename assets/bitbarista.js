@@ -11,11 +11,13 @@ var stateCallback = function(data) {
     window.location.replace("http://localhost:5000/water_request/");
   } else if (data.overall == 'empty_grinds') {
     window.location.replace("http://localhost:5000/empty_grinds/");
+  } else if (data.overall == 'off') {
+    window.location.replace("http://localhost:5000/standby/");
   } else {
     $('#issues').show();
     $('#offers').hide();
     $('#issue-message').append(data.message);
-  } 
+  }
 };
 
 $(document).ready(function(){
