@@ -67,7 +67,8 @@ def choice():
 
 @app.route('/empty_grinds/')
 def empty_grinds():
-  return render_template('empty.html', state_url=state_url)
+  reward = "0.0006"
+  return render_template('empty.html', state_url=state_url, reward=reward)
 
 
 @app.route('/standby/')
