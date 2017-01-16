@@ -32,8 +32,9 @@ CHANNEL_NAMES = ["serbatoio","al_fondi","al_generico","al_calcif","premacinato",
 #STEADY SIGNATURES:
 READY_SIG = [0.0, 31.0, 2.1, 0.0, 0.0, 31.0, 31.0, 2.0]
 TAZZA2_SIG = [0.055, 30.35, 0.0, 0.0, 0.01, 0.0, 30.7, 0.0]
-WATER_EMPTY_SIG = [0.0, 29.0, 0.0, 0.0, 0.0, 56.2, 29.5, 0.0]
+WATER_EMPTY_SIG  = [0.0, 29.0, 0.0, 0.0, 0.0, 56.2, 29.5, 0.0]
 EMPTY_GRINDS_SIG = [0.0, 57.49, 0.0, 0.0, 0.0, 30.4, 57.39, 0.0]
+WATER_TRAY_SIG   = [0.0, 56.74, 0.0, 0.0, 0.0, 56.80, 56.67, 0.0] #both water empty and empty tray lights
 
 #OFF SIGNATURES:
 OFF_SIG = [0.0, 2.0, 2.0, 0.0, 0.10, 2.0, 2.0, 2.0]
@@ -45,6 +46,8 @@ WARMUP_NO_WATER_SIG = [0.0, 14.68, 0.0,  0.0, 0.0,  41.2,  14.3,  0.0]
 NO_BEANS_SINGLE_SIG = [0.12, 13.8, 0.0,  0.1, 0.01, 30.51, 13.85, 0.0]
 NO_BEANS_DOUBLE_SIG = [0.08, 44.3, 0.0, 0.0026, 0.0, 0.0,  44.0,  0.0]
 NO_BEANS_ALL_SIG    = [0.08, 44.0, 0.0, 0.0026, 0.0, 30.1, 43.7, 0.0] #shows after an empty dbl/single
+
+
 
 # LED pin numbering from control board ribbon (NOT GPIO!)
 # serbatoio   #pin 10
@@ -140,7 +143,7 @@ def read_state():
   if all_off:
     state["overall"] = 'off'
     state["message"] = "Machine is off, or warming up."
-  elif test_sig(WATER_EMPTY_SIG, column_averages):
+  elif test_sig(WATER_EMPTY_SIG, column_averages) or test_sig(WATER_TRAY_SIG, column_averages):
     state["overall"] = 'water'
     state["message"] = "Water is missing, could you replace it?"
   elif test_sig(READY_SIG, column_averages):
