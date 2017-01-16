@@ -32,7 +32,7 @@ $(document).ready(function(){
       $.ajax({ url: "{{ state_url }}",
         success: function(data) { 
           timeoot = 6000;
-          if (data.overall == 'ready'){
+          if ((data.overall == 'ready') || (data.overall == 'empty_grinds')){
             window.location.replace("http://localhost:5000/payout_claim/{{ reward }}?reason=refill");
           } else if (data.overall == 'off'){
             window.location.replace('http://localhost:5000/standby/')
