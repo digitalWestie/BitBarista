@@ -65,6 +65,11 @@ def choice():
   return render_template('choice.html', state_url=state_url)
 
 
+@app.route('/empty_grinds/')
+def choice():
+  return render_template('empty.html', state_url=state_url)
+
+
 @app.route('/standby/')
 def standby():
   return render_template('standby.html')
