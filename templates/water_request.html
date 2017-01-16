@@ -34,6 +34,8 @@ $(document).ready(function(){
           timeoot = 6000;
           if (data.overall == 'ready'){
             window.location.replace("http://localhost:5000/payout_claim/{{ reward }}?reason=refill");
+          } else if (data.overall == 'off'){
+            window.location.replace('http://localhost:5000/standby/')
           }
         },
         dataType: "json",
