@@ -178,6 +178,7 @@ def read_state():
       print "Channel averages: ", all_channel_averages
       print "Column averages: ", column_averages
 
+  print overall["overall"]
   return state
 
   # TODO: CHECK FOR ALL NO BEANS STATES 
