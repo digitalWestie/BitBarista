@@ -1,100 +1,61 @@
 {% extends "index.html" %}
 
 {% block content %}
-  <div class="row">
-      <div class="col-sm-offset-1 col-sm-10">
-        <p>Thank you.<br/>
-        I have now sold <span class="input cups">204</span> cups of coffee at an average price of <span class="input">0.206785</span> BTC</p>  
-        <p>Choices were based on supplies matched for</p>
-        <div class="col-sm-10">
-          <div class="col-sm-6">Social Responsibility</div>
-          <div class="col-sm-5">34.6%</div>
-        </div>
-        <div class="col-sm-10">
-          <div class="col-sm-6">Quality</div>
-          <div class="col-sm-5">24.2%</div>
-        </div>
-        <div class="col-sm-10">
-          <div class="col-sm-6">Price </div>
-          <div class="col-sm-5">21.8%</div>
-        </div>
-        <div class="col-sm-10">
-          <div class="col-sm-6">Environmental impact</div>
-          <div class="col-sm-5">19.4%</div>
-        </div>
-        <div class="col-sm-10">
-         <p><br/><span class="input">Ethiopia Sidamo Medium</span> is currently trending highest in terms of <span class="input">Social Responsibility</span> </p>
-         <p>The next supply will be ordered on <span class="input"> 16 Sep 2016</span> </p>
-        </div>
-      </div>
-  </div>
- <div class="row">
-      <div class="col-sm-offset-1 col-sm-10">
-        <div class="touch-button">
-              <a href="/" style="">
-                <span>[[ BUY ANOTHER COFFEE ]]</span>
-              </a>
-        </div> 
-      </div> 
-</div>
-<!--<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/1.gif"></img>
-<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/2.gif"></img>
-<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/3.gif"></img>
-<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/4.gif"></img>
-<img class="gif" style="margin:0 auto; display:block; width:50%;" src="/assets/servinggifs/5.gif"></img>-->
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10">
+    <p>Thank you.<br/>
+    I have now sold <span class="input cups">204</span> cups of coffee at an average price of <span class="input">0.206785</span> BTC</p>
 
+    <p>Choices were based on supplies matched for</p>
+    <div class="col-sm-10">
+      <div class="col-sm-6">Social Responsibility</div>
+      <div class="col-sm-5">34.6%</div>
+    </div>
+    <div class="col-sm-10">
+      <div class="col-sm-6">Quality</div>
+      <div class="col-sm-5">24.2%</div>
+    </div>
+    <div class="col-sm-10">
+      <div class="col-sm-6">Price </div>
+      <div class="col-sm-5">21.8%</div>
+    </div>
+    <div class="col-sm-10">
+      <div class="col-sm-6">Environmental impact</div>
+      <div class="col-sm-5">19.4%</div>
+    </div>
+    <div class="col-sm-10">
+     <p><br/><span class="input">Ethiopia Sidamo Medium</span> is currently trending highest in terms of <span class="input">Social Responsibility</span> </p>
+     <p>The next supply will be ordered on <span class="input"> 16 Sep 2016</span> </p>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block javascript %}
-
 <script>
-//timeout and show gif
 $(document).ready(function(){
-
-  //var totalSec = new Date().getTime();
-  var totalHour = new Date().getHours();
-  var totalMin = new Date().getMinutes();
-  var coffees = Math.Round(totalHour*totalMin/5);
- // totalSec=(Math.round((totalSec-1470006200000)/60000));
-
-  console.log(coffees);
-  $(".cups").html(coffees);
-
   var servetime = {{ servetime }};
-  var serve_countdown = servetime / 5;
-  var successful = true;
+  var success = true;
 
-  var gifs = $('img.gif');
-  var imgIdx = 0;
-
-
-  function updateImg(){  
-    //update image
-    gifs.hide();
-    $(gifs[imgIdx]).show();
-    imgIdx++;
-    if (imgIdx == gifs.size()){ imgIdx = 0; }
-  }
-
-  function endServe(){
-    if (successful){
+  var endServe = function(){
+    if (success){
       window.location.replace("http://localhost:5000/");
     } else {
       window.location.replace("http://localhost:5000/payout_claim/{{amount}}?reason=refund");
     }
-  }
+  };
 
-  updateImg();
-
-  for(count = 8; count <= servetime; count+=8){
-    console.log("count " + count);
-    setTimeout(updateImg, count*1000);
+  var emptyPoll = function(){
+    setTimeout(function(){
+      $.ajax({ url: "{{ state_url }}",
+        success: function(data){ if (data.overall == 'no_beans'){ success = false; } },
+        dataType: "json",
+        complete: emptyPoll
+      });
+    }, 6000);
   };
 
   setTimeout(endServe, servetime * 1000);
-
-  //After x time check state, error: show refund or success: redirect!
-
 });
 </script>
 {% endblock %}

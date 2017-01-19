@@ -108,7 +108,6 @@ def serve(offer):
     servetime = 45
   result = board_reader.press_button(button)
   if result:
-    #TODO CHECK IT HAS SERVED OK
     return render_template('serve.html', result=result, servetime=servetime, amount=offers[offer])
   else:
     return redirect("/", code=302)
