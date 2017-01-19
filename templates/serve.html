@@ -36,15 +36,18 @@
 $(document).ready(function(){
   var servetime = {{ servetime }};
   var success = true;
+  var cost = {{ cost }};
 
   var endServe = function(){
     if (success){
       window.location.replace("http://localhost:5000/");
+    } else if (cost > 0) {
+      window.location.replace("http://localhost:5000/payout_claim/{{cost}}?reason=refund");
     } else {
-      window.location.replace("http://localhost:5000/payout_claim/{{amount}}?reason=refund");
+      window.location.replace("http://localhost:5000/refill/");
     }
   };
-
+  
   var emptyPoll = function(){
     setTimeout(function(){
       $.ajax({ url: "{{ state_url }}",

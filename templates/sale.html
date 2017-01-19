@@ -62,7 +62,7 @@ $(document).ready(function(){
 
           if (data.status == 'Paid'){
             console.log("PAYMENT MADE!");
-            window.location.replace("http://localhost:5000/serve/{{ offer }}");
+            window.location.replace("http://localhost:5000/serve/{{ offer }}?cost={{ price }}");
           }
         },
         dataType: "json",

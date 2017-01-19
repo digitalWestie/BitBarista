@@ -60,7 +60,7 @@ def get_qr():
   return jsonify(**result)
 
 
-@app.route('/choice/')
+@app.route('/choice/') #NB ONLY IN THE CASE OF A FREE COFFEE 
 def choice():
   return render_template('choice.html', state_url=state_url)
 
@@ -111,9 +111,15 @@ def serve(offer):
   else:
     button = "tazza1"
     servetime = 45
+  
+  cost = request.args.get('cost')
+  if cost == None:
+    cost = 0.0
+
   result = board_reader.press_button(button)
+
   if result:
-    return render_template('serve.html', result=result, servetime=servetime, amount=offers[offer])
+    return render_template('serve.html', cost=cost, result=result, servetime=servetime, amount=offers[offer])
   else:
     return redirect("/", code=302)
 
