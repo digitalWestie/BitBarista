@@ -120,7 +120,7 @@ def serve(offer):
   result = board_reader.press_button(button)
 
   if result:
-    return render_template('serve.html', cost=cost, result=result, servetime=servetime, amount=offers[offer])
+    return render_template('serve.html', cost=cost, servetime=servetime, state_url=state_url)
   else:
     return redirect("/", code=302)
 
