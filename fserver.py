@@ -19,6 +19,7 @@ with open('config.json') as json_config:
 
 offers = config["offers"]
 
+root_url = "http://localhost:5000"
 state_url = "http://localhost:5000/state/"
 
 @app.route("/")
@@ -175,7 +176,12 @@ def claim(amount):
 
 @app.route("/payout/<amount>")
 def payout(amount):
-  return render_template('payout.html', amount=amount)
+  after_scan = request.args.get('after_scan')
+  if (after_scan == None):
+    after_scan = root_url
+  else:
+    after_scan = root_url+after_scan
+  return render_template('payout.html', amount=amount, after_scan=after_scan)
 
 
 def check_request(address):

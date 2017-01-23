@@ -42,7 +42,7 @@ $(document).ready(function(){
     if (success) {
       window.location.replace("http://localhost:5000/");
     } else if (cost > 0) {
-      window.location.replace("http://localhost:5000/claim/{{cost}}?reason=refund"); //TODO REFUND PAGE
+      window.location.replace("http://localhost:5000/payout/{{cost}}?after_scan=/refill");
     } else {
       window.location.replace("http://localhost:5000/refill/");
     }
