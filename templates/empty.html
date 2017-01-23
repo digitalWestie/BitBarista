@@ -35,7 +35,7 @@ $(document).ready(function(){
         success: function(data) { 
           timeoot = 6000;
           if (data.overall == 'ready'){
-            window.location.replace("http://localhost:5000/payout_claim/{{ reward }}?reason=empty");
+            window.location.replace("http://localhost:5000/claim/{{ reward }}?reason=empty");
           } else if (data.overall == 'water'){
             window.location.replace('http://localhost:5000/water_request/');
           } else if (data.overall == 'off'){

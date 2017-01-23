@@ -1,0 +1,91 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row" id="offers">
+  <div class="col-sm-offset-1 col-sm-10">
+    <h2>Claim BTC</h2>
+
+    <div class="row" id="scan-instructions">
+      <div class="col-sm-6">
+        <div id="qrcode" style="float:left; margin-right:3%;"></div>
+        <p style="font-size:2vw;">Step 1: Get your smartphone to display a QR code with <i>your</i> bitcoin address!</p>
+        <p style="font-size:2vw;">Step 2: Hold it under the camera on the right.</p>
+      </div>
+
+      <div class="col-sm-6">
+        <img id="scanexample" style="width:95%;" src="/assets/scanexample.png"/>
+        <div id="scanmessage"></div>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+$(document).ready(function(){
+
+  var animateBlink = function(){
+    $('.blink').each(function(){
+      var elem = $(this);
+      setInterval(function() {
+        if (elem.css('visibility') == 'hidden') {
+          elem.css('visibility', 'visible');
+        } else {
+          elem.css('visibility', 'hidden');
+        }
+    }, 100);
+    });
+  };
+
+  var scanError = function(){
+    $("#scanmessage").replaceWith('<div id="scanmessage">Couldn\'t scan QR code, please try again</div>');
+  };
+
+  var paymentError = function(){
+    $("#scanmessage").replaceWith('<div id="scanmessage">Problem sending payment, please try again</div>');
+    $("#scanexample").show();
+  };
+
+  var sendPayment = function(address, amount){
+    $("#scanexample").hide(); //Maybe replace this with a different image?
+    $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+address+'<span class="blink">...</span></div>');
+    animateBlink();
+
+    $.ajax({
+      url: "http://localhost:5000/pay/"+address+"/"+amount,
+      dataType: "json",
+      method: "POST",
+      data: {},
+      success: function(data){
+        if (data["success"]){
+          $("#scanmessage").replaceWith('<div id="scanmessage">Payment sent!</div>');
+          setTimeout(function(){ window.location.replace("http://localhost:5000/"); }, 1900);
+        } else {
+          paymentError();
+        }
+      },
+      error: function(data){
+        paymentError();
+      }
+    });
+  };
+
+  $('#scanexample').click(function(){
+    $.ajax({ 
+      url: "http://localhost:5000/qr/",
+      dataType: "json",
+      success: function(data) {
+        if (data["success"]) { sendPayment(data["address"],"{{ amount }}"); } else { scanError(); }
+      },
+      error: function(data){ scanError(); }
+    });
+  });
+
+});
+</script>
+{% endblock %}
+</div>

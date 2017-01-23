@@ -39,15 +39,15 @@ $(document).ready(function(){
   var cost = {{ cost }};
 
   var endServe = function(){
-    if (success){
+    if (success) {
       window.location.replace("http://localhost:5000/");
     } else if (cost > 0) {
-      window.location.replace("http://localhost:5000/payout_claim/{{cost}}?reason=refund");
+      window.location.replace("http://localhost:5000/claim/{{cost}}?reason=refund"); //TODO REFUND PAGE
     } else {
       window.location.replace("http://localhost:5000/refill/");
     }
   };
-  
+
   var emptyPoll = function(){
     setTimeout(function(){
       $.ajax({ url: "{{ state_url }}",

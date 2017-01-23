@@ -161,8 +161,8 @@ def help():
   return render_template('help.html')
 
 
-@app.route("/payout_claim/<amount>")
-def payout_claim(amount):
+@app.route("/claim/<amount>")
+def claim(amount):
   reason = request.args.get('reason')
   if (reason == "refund"):
     message = "Oops, something went wrong! Follow the steps to claim a refund..."
@@ -170,8 +170,12 @@ def payout_claim(amount):
     message = "Thanks for the refill! Follow the steps to claim your payment."
   else:
     message = "Thanks for that! Follow the steps to claim your payment."
-
   return render_template('claim.html', amount=amount, message=message)
+
+
+@app.route("/payout/<amount>")
+def payout(amount):
+  return render_template('payout.html', amount=amount)
 
 
 def check_request(address):
