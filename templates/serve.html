@@ -35,29 +35,29 @@
 <script>
 $(document).ready(function(){
   var servetime = {{ servetime }};
-  var success = true;
   var cost = {{ cost }};
 
-  var endServe = function(){
-    if (success) {
-      window.location.replace("http://localhost:5000/");
-    } else if (cost > 0) {
-      window.location.replace("http://localhost:5000/payout/{{cost}}?after_scan=/refill");
-    } else {
-      window.location.replace("http://localhost:5000/refill/");
-    }
+  var endServe = function(){  
+    window.location.replace("http://localhost:5000/");
   };
 
   var emptyPoll = function(){
     setTimeout(function(){
       $.ajax({ url: "{{ state_url }}",
-        success: function(data){ if (data.overall == 'no_beans'){ success = false; } },
+        success: function(data){ 
+          if (data.overall == 'no_beans'){
+            var redirect = "http://localhost:5000/refill/";
+            if (cost > 0){ redirect = "http://localhost:5000/payout/{{cost}}?after_scan=/refill"; }
+            window.location.replace(redirect);
+          }
+        },
         dataType: "json",
         complete: emptyPoll
       });
-    }, 6000);
+    }, 5000);
   };
 
+  emptyPoll();
   setTimeout(endServe, servetime * 1000);
 });
 </script>
