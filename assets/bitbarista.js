@@ -13,6 +13,8 @@ var stateCallback = function(data) {
     window.location.replace("http://localhost:5000/empty_grinds/");
   } else if (data.overall == 'off') {
     window.location.replace("http://localhost:5000/standby/");
+  } else if (data.overall == 'warmup') {
+    window.location.replace("http://localhost:5000/warmup/");
   } else {
     $('#issues').show();
     $('#offers').hide();

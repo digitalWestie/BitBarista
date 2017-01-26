@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row" id="warmingup">
+  <div class="col-offset-1 col-sm-10">
+    <p><span id="msg">Flushing pipes and warming up</span><span class="blink">...</span></p>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+var checkIsFlushing = function(){
+  $.ajax({
+    url: '/state/',
+    success: function(result){
+      if(result["overall"] == 'warmup_no_water'){
+        $('#msg').text("Attempted to flush pipes but no water available. Continuing warm up");
+        setTimeout(function(){ window.location.replace("http://localhost:5000/"); }, 18000);
+      }
+    }
+  });
+};
+
+var checkIsReady = function(){
+  $.ajax({
+    url: '/state/',
+    success: function(result){
+      if(result["overall"] == 'ready'){
+        window.location.replace("http://localhost:5000/");
+      }
+    }
+  });
+};
+
+setTimeout(checkIsFlushing,2000);
+setTimeout(checkIsReady,23000);
+setTimeout(function(){ window.location.replace("http://localhost:5000/"); }, 43000);
+</script>
+{% endblock %}

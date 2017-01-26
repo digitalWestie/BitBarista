@@ -82,6 +82,11 @@ def standby():
   return render_template('standby.html')
 
 
+@app.route('/warmup/')
+def warmup():
+  return render_template('warmup.html')
+
+
 @app.route('/sale/<offer>')
 def sale(offer):
   state = board_reader.read_state() 
