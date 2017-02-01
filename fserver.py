@@ -47,7 +47,13 @@ def send_asset(path):
 @app.route('/water_request/')
 def water_request():
   reward = "0.0006"
-  return render_template('water_request.html', reward=reward, state_url=state_url)
+  
+  abused = False
+  history = action_history()
+  if (len(history) > 0): 
+    abused = (history[-1][1] == 'water_refill')
+  
+  return render_template('water_request.html', reward=reward, state_url=state_url, abused=abused)
 
 
 @app.route('/state/')
@@ -177,6 +183,9 @@ def claim(amount):
     message = "Oops, something went wrong! Follow the steps to claim a refund..."
   elif (reason == "refill"):
     message = "Thanks for the refill! Follow the steps to claim your payment."
+  elif (reason == "water_refilled"):
+    message = "Thanks for the refill! Follow the steps to claim your payment."
+    save_action("water_refilled", None)
   else:
     message = "Thanks for that! Follow the steps to claim your payment."
   return render_template('claim.html', amount=amount, message=message)
@@ -246,29 +255,38 @@ def bitbarista_history():
     return False
 
 
-def serving_history():
-  h = []
+def action_history():
   try:
     reader = csv.reader(open('history.csv', 'r'))
-    h = list(reader)
+    return list(reader)
   except Exception as error:
     print "Failed to read history csv \n", str(error)
     return []
 
-def serving_count():
-  return len(serving_history())
 
-def save_serving(price):
+def serving_count():
+  count = 0
+  for action in action_history():
+    if (action[1] == 'serving'):
+      count+=1
+  return count
+
+
+def save_action(action, param):
   try:
     with open("history.csv", "a") as history:
       nextline = ""
-      if len(serving_history()) >= 1:
+      if len(action_history()) >= 1:
         nextline = "\n"
-      history.write(nextline + str(datetime.datetime.now()) + "," + str(price))
+      history.write(nextline + str(datetime.datetime.now()) + "," + str(action) + "," + str(param))
     return True
   except Exception as error:
     print "Failed to write to history.csv \n", str(error)
     return False
+
+
+def save_serving(price):
+  return save_action('serving', price)
 
 
 if __name__ == "__main__":
