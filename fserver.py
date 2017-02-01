@@ -11,6 +11,8 @@ import random
 import board_reader as board_reader
 import qrcode as qrcode
 import random
+import csv
+import datetime
 
 app = Flask(__name__)
 
@@ -125,6 +127,7 @@ def serve(offer):
   result = board_reader.press_button(button)
 
   if result:
+    save_serving(cost)
     return render_template('serve.html', cost=cost, servetime=servetime, state_url=state_url)
   else:
     return redirect("/", code=302)
@@ -240,6 +243,28 @@ def bitbarista_history():
   if (p.returncode == 0):
     return json.loads(output)
   else:
+    return False
+
+
+def serving_history():
+  reader = csv.reader(open('history.csv', 'r'))
+  h = []
+  try:
+    h = list(reader)
+  except Exception as error:
+    print "Failed to read history csv \n", str(error)
+  return h
+
+
+def save_serving(price):
+  try:
+    with open("history.csv", "a") as history:
+      nextline = ""
+      if len(read_history()) >= 1:
+        nextline = "\n"
+      history.write(nextline + str(datetime.datetime.now()) + "," + str(price))
+    return True
+  except:
     return False
 
 
