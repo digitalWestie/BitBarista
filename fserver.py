@@ -247,24 +247,27 @@ def bitbarista_history():
 
 
 def serving_history():
-  reader = csv.reader(open('history.csv', 'r'))
   h = []
   try:
+    reader = csv.reader(open('history.csv', 'r'))
     h = list(reader)
   except Exception as error:
     print "Failed to read history csv \n", str(error)
-  return h
+    return []
 
+def serving_count():
+  return len(serving_history())
 
 def save_serving(price):
   try:
     with open("history.csv", "a") as history:
       nextline = ""
-      if len(read_history()) >= 1:
+      if len(serving_history()) >= 1:
         nextline = "\n"
       history.write(nextline + str(datetime.datetime.now()) + "," + str(price))
     return True
-  except:
+  except Exception as error:
+    print "Failed to write to history.csv \n", str(error)
     return False
 
 
