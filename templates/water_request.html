@@ -13,11 +13,11 @@
         <div class="touch-button" href="/start" style="">
         <img src="/assets/watertank.png" style="width:29%; height:auto; float:left;"></img>
 
-        {{ if abused }}
+        {% if abused %}
           <p style="width:70%; padding-top:3%;display:inline-block;">Could you refill the water tank? There's some bitcoin in it for you!</p>
-        {{ else }}
+        {% else %}
           <p style="width:70%; padding-top:3%;display:inline-block;">Possible abuse detected. Refill was recently made. Please refill with water to resume normal operation.</p>
-        {{ endif }}
+        {% endif %}
 
         <div style="clear:both;"></div>
         </div>
@@ -31,13 +31,13 @@
 {% block javascript %}
 <script>
 $(document).ready(function(){
-  
+
   var timeoot = 8000;
   var redirect = "http://localhost:5000/claim/{{ reward }}?reason=water_refilled";
 
-  {{ if abused }}
+  {% if abused %}
     redirect = "http://localhost:5000/";
-  {{ endif }}
+  {% endif %}
 
   function poll() { 
     setTimeout(function() {
