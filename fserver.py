@@ -51,7 +51,8 @@ def water_request():
   abused = False
   history = action_history()
   if (len(history) > 0): 
-    abused = (history[-1][1] == 'water_refilled')
+    abused = (history[-1][1] == 'water_refilled' or history[-1][1] == 'water_abuse')
+    save_action("water_abuse", None)
   
   return render_template('water_request.html', reward=reward, state_url=state_url, abused=abused)
 
