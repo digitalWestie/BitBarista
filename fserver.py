@@ -103,9 +103,10 @@ def sale(offer):
   state = board_reader.read_state() 
   if (state['overall'] == 'ready'):
     
-    price=offers[offer]["price"]
+    offer_detials = offers[offer]
+    price = offer_details["price"]
     request = generate_request(price)
-
+    
     if not request:
       print "\n Error: trouble generating request for offer"
       return redirect("/error", code=302)
@@ -116,7 +117,7 @@ def sale(offer):
 
     request_check_url = "http://localhost:5000/payment_request/"+request["address"]
 
-    return render_template('sale.html', offer=offer, address=request["address"], price=price, qrdata=request["URI"], request_check_url=request_check_url)
+    return render_template('sale.html', offer=offer, offer_details=offer_details, address=request["address"], price=price, qrdata=request["URI"], request_check_url=request_check_url)
   else:
     return redirect("/", code=302)
 
