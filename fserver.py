@@ -103,10 +103,10 @@ def sale(offer):
   state = board_reader.read_state() 
   if (state['overall'] == 'ready'):
     
-    offer_detials = offers[offer]
+    offer_details = offers[offer]
     price = offer_details["price"]
     request = generate_request(price)
-    
+
     if not request:
       print "\n Error: trouble generating request for offer"
       return redirect("/error", code=302)
