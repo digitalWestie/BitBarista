@@ -1,4 +1,3 @@
-
 {% extends "index.html" %}
 {% block content %}
 
@@ -6,21 +5,18 @@
   <div class="col-sm-offset-1 col-sm-10">
     <p><span class="input">Which coffee would you like?</span></p>
     
-    <div class="row">
-      <div class="col-sm-5">
-        <a class="touch-button" href="/serve/single" style="">
-          <span class="input">South Asian Blend Medium </span><br/>
-          <span class="input_u">Macth: Best Price</span><br/>
-        </a>
-      </div>
-
-      <div class="col-sm-5">
-        <a class="touch-button" href="/serve/single" style="">
-          <span class="input">Brazil Santos Medium-Dark</span><br/>
-          <span class="input_u">Match: Best Quality</span><br/>
-        </a>
-      </div>
-    </div>
+    {% for key,offer in offers %}
+      {% if ((loop.index0%2)==0) %}<div class="row">{% endif %}
+        <div class="col-sm-5">
+          <a class="touch-button" href="/sale/{{ key }}">
+          <span class="input">{{ offer["name"] }}</span><br/>
+          <span class="input_u">Match: {{ offer["match"] }}</span><br/>
+          </a>
+        </div>
+      {% if ((loop.index0%2)!=0) %}</div>{% endif %}
+    {% else %}
+      <div class="col-sm-5"><em>No offers available</em></div>
+    {% endfor %}
 
   </div>
 </div>

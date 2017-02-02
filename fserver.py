@@ -73,7 +73,8 @@ def get_qr():
 
 @app.route('/choice/') #NB ONLY IN THE CASE OF A FREE COFFEE 
 def choice():
-  return render_template('choice.html', state_url=state_url)
+  offer_list = config["offers"].items()
+  return render_template('choice.html', state_url=state_url, offers=offer_list)
 
 
 @app.route('/refill/')
