@@ -36,7 +36,8 @@ def table():
 
 @app.route("/start")
 def start():
-  return render_template('root.html', state_url=state_url, offers=offers)
+  offer_list = config["offers"].items()
+  return render_template('offers.html', state_url=state_url, offers=offer_list)
 
 
 @app.route('/assets/<path:path>')
@@ -101,7 +102,8 @@ def sale(offer):
   state = board_reader.read_state() 
   if (state['overall'] == 'ready'):
     
-    request = generate_request(offers[offer])
+    price=offers[offer]["price"]
+    request = generate_request(price)
 
     if not request:
       print "\n Error: trouble generating request for offer"
@@ -113,14 +115,14 @@ def sale(offer):
 
     request_check_url = "http://localhost:5000/payment_request/"+request["address"]
 
-    return render_template('sale.html', offer=offer, address=request["address"], price=offers[offer], qrdata=request["URI"], request_check_url=request_check_url)
+    return render_template('sale.html', offer=offer, address=request["address"], price=price, qrdata=request["URI"], request_check_url=request_check_url)
   else:
     return redirect("/", code=302)
 
 
 @app.route('/serve/<offer>')
 def serve(offer):
-  if (offer == "double"): 
+  if (offer == "double"):
     button = "tazza2"
     servetime = 60
   else:

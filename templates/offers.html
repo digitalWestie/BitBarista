@@ -1,0 +1,69 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row" id="offers">
+  <div class="col-sm-offset-1 col-sm-10">
+    <p><span class="input">Future Supply</span></p>
+    <p>Best matches for coffee orders on <span class="input">16 Sep 2016</span><br/>
+    The price you pay for your coffee will influence the next supply</p>
+    Choose option
+
+    {% for key,offer in offers %}
+      {% if ((loop.index0%2)==0) %}<div class="row">{% endif %}
+        <div class="col-sm-5">
+          <a class="touch-button" href="/sale/{{ key }}">
+          <span class="input">{{ offer["name"] }}</span><br/>
+          <span class="input_u">Match: {{ offer["match"] }}</span><br/>
+          </a>
+        </div>
+      {% if ((loop.index0%2)!=0) %}</div>{% endif %}
+    {% else %}
+      <div class="col-sm-5"><em>No offers available</em></div>
+    {% endfor %}
+    
+  </div>
+</div>
+
+<div class="row" id="issues">
+  <div class="col-sm-offset-1 col-sm-10">
+    <p>Oh, it looks like I could do with some help!</p>
+
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="touch-button" style="">
+          <p id="issue-message"></p>
+        </div>
+      </div>
+
+      <div class="col-sm-5">
+        <a href="../help" class="touch-button" style="">
+          <p>Check troubleshooting manual</p>
+        </a>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+$(document).ready(function(){
+
+  var timeoot = 0;
+  function poll() {
+    setTimeout(function() {
+      $.ajax({
+        url: "{{ state_url }}", 
+        success: stateCallback, 
+        complete: function(){ timeoot = 6000; poll(); } 
+      });
+    }, timeoot);
+  }
+  poll();
+
+});
+</script>
+{% endblock %}

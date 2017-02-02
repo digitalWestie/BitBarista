@@ -1,6 +1,30 @@
 //An example configuration file
 //To use make a copy of this and rename it to config.json
 {
-  "offers":{ "single":0.001, "double":0.0019 },
+  "offers": {
+    "asian": { 
+      "name": "South Asian Blend Medium",
+      "price": 0.0004,
+      "match": "Best Price"
+    },
+
+    "brazilian": { 
+      "name": "Brazil Santos Medium-Dark",
+      "price": 0.00045,
+      "match": "Trending Choice"
+    },
+
+    "ethiopian": { 
+      "name": "Ethiopia Sidamo Medium",
+      "price": 0.00045,
+      "match": "Best Social Responsibility"
+    },
+
+    "colombian": { 
+      "name": "Colombia Huila Medium",
+      "price": 0.00045,
+      "match": "Low Environmental Impact"
+    }
+  },
   "walletpass":"<electrum wallet password>"
 }
