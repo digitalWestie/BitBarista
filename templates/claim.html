@@ -2,13 +2,13 @@
 {% block content %}
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-10">
-    <h2 id="message">{{ message }}</h2>
+    <h2>{{ message }}</h2>
     <p>Would you like to claim Bitcoin or a free coffee?</p>
     
     <div class="row" id="claim-choice">
       <div class="col-sm-4">
         <div class="touch-button">
-        <a id="btc-claim" href="/payout/{{ amount }}">
+        <a id="btc-claim" style="width:80%;" href="/payout/{{ amount }}">
           Claim BTC
         </a>
         </div>
@@ -16,7 +16,7 @@
 
       <div class="col-sm-4">
         <div class="touch-button">
-        <a id="coffee-claim" href="/choice">
+        <a id="coffee-claim" style="width:80%;" href="/choice">
           Claim Coffee
         </a>
         </div>
@@ -24,7 +24,7 @@
 
       <div class="col-sm-4">
         <div class="touch-button">
-        <a id="btc-claim" href="/">
+        <a id="btc-claim" style="width:80%;" href="/">
           Return to home
         </a>
         </div>
