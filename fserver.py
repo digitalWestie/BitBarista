@@ -185,14 +185,14 @@ def help():
 def claim(amount):
   reason = request.args.get('reason')
   if (reason == "refund"):
-    message = "Oops, something went wrong! Follow the steps to claim a refund..."
+    message = "Oops, something went wrong! Please claim a refund."
   elif (reason == "refill"):
-    message = "Thanks for the refill! Follow the steps to claim your payment."
+    message = "Thanks for the refill!"
   elif (reason == "water_refilled"):
-    message = "Thanks for the refill! Follow the steps to claim your payment."
+    message = "Thanks for the refill!"
     save_action("water_refilled", None)
   else:
-    message = "Thanks for that! Follow the steps to claim your payment."
+    message = "Thanks for that! Follow the steps to claim a payment or free coffee."
   return render_template('claim.html', amount=amount, message=message)
 
 
