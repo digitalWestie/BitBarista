@@ -1,7 +1,6 @@
 {% extends "index.html" %}
 {% block content %}
 
-
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-12">
 
@@ -11,7 +10,6 @@
       <div class="col-sm-10">
 
         <div class="touch-button">
-
           <div class="row">
             <div class="col-sm-5">
               <!--<img src="/assets/espresso.jpeg" style="margin:0 auto; display:block; max-width:200px; min-width:80px; width:70%; height:auto;"></img>-->
@@ -28,12 +26,12 @@
             </div>
           </div>
         </div>
+        
         <div class="touch-button">
-            
-              <a href="/" style="">
-                <span>[[ CANCEL ]]</span>
-              </a>
-            </div>  
+          <a href="/" style="">
+          <span>[[ CANCEL ]]</span>
+          </a>
+        </div>
 
       </div>
     </div>
@@ -50,25 +48,18 @@ $(document).ready(function(){
   $('#qrcode').append(canvas);
   qr.canvas({ canvas: canvas, value: '{{ qrdata }}', size: 6.1 });
 
-  var attempts = 0;
   function poll() { 
     setTimeout(function() {
       $.ajax({ url: "{{ request_check_url }}",
-        success: function(data) { 
-          attempts++;
-          if (attempts >= 60){ //reduce this
-            window.location.replace("http://localhost:5000/");
-          }
-
+        success: function(data) {
           if (data.status == 'Paid'){
-            console.log("PAYMENT MADE!");
             window.location.replace("http://localhost:5000/serve/{{ offer }}?cost={{ price }}");
           }
         },
         dataType: "json",
         complete: poll
       });
-    }, 1000);
+    }, 1500);
   }
 
   poll();
