@@ -24,6 +24,16 @@ offers = config["offers"]
 root_url = "http://localhost:5000"
 state_url = "http://localhost:5000/state/"
 
+def get_message(reason):
+  if (reason == "refund"):
+    return "Oops, something went wrong! Please claim a refund."
+  elif (reason == "refill"):
+    return "Thanks for the refill!"
+  elif (reason == "water_refilled"):
+    return "Thanks for the refill!"
+  else:
+    return "Thanks for that! Follow the steps to claim a payment or free coffee."
+
 @app.route("/")
 def home():
   return render_template('home.html', hello="STARTED")
@@ -74,7 +84,8 @@ def get_qr():
 @app.route('/choice/') #NB ONLY IN THE CASE OF A FREE COFFEE 
 def choice():
   offer_list = config["offers"].items()
-  return render_template('choice.html', state_url=state_url, offers=offer_list)
+  message = get_message(reason)
+  return render_template('choice.html', state_url=state_url, offers=offer_list, message=message)
 
 
 @app.route('/refill/')
@@ -184,15 +195,11 @@ def help():
 @app.route("/claim/<amount>")
 def claim(amount):
   reason = request.args.get('reason')
-  if (reason == "refund"):
-    message = "Oops, something went wrong! Please claim a refund."
-  elif (reason == "refill"):
-    message = "Thanks for the refill!"
-  elif (reason == "water_refilled"):
-    message = "Thanks for the refill!"
+  message = get_message(reason)
+
+  if (reason == "water_refilled"):
     save_action("water_refilled", None)
-  else:
-    message = "Thanks for that! Follow the steps to claim a payment or free coffee."
+
   return render_template('claim.html', amount=amount, message=message)
 
 
