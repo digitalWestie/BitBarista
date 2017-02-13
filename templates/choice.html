@@ -3,7 +3,8 @@
 
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-10">
-    <p><span class="input">Which coffee would you like?</span></p>
+    <h2><span class="input">Which coffee would you like?</span></h2>
+    {% if message %}<p>{{ message }}</p>{% endif %}
     
     {% for key,offer in offers %}
       {% if ((loop.index0%2)==0) %}<div class="row">{% endif %}

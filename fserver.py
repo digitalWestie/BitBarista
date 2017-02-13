@@ -84,7 +84,13 @@ def get_qr():
 @app.route('/choice/') #NB ONLY IN THE CASE OF A FREE COFFEE 
 def choice():
   offer_list = config["offers"].items()
-  message = get_message(reason)
+  
+  message = None
+  reason = request.args.get('reason')
+  
+  if reason:
+    message = get_message(reason)
+
   return render_template('choice.html', state_url=state_url, offers=offer_list, message=message)
 
 
