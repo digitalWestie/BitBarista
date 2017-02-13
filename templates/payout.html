@@ -7,14 +7,14 @@
 
     <div class="row" id="scan-instructions">
       <div class="col-sm-6">
-        <div id="qrcode" style="float:left; margin-right:3%;"></div>
         <p style="font-size:2vw;">Step 1: Get your smartphone to display a QR code with <i>your</i> bitcoin address!</p>
         <p style="font-size:2vw;">Step 2: Hold it under the camera on the right.</p>
+        <img style="width:95%;" src="/assets/startscan.png"/>
       </div>
 
       <div class="col-sm-6">
-        <img id="scanexample" style="width:95%;" src="/assets/scanexample.png"/>
-        <div id="scanmessage"></div>
+        <button id="scanmessage" class="touch-button">Start scanning</button>
+        <div id="startscan"></div>
         <div style="clear:both;"></div>
       </div>
     </div>
@@ -47,11 +47,11 @@ $(document).ready(function(){
 
   var paymentError = function(){
     $("#scanmessage").replaceWith('<div id="scanmessage">Problem sending payment, please try again</div>');
-    $("#scanexample").show();
+    $("#startscan").show();
   };
 
   var sendPayment = function(address, amount){
-    $("#scanexample").hide(); //Maybe replace this with a different image?
+    $("#startscan").hide(); //Maybe replace this with a different image?
     $("#scanmessage").replaceWith('<div id="scanmessage">Paying address: '+address+'<span class="blink">...</span></div>');
     animateBlink();
 
@@ -74,7 +74,7 @@ $(document).ready(function(){
     });
   };
 
-  $('#scanexample').click(function(){
+  $('#startscan').click(function(){
     $.ajax({ 
       url: "http://localhost:5000/qr/",
       dataType: "json",
