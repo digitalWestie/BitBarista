@@ -36,3 +36,19 @@ $(document).ready(function(){
   });
 
 });
+
+var logAction = function(description){
+  //Logging to http://datadrop.wolframcloud.com/
+  //NB databins only last 30 days
+  $.ajax({ 
+    url: 'https://datadrop.wolframcloud.com/api/v1.0/Add?bin=jxFDUPr6',
+    method: "POST",
+    data: {
+      timestamp: (new Date).toString(), 
+      location: window.location.toString(),
+      description: description
+    },
+    dataType: "json",
+    success: function(data){ console.log(data) }
+  });
+};
