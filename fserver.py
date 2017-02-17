@@ -155,7 +155,7 @@ def serve(offer):
   result = board_reader.press_button(button)
 
   if result:
-    save_serving(cost)
+    save_serving(offer, cost)
     return render_template('serve.html', cost=cost, servetime=servetime, state_url=state_url)
   else:
     return redirect("/", code=302)
@@ -282,12 +282,23 @@ def action_history():
     return []
 
 
-def serving_count():
-  count = 0
+def action_counts():
+  counts = {}
   for action in action_history():
-    if (action[1] == 'serving'):
-      count+=1
-  return count
+    if counts.has_key(action[1]):
+      counts[action[1]] += 1
+    else:
+      counts[action[1]] = 1
+  return counts
+
+
+def serving_counts():
+  counts = {}
+  for key,val in action_counts().items():
+    split = key.split(':')
+    if (len(split) > 1):
+      counts[split[1]] = val
+  return counts
 
 
 def save_action(action, param):
@@ -303,8 +314,8 @@ def save_action(action, param):
     return False
 
 
-def save_serving(price):
-  return save_action('serving', price)
+def save_serving(offer, price):
+  return save_action('served:'+offer, price)
 
 
 if __name__ == "__main__":
