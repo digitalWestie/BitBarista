@@ -13,6 +13,7 @@ import qrcode as qrcode
 import random
 import csv
 import datetime
+import requests
 
 app = Flask(__name__)
 
@@ -324,6 +325,16 @@ def save_action(action, param):
 
 def save_serving(offer, price):
   return save_action('served:'+offer, price)
+
+
+def download_suppliers():
+  r = requests.get('location')
+  if ((r.status_code == 200) and (len(r.text) > 0)):
+    with open('suppliers.csv', 'w') as f:
+      f.write(r.text)
+    return True
+  else
+    return False
 
 
 if __name__ == "__main__":
