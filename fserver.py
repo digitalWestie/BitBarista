@@ -156,7 +156,8 @@ def serve(offer):
 
   if result:
     save_serving(offer, cost)
-    return render_template('serve.html', cost=cost, servetime=servetime, state_url=state_url)
+    servings = serving_counts()
+    return render_template('serve.html', cost=cost, servetime=servetime, state_url=state_url, servings=servings.items(), total_servings=total_servings(servings))
   else:
     return redirect("/", code=302)
 
@@ -299,6 +300,13 @@ def serving_counts():
     if (len(split) > 1):
       counts[split[1]] = val
   return counts
+
+
+def total_servings(serving_counts):
+  total = 0
+  for key,val in serving_counts.items():
+    total += val
+  return total
 
 
 def save_action(action, param):
