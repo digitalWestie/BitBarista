@@ -183,6 +183,8 @@ def payment_request(address):
   request = check_request(address)
   print request
   if request:
+    if not is_connected():
+      request['status'] = 'disconnected'
     return jsonify(**request)
   else: 
     abort(500)
