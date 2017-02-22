@@ -14,6 +14,7 @@ import random
 import csv
 import datetime
 import requests
+import socket
 
 app = Flask(__name__)
 
@@ -72,6 +73,9 @@ def water_request():
 @app.route('/state/')
 def get_state():
   state = board_reader.read_state()
+  if not is_connected():
+    state["overall"] = 'disconnected'
+    state["message"] = "BitBarista is not connected to internet, please check connectivity"
   return jsonify(**state)
 
 
@@ -109,6 +113,11 @@ def empty_grinds():
 @app.route('/standby/')
 def standby():
   return render_template('standby.html')
+
+
+@app.route('/disconnected/')
+def disconnected():
+  return render_template('disconnected.html')
 
 
 @app.route('/warmup/')
@@ -335,6 +344,15 @@ def download_suppliers():
     return True
   else:
     return False
+
+
+def is_connected():
+  try:
+    socket.create_connection(("www.google.com", 80))
+    return True
+  except:
+    pass
+  return False
 
 
 if __name__ == "__main__":

@@ -15,6 +15,8 @@ var stateCallback = function(data) {
     window.location.replace("http://localhost:5000/standby/");
   } else if (data.overall == 'warmup') {
     window.location.replace("http://localhost:5000/warmup/");
+  } else if (data.overall == 'disconnected') {
+    window.location.replace("http://localhost:5000/disconnected/");
   } else {
     $('#issues').show();
     $('#offers').hide();

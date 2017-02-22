@@ -40,6 +40,8 @@ $(document).ready(function(){
             window.location.replace('http://localhost:5000/water_request/');
           } else if (data.overall == 'off'){
             window.location.replace('http://localhost:5000/standby/');
+          } else if (data.overall == 'disconnected'){
+            window.location.replace('http://localhost:5000/disconnected/');
           }
         },
         dataType: "json",

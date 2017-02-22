@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row" id="standby">
+  <div class="col-offset-1 col-sm-10">
+    <a class="touch-button" href="#">
+      Disconnected from network, please check network availability.
+    </a>
+   </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+function poll() { 
+  setTimeout(function(){
+    $.ajax({ url: "{{ state_url }}",
+      success: function(data) { 
+        if (data.overall == 'off') {
+          window.location.replace('http://localhost:5000/standby/');
+        } else if (data.overall != 'disconnected') {
+          window.location.replace('http://localhost:5000/');
+        }
+      },
+      dataType: "json",
+      complete: poll
+    });
+  }, 6000);
+}
+
+poll();
+</script>
+{% endblock %}
