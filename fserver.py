@@ -38,7 +38,7 @@ def get_message(reason):
 
 @app.route("/")
 def home():
-  return render_template('home.html', hello="STARTED")
+  return render_template('home.html', state_url=state_url)
 
 
 @app.route("/table")
@@ -117,7 +117,7 @@ def standby():
 
 @app.route('/disconnected/')
 def disconnected():
-  return render_template('disconnected.html')
+  return render_template('disconnected.html', state_url=state_url)
 
 
 @app.route('/warmup/')
