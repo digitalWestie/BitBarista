@@ -333,7 +333,7 @@ def download_suppliers():
     with open('suppliers.csv', 'w') as f:
       f.write(r.text)
     return True
-  else
+  else:
     return False
 
 
