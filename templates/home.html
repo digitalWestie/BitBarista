@@ -24,7 +24,6 @@
         <!--<a class="touch-button" href="/start" style="">-->
         <a class="touch-button" href="/table" style="">
         <span>[[ BUY COFFEE ]]</span>
-        <!--<img src="../assets/espresso.jpeg" style="height:8.9em; width:auto;"></img> LET'S GET {{ hello }}!-->
         </a>
       </div>
     </div>
@@ -35,7 +34,19 @@
 {% block javascript %}
 <script>
 $(document).ready(function(){
-  
+  var timeoot = 0;
+
+  function poll() { 
+    setTimeout(function() {
+      $.ajax({ 
+        url: "{{ state_url }}", 
+        success: stateCallback, 
+        complete: function(){ timeoot = 6000; poll(); } 
+      });
+    }, timeoot);
+  }
+
+  poll();
 });
 </script>
 {% endblock %}
