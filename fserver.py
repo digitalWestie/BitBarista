@@ -206,7 +206,7 @@ def pay(address, amount):
 
 @app.route("/error/")
 def error_page():
-  return render_template('error.html')
+  return render_template('error.html', state_url=state_url)
 
 
 @app.route("/help")
