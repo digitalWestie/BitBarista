@@ -342,7 +342,7 @@ def save_serving(offer, price):
 
 
 def download_suppliers():
-  r = requests.get('location')
+  r = requests.get('https://raw.githubusercontent.com/digitalWestie/BitBarista/master/suppliers.csv')
   if ((r.status_code == 200) and (len(r.text) > 0)):
     with open('suppliers.csv', 'w') as f:
       f.write(r.text)
