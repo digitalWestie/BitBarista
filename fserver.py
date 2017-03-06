@@ -136,7 +136,7 @@ def sale(offer):
 
     if not request:
       print "\n Error: trouble generating request for offer"
-      return redirect("/error", code=302)
+      return redirect("/error/", code=302)
     
     request["URI"] = request["URI"]+'&label=BitBarista&message=offer_'+offer
     print "Making request for: "
@@ -201,7 +201,7 @@ def pay(address, amount):
     return redirect("/", code=302)
 
 
-@app.route("/error")
+@app.route("/error/")
 def error_page():
   return render_template('error.html')
 
