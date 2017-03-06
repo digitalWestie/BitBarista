@@ -4,7 +4,7 @@
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-10">
     <p><span class="input">Future Supply</span></p>
-    <p>Best matches for coffee orders on <span class="input">16 Sep 2016</span><br/>
+    <p>Best matches for coffee orders on <span id="date" class="input"></span><br/>
     The price you pay for your coffee will influence the next supply</p>
     Choose option
 
@@ -63,6 +63,9 @@ $(document).ready(function(){
     }, timeoot);
   }
   poll();
+
+  var d = new Date;
+  $('#date').text(d.toLocaleString().substring(0,10))
 
 });
 </script>
