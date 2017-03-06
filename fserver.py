@@ -232,7 +232,13 @@ def payout(amount):
     after_scan = root_url
   else:
     after_scan = root_url+after_scan
-  return render_template('payout.html', amount=amount, after_scan=after_scan)
+
+  message = None
+  payout_type = request.args.get('type')
+  if (payout_type == 'refund'):
+    message = "Sorry we cannot serve coffee just now, please claim a refund!"
+
+  return render_template('payout.html', amount=amount, after_scan=after_scan, message=message)
 
 
 def check_request(address):

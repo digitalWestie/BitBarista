@@ -43,7 +43,9 @@ $(document).ready(function(){
         success: function(data){ 
           if (data.overall == 'no_beans'){
             var redirect = "http://localhost:5000/refill/";
-            if (cost > 0){ redirect = "http://localhost:5000/payout/{{cost}}?after_scan=/refill"; }
+            if (cost > 0){ 
+              redirect = "http://localhost:5000/payout/{{cost}}?after_scan=/refill&type=refund";
+            }
             window.location.replace(redirect);
           }
         },
