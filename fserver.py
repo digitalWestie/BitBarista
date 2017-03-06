@@ -124,6 +124,7 @@ def disconnected():
 
 @app.route('/warmup/')
 def warmup():
+  download_suppliers()
   return render_template('warmup.html')
 
 
@@ -356,7 +357,9 @@ def suppliers_list():
     return list(reader)
   except Exception as error:
     print "Failed to read suppliers csv \n", str(error)
-    return []
+    reader = csv.reader(open('backup_suppliers.csv', 'r'))
+    return list(reader)
+
 
 def is_connected():
   try:
