@@ -18,7 +18,10 @@ $(document).ready(function(){
     setTimeout(function() {
       $.ajax({ 
         url: "{{ state_url }}", 
-        success: stateCallback, 
+        success: function(data){ 
+          stateCallback(data);
+          if (data.overall == 'ready'){ window.location.replace("http://localhost:5000/"); }
+        },
         complete: function(){ timeoot = 6000; poll(); } 
       });
     }, timeoot);
