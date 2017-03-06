@@ -1,26 +1,48 @@
-
 {% extends "index.html" %}
 
 {% block content %}
 
 <div class="row">
   <div class="col-sm-12">
-
-        <p> 
-          <span id="show_1" style="visibility:hidden">
-            [[ Analysing supply chains ]] <span class="blink">...</span><br/>
-          </span>
-          <span id="show_2" style="visibility:hidden">
-            Estimated date of next coffee order <span class="input_u">16 Sep 2016</span>
-          </span>
-        </p>
-        
+    <p> 
+      <span id="show_1" style="visibility:hidden">
+        [[ Analysing supply chains ]] <span class="blink">...</span><br/>
+      </span>
+      <span id="show_2" style="visibility:hidden">
+        Estimated date of next coffee order <span class="input_u">15 Apr 2017</span>
+      </span>
+    </p>
   </div>
   
   <div class="col-sm-12" id="countries_list">
     <div class="col-sm-12 row ">
-      <div class="col-sm-1 input_u">Countr</div><div class="col-sm-1 input_u">Climat</div><div class="col-sm-1 input_u">WorkC</div><div class="col-sm-1 input_u">Politi</div><div class="col-sm-1 input_u">Infras</div><div class="col-sm-1 input_u">Stabil</div><div class="col-sm-1 input_u">Specul</div><div class="col-sm-2 input_u">Demand</div><div class="col-sm-2 input_u">MainSupply</div><div class="col-sm-1 input_u">FairTrd</div>
+      <div class="col-sm-1 input_u">Countr</div>
+      <div class="col-sm-1 input_u">Climat</div>
+      <div class="col-sm-1 input_u">WorkC</div>
+      <div class="col-sm-1 input_u">Politi</div>
+      <div class="col-sm-1 input_u">Infras</div>
+      <div class="col-sm-1 input_u">Stabil</div>
+      <div class="col-sm-1 input_u">Specul</div>
+      <div class="col-sm-2 input_u">Demand</div>
+      <div class="col-sm-2 input_u">MainSupply</div>
+      <div class="col-sm-1 input_u">FairTrd</div>
     </div>
+
+    {% for row in suppliers %}
+      <div class='col-sm-12 row supply-row' style='visibility:hidden' id='{{ row[0] }}'>
+        <div class='col-sm-1'>{{ row[0] }}</div>
+        <div class='col-sm-1'>{{ row[1] }}%</div>
+        <div class='col-sm-1'>{{ row[2] }}%</div>
+        <div class='col-sm-1'>{{ row[3] }}%</div>
+        <div class='col-sm-1'>{{ row[4] }}%</div>
+        <div class='col-sm-1'>{{ row[5] }}%</div>
+        <div class='col-sm-1'>{{ row[6] }}%</div>
+        <div class='col-sm-2'>{{ row[7] }}</div>
+        <div class='col-sm-2 {{ row[8] }}'>{{ row[8] }}</div>
+        <div class='col-sm-1 {{ row[9] }}'>{{ row[9] }}</div>
+      </div>
+    {% endfor %}
+
   </div>
   <a class="touch-button" href="/start" id="goToStart">Stop</a>
 </div>
@@ -28,7 +50,5 @@
 {% endblock %}
 
 {% block javascript %}
-
-<script type="text/javascript" src="../assets/table.js"></script>
-
+  <script type="text/javascript" src="../assets/table.js"></script>
 {% endblock %}

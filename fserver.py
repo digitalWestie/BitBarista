@@ -43,7 +43,9 @@ def home():
 
 @app.route("/table")
 def table():
-  return render_template('table.html')
+  suppliers=suppliers_list()
+  suppliers.pop(0)
+  return render_template('table.html', suppliers=suppliers)
 
 
 @app.route("/start")
@@ -347,6 +349,14 @@ def download_suppliers():
   else:
     return False
 
+
+def suppliers_list():
+  try:
+    reader = csv.reader(open('suppliers.csv', 'r'))
+    return list(reader)
+  except Exception as error:
+    print "Failed to read suppliers csv \n", str(error)
+    return []
 
 def is_connected():
   try:

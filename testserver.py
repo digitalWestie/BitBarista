@@ -21,16 +21,29 @@ offers = config["offers"]
 root_url = "http://localhost:5000"
 state_url = "http://localhost:5000/state/"
 
+@app.route('/assets/<path:path>')
+def send_asset(path):
+  return send_from_directory('assets', path)
+
 @app.route("/")
 def home():
   cost = request.args.get('cost')
   print cost
   return render_template('home.html', hello="STARTED")
 
-@app.route("/offers")
-def offers():
-  offer_list = config["offers"].items()
-  return render_template('offers.html', state_url=state_url, offers=offer_list)
+@app.route("/table")
+def table():
+  suppliers=suppliers_list()
+  suppliers.pop(0)
+  return render_template('table.html', suppliers=suppliers)
+
+def suppliers_list():
+  try:
+    reader = csv.reader(open('suppliers.csv', 'r'))
+    return list(reader)
+  except Exception as error:
+    print "Failed to read suppliers csv \n", str(error)
+    return []
 
 
 if __name__ == "__main__":
