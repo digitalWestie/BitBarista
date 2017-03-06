@@ -159,7 +159,7 @@ def serve(offer):
     servetime = 60
   else:
     button = "tazza1"
-    servetime = 45
+    servetime = 46
   
   cost = request.args.get('cost')
   if cost == None:
