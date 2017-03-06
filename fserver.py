@@ -203,7 +203,7 @@ def pay(address, amount):
 
 @app.route("/error")
 def error_page():
-  return 'Oh uh, something went wrong! <a href="/">Please try again.</a>'
+  return render_template('error.html')
 
 
 @app.route("/help")

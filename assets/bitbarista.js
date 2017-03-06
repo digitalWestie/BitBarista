@@ -18,9 +18,7 @@ var stateCallback = function(data) {
   } else if (data.overall == 'disconnected') {
     window.location.replace("http://localhost:5000/disconnected/");
   } else {
-    $('#issues').show();
-    $('#offers').hide();
-    $('#issue-message').append(data.message);
+    window.location.replace("http://localhost:5000/error/");
   }
 };
 
