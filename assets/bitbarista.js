@@ -37,6 +37,11 @@ $(document).ready(function(){
     }, 100);
   });
 
+  $('a').click(function(){
+    $('body').css('cursor','wait');
+    setTimeout(function(){ $('body').css('cursor','none'); }, 1000);
+  });
+
 });
 
 var logAction = function(description){

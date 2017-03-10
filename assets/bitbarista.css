@@ -1,7 +1,4 @@
-html {
-  height: 100%;
-  cursor: none;
-}
+html { height: 100%; }
 
 body { 
   background: #000000; 
@@ -74,10 +71,6 @@ div.footer { }
   border-radius: 2%;
   display: inline-block;
   text-decoration: none;
-}
-
-a.touch-button:hover {
-  cursor: pointer;
 }
 
 #status{
