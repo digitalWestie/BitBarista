@@ -37,9 +37,10 @@ $(document).ready(function(){
     }, 100);
   });
 
-  $('a').click(function(){
-    $('body').css('cursor','wait');
-    setTimeout(function(){ $('body').css('cursor','none'); }, 1000);
+  $('a, button').click(function(){
+    $(this).css('background-color','white').css('color', 'black');
+    var that = this;
+    setTimeout(function(){ $(that).css('background-color','none').css('color', 'white'); }, 1000);
   });
 
 });
