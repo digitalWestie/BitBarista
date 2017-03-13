@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row">
+  <div id="warmup" class="col-offset-1 col-sm-10">
+    <p><span id="msg">Steamer is warming up</span><span class="blink">...</span></p>
+  </div>
+
+  <div id="ready" style="display:none;" class="col-offset-1 col-sm-10">
+    <p>Steamer is ready.</p>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+$(document).ready(function(){
+  var timeoot = 0;
+
+  function poll(){
+    setTimeout(function() {
+      $.ajax({ 
+        url: "{{ state_url }}",
+        success: function(result){ 
+          if (result['overall'] == 'steamer_warmup'){}
+          else if (result['overall'] == 'steamer_ready'){
+            $('#warmup').hide(); $('#ready').show();
+          } else { window.location.replace("http://localhost:5000/"); }
+        },
+        complete: function(){ timeoot = 6000; poll(); } 
+      });
+    }, timeoot);
+  }
+
+  poll();
+});
+</script>
+{% endblock %}

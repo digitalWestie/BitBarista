@@ -17,6 +17,10 @@ var stateCallback = function(data) {
     window.location.replace("http://localhost:5000/warmup/");
   } else if (data.overall == 'warmup_no_water') {
     window.location.replace("http://localhost:5000/warmup/");
+  } else if (data.overall == 'steamer_warmup') {
+    window.location.replace("http://localhost:5000/steamer/");
+  } else if (data.overall == 'steamer_ready') {
+    window.location.replace("http://localhost:5000/steamer/");
   } else if (data.overall == 'disconnected') {
     window.location.replace("http://localhost:5000/disconnected/");
   } else {

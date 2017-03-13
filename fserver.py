@@ -106,6 +106,11 @@ def refill():
   return render_template('refill.html')
 
 
+@app.route('/steamer/')
+def refill():
+  return render_template('steamer.html', state_url=state_url)
+
+
 @app.route('/empty_grinds/')
 def empty_grinds():
   reward = "0.0006"
