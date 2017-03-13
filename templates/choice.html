@@ -3,7 +3,11 @@
 
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-10">
-    <h2><span class="input">Which coffee would you like?</span></h2>
+    <p style="font-size:110%;"><span class="input">Vote for Future Supply</span></p>
+    <p>Best matches for coffee orders on <span id="date" class="input"></span><br/>
+    Your vote will influence the next supply</p>
+    Choose option
+
     {% if message %}<p>{{ message }}</p>{% endif %}
     
     {% for key,offer in offers %}
