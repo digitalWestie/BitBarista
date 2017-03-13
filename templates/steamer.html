@@ -2,19 +2,18 @@
 {% block content %}
 
 <div class="row">
-  <div  class="col-offset-1 col-sm-10">
+  <div class="col-offset-1 col-sm-10">
     <p id="warmup"><span id="msg">Steamer is warming up</span><span class="blink">...</span></p>
-    <div id="ready" class="row" style="display:none;">
-      
-      <div clsas="col-sm-6">
-        <p>Steamer is ready. Turn the steam knob anti-clockwise to release steam.</p>
-      </div>
-      <div class="col-sm-4">
-        <img style="width:90%;" src="/assets/steamer.png"/>
-      </div>
-
-    </div>
     <p id="cooldown" style="display:none;">Cooling down, please wait<span class="blink">...</span></p>
+  </div>
+</div>
+
+<div id="ready" class="row" style="display:none;">
+  <div clsas="col-offset-1 col-sm-5">
+    <p>Steamer is ready. Turn the steam knob anti-clockwise to release steam.</p>
+  </div>
+  <div class="col-sm-4">
+    <img style="width:90%;" src="/assets/steamer.png"/>
   </div>
 </div>
 
