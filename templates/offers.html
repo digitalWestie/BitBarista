@@ -3,9 +3,9 @@
 
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-10">
-    <p><span class="input">Future Supply</span></p>
+    <p style="font-size:110%;"><span class="input">Vote for Future Supply</span></p>
     <p>Best matches for coffee orders on <span id="date" class="input"></span><br/>
-    The price you pay for your coffee will influence the next supply</p>
+    The price you pay for your coffee is based on how you vote</p>
     Choose option
 
     {% for key,offer in offers %}
@@ -65,7 +65,7 @@ $(document).ready(function(){
   poll();
 
   var d = new Date;
-  $('#date').text(d.toLocaleString().substring(0,12))
+  $('#date').text(d.toLocaleString().substring(0,13));
 
 });
 </script>
