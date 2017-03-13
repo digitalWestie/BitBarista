@@ -2,12 +2,19 @@
 {% block content %}
 
 <div class="row">
-  <div id="warmup" class="col-offset-1 col-sm-10">
-    <p><span id="msg">Steamer is warming up</span><span class="blink">...</span></p>
-  </div>
+  <div  class="col-offset-1 col-sm-10">
+    <p id="warmup"><span id="msg">Steamer is warming up</span><span class="blink">...</span></p>
+    <div id="ready" class="row" style="display:none;">
+      
+      <div clsas="col-sm-6">
+        <p>Steamer is ready. Turn the steam knob anti-clockwise to release steam.</p>
+      </div>
+      <div class="col-sm-4">
+        <img style="width:90%;" src="/assets/steamer.png"/>
+      </div>
 
-  <div id="ready" style="display:none;" class="col-offset-1 col-sm-10">
-    <p>Steamer is ready.</p>
+    </div>
+    <p id="cooldown" style="display:none;">Cooling down, please wait<span class="blink">...</span></p>
   </div>
 </div>
 
@@ -25,10 +32,12 @@ $(document).ready(function(){
         success: function(result){ 
           if (result['overall'] == 'steamer_warmup'){}
           else if (result['overall'] == 'steamer_ready'){
-            $('#warmup').hide(); $('#ready').show();
+            $('#warmup, #cooldown').hide(); $('#ready').show();
+          } else if (result['overall'] == 'warmup'){
+            $('#warmup, #ready').hide(); $('#cooldown').show();
           } else { window.location.replace("http://localhost:5000/"); }
         },
-        complete: function(){ timeoot = 6000; poll(); } 
+        complete: function(){ timeoot = 5000; poll(); } 
       });
     }, timeoot);
   }
