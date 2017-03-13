@@ -107,7 +107,7 @@ def refill():
 
 
 @app.route('/steamer/')
-def refill():
+def steamer():
   return render_template('steamer.html', state_url=state_url)
 
 
