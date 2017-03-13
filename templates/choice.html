@@ -3,12 +3,11 @@
 
 <div class="row" id="offers">
   <div class="col-sm-offset-1 col-sm-10">
+    {% if message %}<p>{{ message }}</p>{% endif %}
     <p style="font-size:130%;"><span class="input">Vote for Future Supply</span></p>
     <p>Best matches for coffee orders on <span id="date" class="input"></span><br/>
     Your vote will influence the next supply</p>
     Choose option
-
-    {% if message %}<p>{{ message }}</p>{% endif %}
     
     {% for key,offer in offers %}
       {% if ((loop.index0%2)==0) %}<div class="row">{% endif %}
@@ -44,7 +43,7 @@ $(document).ready(function(){
   }
 
   poll();
-   
+
   var d = new Date;
   $('#date').text(d.toLocaleString().substring(0,13));
 
