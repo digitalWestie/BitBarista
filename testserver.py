@@ -21,21 +21,34 @@ offers = config["offers"]
 root_url = "http://localhost:5000"
 state_url = "http://localhost:5000/state/"
 
-@app.route('/assets/<path:path>')
-def send_asset(path):
-  return send_from_directory('assets', path)
+@app.route("/test/")
+def test():
+  home_text='''<p>Currently serving <span class="input">Name</span> 
+  coffee supplied by <span class="input_u">Producer</span> 
+  harvested on   <span class="input_u">Dec 2016</span>
+  purchased at <span class="input">&#163;20.00</span>/kg -   price change in relation to: previous year <span class="input_u">+0.34%</span>, previous month <span class="input_u">-0.001%</span></p>  <p>Supply purchased on <span class="input_u">6 Mar 2017</span>. Paid for by <span class="input">61</span> previous BitBarista customers, who chose the highest rated in terms of 
+  <span class="input_u">Low Environmental Impact.</span></p>'''
+  
+  return render_template('test.html', home_text=home_text)
 
-@app.route("/")
-def home():
-  cost = request.args.get('cost')
-  print cost
-  return render_template('home.html', hello="STARTED")
+
+@app.route("/state/")
+def state():
+  result = { overall: 'ready' }
+  return jsonify(**result)
+
 
 @app.route("/table")
 def table():
   suppliers=suppliers_list()
   suppliers.pop(0)
   return render_template('table.html', suppliers=suppliers)
+
+
+@app.route('/assets/<path:path>')
+def send_asset(path):
+  return send_from_directory('assets', path)
+
 
 def suppliers_list():
   try:

@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row" id="offers">
+  <div class="row">
+    <div class="col-sm-offset-1 col-sm-10">
+      {{ home_text | safe }}
+      <a class="touch-button" href="/table" style="">
+      <span>[[ BUY COFFEE ]]</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<div id="issues">
+  <p id="issue-message"></p>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+</script>
+{% endblock %}
