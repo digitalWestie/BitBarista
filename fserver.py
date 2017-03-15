@@ -38,7 +38,6 @@ def get_message(reason):
 
 @app.route("/")
 def home():
-  download_home_blurb()
   home_blurb = read_home_blurb()
   return render_template('home.html', state_url=state_url, home_blurb=home_blurb)
 
@@ -131,6 +130,7 @@ def disconnected():
 
 @app.route('/warmup/')
 def warmup():
+  download_home_blurb()
   download_suppliers()
   return render_template('warmup.html')
 
