@@ -38,7 +38,9 @@ def get_message(reason):
 
 @app.route("/")
 def home():
-  return render_template('home.html', state_url=state_url)
+  download_home_blurb()
+  home_blurb = read_home_blurb()
+  return render_template('home.html', state_url=state_url, home_blurb=home_blurb)
 
 
 @app.route("/table")
@@ -349,6 +351,24 @@ def save_action(action, param):
 
 def save_serving(offer, price):
   return save_action('served:'+offer, price)
+
+
+def download_home_blurb():  
+  r = requests.get('https://raw.githubusercontent.com/digitalWestie/BitBarista/master/templates/home_blurb.html')
+  if ((r.status_code == 200) and (len(r.text) > 0)):
+    with open('templates/home_blurb.html', 'w') as f:
+      f.write(r.text)
+    return True
+  else:
+    return False
+
+
+def read_home_blurb():
+  try:
+    return open('templates/home_blurb.html', 'r').read()
+  except Exception as error:
+    print "Failed to read home blurb", str(error)
+    return None
 
 
 def download_suppliers():
