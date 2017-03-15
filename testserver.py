@@ -11,6 +11,8 @@ import fake_board_reader as board_reader #board_reader on pi
 import random
 import csv
 import datetime
+import requests
+import socket
 
 app = Flask(__name__)
 
@@ -24,7 +26,8 @@ state_url = "http://localhost:5000/state/"
 @app.route("/test/")
 def test():
   download_home_blurb()
-  return render_template('test.html', home_text=home_text)
+  home_blurb = read_home_blurb()
+  return render_template('test.html', home_blurb=home_blurb)
 
 
 @app.route("/state/")
@@ -54,8 +57,8 @@ def suppliers_list():
     return []
 
 
-def download_home_blurb():
-  r = requests.get('https://raw.githubusercontent.com/digitalWestie/BitBarista/master/home_blurb.html')
+def download_home_blurb():  
+  r = requests.get('https://raw.githubusercontent.com/digitalWestie/BitBarista/master/templates/home_blurb.html')
   if ((r.status_code == 200) and (len(r.text) > 0)):
     with open('templates/home_blurb.html', 'w') as f:
       f.write(r.text)
@@ -63,6 +66,12 @@ def download_home_blurb():
   else:
     return False
 
+def read_home_blurb():
+  try:
+    return open('templates/home_blurb.html', 'r').read()
+  except Exception as error:
+    print "Failed to read home blurb", str(error)
+    return None
 
 if __name__ == "__main__":
   try:
