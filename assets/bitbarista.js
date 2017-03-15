@@ -53,7 +53,7 @@ var logAction = function(description){
   //Logging to http://datadrop.wolframcloud.com/
   //NB databins only last 30 days
   $.ajax({ 
-    url: 'https://datadrop.wolframcloud.com/api/v1.0/Add?bin=jXDIoNvK',
+    url: 'https://datadrop.wolframcloud.com/api/v1.0/Add?bin=kb8xmU2c',
     method: "POST",
     data: {
       timestamp: (new Date).toString(), 
