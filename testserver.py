@@ -23,12 +23,7 @@ state_url = "http://localhost:5000/state/"
 
 @app.route("/test/")
 def test():
-  home_text='''<p>Currently serving <span class="input">Name</span> 
-  coffee supplied by <span class="input_u">Producer</span> 
-  harvested on   <span class="input_u">Dec 2016</span>
-  purchased at <span class="input">&#163;20.00</span>/kg -   price change in relation to: previous year <span class="input_u">+0.34%</span>, previous month <span class="input_u">-0.001%</span></p>  <p>Supply purchased on <span class="input_u">6 Mar 2017</span>. Paid for by <span class="input">61</span> previous BitBarista customers, who chose the highest rated in terms of 
-  <span class="input_u">Low Environmental Impact.</span></p>'''
-  
+  download_home_blurb()
   return render_template('test.html', home_text=home_text)
 
 
@@ -57,6 +52,16 @@ def suppliers_list():
   except Exception as error:
     print "Failed to read suppliers csv \n", str(error)
     return []
+
+
+def download_home_blurb():
+  r = requests.get('https://raw.githubusercontent.com/digitalWestie/BitBarista/master/home_blurb.html')
+  if ((r.status_code == 200) and (len(r.text) > 0)):
+    with open('templates/home_blurb.html', 'w') as f:
+      f.write(r.text)
+    return True
+  else:
+    return False
 
 
 if __name__ == "__main__":
