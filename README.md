@@ -14,6 +14,6 @@ To get on the wifi close the full screen browser using the keyboard by pressing 
 
 To launch the interface press 'Try again' on the browser showing the error page. Once the bitbarista home-page is shown press F11 to put the browser into fullscreen mode. 
 
-Alternatively, you can close all windows and launch the interface again by running the startup short-cut called `runbitbarista.sh`. You should be able to find this on the desktop. It should show a prompt, choose 'Execute in terminal'. Once you've done this open the browser and navigate to `http://localhost:5000`. 
+Alternatively, you can close all windows and launch the interface again by running the startup short-cut called `runbitbarista.sh`. You should be able to find this on the desktop. It should show a prompt, choose 'Execute in terminal'. Once you've done this it should open the browser and navigate to `http://localhost:5000`. 
 
 ## 
