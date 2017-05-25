@@ -8,7 +8,7 @@ Plug in both the Pi and the coffee machine. The Pi doesn't have a switch. The co
 
 ### Startup issues
 
-If it's not connected to the wifi it will probably show an error like: 'Oops! It was not possible to show this website'.
+If you see an error like: 'Oops! It was not possible to show this website'. Press the refresh button (or F5). If it's still showing the error, it's likely the Bitbarista is not connected to the wifi.
 
 To get on the wifi close the full screen browser using the keyboard by pressing F11. Select a wifi network by pressing the wifi symbol at top right.
 
