@@ -1,25 +1,19 @@
 # BitBarista
+
 An autonomous BTC coffee buying/vending machine.
 
-## Running on startup
+## Starting up
 
-Install xautomation
+Plug in both the Pi and the coffee machine. The Pi doesn't have a switch. The coffee machine does at the back. Once on it should start the BitBarista interface.
 
-```
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install xautomation
-```
+### Startup issues
 
+If it's not connected to the wifi it will probably show an error like: 'Oops! It was not possible to show this website'.
 
-Run the bitbarista scripts on startup by adding a new line to `nano ~/.config/lxsession/LXDE-pi/autostart`. This new line should start with "@" + scriptname (including path to script if necessary): 
+To get on the wifi close the full screen browser using the keyboard by pressing F11. Select a wifi network by pressing the wifi symbol at top right.
 
-So `autostart` should look something like this:
+To launch the interface press 'Try again' on the browser showing the error page. Once the bitbarista home-page is shown press F11 to put the browser into fullscreen mode. 
 
-```
-@lxpanel --profile LXDE-pi
-@pcmanfm --desktop --profile LXDE-pi
-@xscreensaver -no-splash
-@/home/pi/BitBarista/runbitbarista.sh
-@/home/pi/BitBarista/runbrowser.sh
-```
+Alternatively, you can close all windows and launch the interface again by running the startup short-cut called `runbitbarista.sh`. You should be able to find this on the desktop. It should show a prompt, choose 'Execute in terminal'. Once you've done this open the browser and navigate to `http://localhost:5000`. 
+
+## 
