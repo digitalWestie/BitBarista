@@ -4,16 +4,26 @@ An autonomous BTC coffee buying/vending machine.
 
 ## Starting up
 
-Plug in both the Pi and the coffee machine. The Pi doesn't have a switch. The coffee machine does at the back. Once on it should start the BitBarista interface.
+### Power on the BitBarista
 
-### Startup issues
+Plug in both the Pi and the coffee machine. Turn on the coffee machine power switch at the back. The Pi has no power switch and just needs to be plugged in. Once turned on, the screen should show the BitBarista interface in a full-screen browser window.
 
-If you see an error like: 'Oops! It was not possible to show this website'. Press the refresh button (or F5). If it's still showing the error, it's likely the Bitbarista is not connected to the wifi.
+### 'Oops! It was not possible to show this website'
 
-To get on the wifi close the full screen browser using the keyboard by pressing F11. Select a wifi network by pressing the wifi symbol at top right.
+If you see a page with this error, press the browser refresh button or F5. If you still see the same message, make sure the BitBarista has an active Wifi connection.
 
-To launch the interface press 'Try again' on the browser showing the error page. Once the bitbarista home-page is shown press F11 to put the browser into fullscreen mode. 
+### Connect to Wifi
 
-Alternatively, you can close all windows and launch the interface again by running the startup short-cut called `runbitbarista.sh`. You should be able to find this on the desktop. It should show a prompt, choose 'Execute in terminal'. Once you've done this it should open the browser and navigate to `http://localhost:5000`. 
+To connect to a wifi network first exit the full-screen browser mode (by pressing F11). A menu bar should now be visible at the top of the screen. Select a wifi network by pressing the wifi symbol at the top right.
 
-## 
+Once connected, test the wifi connection by opening a browser window. Do this by clicking the world and cursor icon on the left side of the menu bar or using the drop-down: `Menu -> Internet -> Epiphany Web Browser`. You will need to take this step if the wifi connection requires a web login.
+
+Once the browser is open try navigating to a website using the address bar and pressing `Enter`. If this works, navigate to the BitBarista home page by entering `http://localhost:5000/` in the browser's address bar. 
+
+### Restarting the BitBarista Interface
+
+Navigate to the desktop by closing all windows (by either tapping the window's 'X' button or pressing Alt+F4). 
+
+Launch the interface again by running the startup short-cut found on the desktop called `runbitbarista.sh`. Execute the shortcut by double-tapping or selecting it and pressing `Enter`. 
+
+It should show a prompt, choose 'Execute in terminal'. Once you've done this the script should run the BitBarista application and open a browser window showing the BitBarista interface. Once the interface is showing press F11 to put the browser into fullscreen mode.
