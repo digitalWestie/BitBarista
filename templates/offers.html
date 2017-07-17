@@ -12,8 +12,8 @@
       {% if ((loop.index0%2)==0) %}<div class="row">{% endif %}
         <div class="col-sm-5">
           <a class="touch-button" href="/sale/{{ key }}">
-          <span class="input">{{ offer["name"] }}</span><br/>
-          <span class="input_u">Match: {{ offer["match"] }}</span><br/>
+          <span class="input">{{ offer["match"] }}</span><br/>
+          <span class="input_u">Match: {{ offer["name"] }}, {{ offer["producer"] }}</span><br/>
           <span class="input_u">{{ offer["price"] }}BTC</span><br/>
           </a>
         </div>
