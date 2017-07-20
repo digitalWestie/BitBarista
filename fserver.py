@@ -173,7 +173,7 @@ def serve(offer):
     cost = 0.0
 
   result = board_reader.press_button(button)
-
+  
   if result:
     save_serving(offer, cost)
     servings = serving_counts()
