@@ -62,7 +62,7 @@ def send_asset(path):
 
 @app.route('/water_request/')
 def water_request():
-  reward = "0.0006"
+  reward = "0.0002"
   
   abused = False
   history = action_history()
@@ -114,7 +114,7 @@ def steamer():
 
 @app.route('/empty_grinds/')
 def empty_grinds():
-  reward = "0.0006"
+  reward = "0.0002"
   return render_template('empty.html', state_url=state_url, reward=reward)
 
 
