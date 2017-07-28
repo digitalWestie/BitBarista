@@ -163,10 +163,10 @@ def sale(offer):
 def serve(offer):
   if (offer == "double"):
     button = "tazza2"
-    servetime = 62
+    servetime = 72
   else:
     button = "tazza1"
-    servetime = 60
+    servetime = 70
   
   cost = request.args.get('cost')
   if cost == None:
