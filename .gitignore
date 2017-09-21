@@ -1,5 +1,6 @@
 resources/
 config.json
+config.json*
 newtxn
 payouts.csv
 references.csv
