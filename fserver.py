@@ -21,6 +21,9 @@ app = Flask(__name__)
 with open('config.json') as json_config:
   config = json.load(json_config)
 
+with open('credentials.json') as json_credentials:
+  credentials = json.load(json_credentials)
+
 offers = config["offers"]
 
 root_url = "http://localhost:5000"
@@ -258,7 +261,7 @@ def check_request(address):
 
 def send_payment(address, amount):
   print "Attempting to send payment to " + address + " for " + str(amount) + "BTC"
-  p = Popen(['electrum', 'payto', address, str(amount), '-W', config["walletpass"]], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  p = Popen(['electrum', 'payto', address, str(amount), '-W', credentials["walletpass"]], stdin=PIPE, stdout=PIPE, stderr=PIPE)
   tx, err = p.communicate()
   
   if p.returncode == 0:
