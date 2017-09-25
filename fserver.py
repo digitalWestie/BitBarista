@@ -135,6 +135,7 @@ def disconnected():
 def warmup():
   download_home_blurb()
   download_suppliers()
+  download_config()
   return render_template('warmup.html')
 
 
@@ -356,10 +357,20 @@ def save_serving(offer, price):
   return save_action('served:'+offer, price)
 
 
-def download_home_blurb():  
+def download_home_blurb():
   r = requests.get('https://raw.githubusercontent.com/digitalWestie/BitBarista/master/templates/home_blurb.html')
   if ((r.status_code == 200) and (len(r.text) > 0)):
     with open('templates/home_blurb.html', 'w') as f:
+      f.write(r.text)
+    return True
+  else:
+    return False
+
+
+def download_config():
+  r = requests.get('https://raw.githubusercontent.com/digitalWestie/BitBarista/master/config.json')
+  if ((r.status_code == 200) and (len(r.text) > 0)):
+    with open('config.json', 'w') as f:
       f.write(r.text)
     return True
   else:
