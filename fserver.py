@@ -51,7 +51,7 @@ def table():
 
 @app.route("/start")
 def start():
-  offer_list = config["offers"].items()
+  offer_list = offers.items()
   return render_template('offers.html', state_url=state_url, offers=offer_list)
 
 
@@ -91,7 +91,7 @@ def get_qr():
 
 @app.route('/choice/') #NB ONLY IN THE CASE OF A FREE COFFEE 
 def choice():
-  offer_list = config["offers"].items()
+  offer_list = offers.items()
   
   message = None
   reason = request.args.get('reason')
