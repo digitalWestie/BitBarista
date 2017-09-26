@@ -1,27 +1,27 @@
 {
   "offers": {
-    "best-price": { 
+    "best-price": {
       "name": "South Asian Blend Medium",
-      "price": 0.00015,
+      "price": 0.00016,
       "match": "Best Price",
       "producer": "Farm name"
     },
 
-    "trending-choice": { 
+    "trending-choice": {
       "name": "Brazil Santos Medium-Dark",
       "price": 0.00025,
       "match": "Trending Choice",
       "producer": "Farm name"
     },
 
-    "best-social-responsibility": { 
+    "best-social-responsibility": {
       "name": "Ethiopia Sidamo Medium",
       "price": 0.0002,
       "match": "Best Social Responsibility",
       "producer": "Farm name"
     },
 
-    "low-environmental-impact": { 
+    "low-environmental-impact": {
       "name": "Colombia Huila Medium",
       "price": 0.0002,
       "match": "Low Environmental Impact",
