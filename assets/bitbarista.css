@@ -29,6 +29,9 @@ p{
   padding-top:0.7em;
 }
 
+h1 { font-size:1.2em; }
+h1 span { font-size:1.5em; }
+
 h2 { 
   margin-bottom:0.7em; 
 }
