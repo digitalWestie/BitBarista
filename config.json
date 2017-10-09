@@ -1,31 +1,31 @@
 {
   "offers": {
     "best-price": {
-      "name": "South Asian Blend Medium",
+      "name": "Colombia Caturra & Castillo",
       "price": 0.00016,
       "match": "Best Price",
-      "producer": "Farm name"
+      "producer": "Pijao Quindo"
     },
 
-    "trending-choice": {
-      "name": "Brazil Santos Medium-Dark",
+    "best-quality": {
+      "name": "Brazil Catuai",
       "price": 0.00025,
-      "match": "Trending Choice",
-      "producer": "Farm name"
+      "match": "Best Quality",
+      "producer": "Sitio Nossa do Senhora"
     },
 
     "best-social-responsibility": {
-      "name": "Ethiopia Sidamo Medium",
+      "name": "Ethiopia Heirloom",
       "price": 0.0002,
       "match": "Best Social Responsibility",
-      "producer": "Farm name"
+      "producer": "Aricha Edido"
     },
 
     "low-environmental-impact": {
-      "name": "Colombia Huila Medium",
+      "name": "Burundi Bourban",
       "price": 0.0002,
       "match": "Low Environmental Impact",
-      "producer": "Farm name"
+      "producer": "Kibingo"
     }
   }
 }
