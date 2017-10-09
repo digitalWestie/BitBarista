@@ -24,8 +24,6 @@ with open('config.json') as json_config:
 with open('credentials.json') as json_credentials:
   credentials = json.load(json_credentials)
 
-offers = config["offers"]
-
 root_url = "http://localhost:5000"
 state_url = "http://localhost:5000/state/"
 
@@ -54,7 +52,7 @@ def table():
 
 @app.route("/start")
 def start():
-  offer_list = offers.items()
+  offer_list = config["offers"].items()
   return render_template('offers.html', state_url=state_url, offers=offer_list)
 
 
@@ -94,7 +92,7 @@ def get_qr():
 
 @app.route('/choice/') #NB ONLY IN THE CASE OF A FREE COFFEE 
 def choice():
-  offer_list = offers.items()
+  offer_list = config["offers"].items()
   
   message = None
   reason = request.args.get('reason')
@@ -133,6 +131,7 @@ def disconnected():
 
 @app.route('/warmup/')
 def warmup():
+  global config
   if download_config():
     with open('config.json') as json_config:
       config = json.load(json_config)
@@ -146,7 +145,7 @@ def sale(offer):
   state = board_reader.read_state() 
   if (state['overall'] == 'ready'):
     
-    offer_details = offers[offer]
+    offer_details = config["offers"][offer]
     price = offer_details["price"]
     request = generate_request(price)
 
