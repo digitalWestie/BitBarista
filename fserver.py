@@ -133,9 +133,11 @@ def disconnected():
 
 @app.route('/warmup/')
 def warmup():
+  if download_config()
+    with open('config.json') as json_config:
+      config = json.load(json_config)
   download_home_blurb()
   download_suppliers()
-  download_config()
   return render_template('warmup.html')
 
 
