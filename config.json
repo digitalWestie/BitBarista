@@ -1,17 +1,17 @@
 {
   "offers": {
     "best-price": {
-      "name": "Colombia Caturra-Castillo",
-      "price": 0.00016,
+      "name": "Costa Rica Villa Sarchi",
+      "price": 0.00018,
       "match": "Best Price",
-      "producer": "Pijao Quindo"
+      "producer": "Aguilera Bros"
     },
 
     "best-quality": {
-      "name": "Brazil Catuai",
-      "price": 0.00025,
+      "name": "El Salvador Bourbon",
+      "price": 0.00024,
       "match": "Best Quality",
-      "producer": "Sitio Nossa do Senhora"
+      "producer": "Finca Miravalle"
     },
 
     "best-social-responsibility": {
