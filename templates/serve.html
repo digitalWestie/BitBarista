@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-sm-offset-1 col-sm-6">
     <p>Thank you.<br/>
-    I have now served <span class="input cups">{{ total_servings }}</span> cups of coffee. 
+    I have now served <span class="input cups">{{ total_servings }}</span> cups of coffee.</p>
 
     {% for offer,count in servings %}
       {% if ((loop.index0%2)==0) %}<div class="row">{% endif %}

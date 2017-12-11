@@ -1,17 +1,17 @@
 {
   "offers": {
     "best-price": {
-      "name": "Colombia Caturra-Castillo",
-      "price": 0.00016,
+      "name": "Guatemala Bourbon",
+      "price": 0.00017,
       "match": "Best Price",
-      "producer": "Pijao Quindo"
+      "producer": "Sierra Morena"
     },
 
     "best-quality": {
-      "name": "Brazil Catuai",
-      "price": 0.00025,
+      "name": "El Salvador Bourbon",
+      "price": 0.00024,
       "match": "Best Quality",
-      "producer": "Sitio Nossa do Senhora"
+      "producer": "Finca Miravalle"
     },
 
     "best-social-responsibility": {
@@ -22,10 +22,10 @@
     },
 
     "low-environmental-impact": {
-      "name": "Burundi Bourban",
-      "price": 0.0002,
+      "name": "Columbia Caturra & Castillo",
+      "price": 0.00021,
       "match": "Low Environmental Impact",
-      "producer": "Kibingo"
+      "producer": "Ignacio Quintero"
     }
   }
 }
