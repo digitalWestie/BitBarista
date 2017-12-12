@@ -1,29 +1,29 @@
 {
   "offers": {
     "best-price": {
-      "name": "Guatemala Bourbon",
-      "price": 0.00017,
+      "name": "El Salvador Bourbon",
+      "price": 0.00011,
       "match": "Best Price",
-      "producer": "Sierra Morena"
+      "producer": "Finca Miravalle"
     },
 
     "best-quality": {
-      "name": "El Salvador Bourbon",
-      "price": 0.00024,
+      "name": "Guatemala Bourbon",
+      "price": 0.0002,
       "match": "Best Quality",
-      "producer": "Finca Miravalle"
+      "producer": "Sierra Morena"
     },
 
     "best-social-responsibility": {
       "name": "Ethiopia Heirloom",
-      "price": 0.0002,
+      "price": 0.00015,
       "match": "Best Social Responsibility",
       "producer": "Aricha Edido"
     },
 
     "low-environmental-impact": {
       "name": "Columbia Caturra & Castillo",
-      "price": 0.00021,
+      "price": 0.00014,
       "match": "Low Environmental Impact",
       "producer": "Ignacio Quintero"
     }
